@@ -1,4 +1,4 @@
-package com.soterians.securitron;
+package com.soterians.securitron.UI;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
