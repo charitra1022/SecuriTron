@@ -11,9 +11,11 @@ public class MainApplication extends Application {
   @Override
   public void start(Stage stage) throws IOException {
     FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main_window.fxml"));
-    Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-    stage.setTitle("Hello!");
+    Scene scene = new Scene(fxmlLoader.load(), 500, 500);
+    stage.setTitle("SecuriTron");
     stage.setScene(scene);
+    stage.setMinWidth(500);
+    stage.setMinHeight(500);
     stage.show();
   }
 

@@ -1,14 +1,9 @@
 package com.soterians.securitron.UI;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 
 public class MainWindowController {
   @FXML
-  private Label welcomeText;
-
-  @FXML
-  protected void onHelloButtonClick() {
-    welcomeText.setText("Welcome to JavaFX Application!");
-  }
+  private Button encryptBtn, decryptBtn, historyBtn, settingsBtn;
 }
