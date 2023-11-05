@@ -3,7 +3,7 @@ package com.soterians.securitron.UI;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class MainPageController {
+public class MainWindowController {
   @FXML
   private Label welcomeText;
 
