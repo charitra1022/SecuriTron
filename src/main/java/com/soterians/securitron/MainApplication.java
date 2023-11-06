@@ -14,8 +14,9 @@ public class MainApplication extends Application {
     Scene scene = new Scene(fxmlLoader.load(), 500, 500);
     stage.setTitle("SecuriTron");
     stage.setScene(scene);
-    stage.setMinWidth(500);
-    stage.setMinHeight(500);
+    stage.setMinWidth(900);
+    stage.setMinHeight(600);
+    stage.setResizable(false);
     stage.show();
   }
 
