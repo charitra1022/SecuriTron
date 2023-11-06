@@ -103,7 +103,7 @@
                                                 </AnchorPane>
                                                 <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" GridPane.vgrow="NEVER">
                                                    <children>
-                                                      <Button layoutX="32.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Encrypt Files" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="30.0" />
+                                                      <Button fx:id="encryptBtn" layoutX="32.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#encryptBtnClicked" prefHeight="40.0" prefWidth="110.0" text="Encrypt Files" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="30.0" />
                                                    </children>
                                                 </AnchorPane>
                                              </children>

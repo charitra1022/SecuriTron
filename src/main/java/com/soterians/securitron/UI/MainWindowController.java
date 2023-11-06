@@ -4,6 +4,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
@@ -19,7 +22,7 @@ public class MainWindowController {
   private List<File> filesList;   // list of files returned by the file selection event
 
   @FXML
-  private Button settingsBtn, aboutBtn, closeBtn, selectBtn;
+  private Button settingsBtn, aboutBtn, closeBtn, selectBtn, encryptBtn;
 
   @FXML
   private Pane dragPane;  // container over which files will be dropped
@@ -64,6 +67,43 @@ public class MainWindowController {
 
 
   /**
+   * called when encrypt button is clicked
+   * @param actionEvent button click event
+   */
+  @FXML
+  private void encryptBtnClicked(ActionEvent actionEvent) {
+    if(filesList == null || filesList.isEmpty()) {
+      showSimpleDialog(
+              "No files to encrypt!",
+              "Open files or Drag files in the above box to encrypt them."
+      );
+      return;
+    }
+
+    System.out.println("encryption started");
+
+    // to add code for calling encryption function
+
+    filesList = null;
+    files = folders = null;
+  }
+
+
+  /**
+   * Creates and shows a dialog box with specific text and title
+   * @param title text to display as dialogBox title
+   * @param text text to display as dialogBox content
+   */
+  protected void showSimpleDialog(String title, String text) {
+    Dialog<String> dialog = new Dialog<>();
+    dialog.setTitle(title);
+    dialog.setContentText(text);
+    dialog.getDialogPane().getButtonTypes().add(new ButtonType("OK", ButtonBar.ButtonData.OK_DONE));
+    dialog.showAndWait();
+  }
+
+
+  /**
    * Separates files and folders from the list returned by the selection event (drag/open)
    */
   private void handleFilesSelected() {
@@ -82,7 +122,7 @@ public class MainWindowController {
     }
 
     // create appropriate message to display
-    String msg = "Dropped ";
+    String msg = "Added ";
     if(!files.isEmpty()) msg += files.size() + " files";
     if(!files.isEmpty() && !folders.isEmpty()) msg += " & ";
     if(!folders.isEmpty()) msg += folders.size() + " folders\n";

@@ -39,7 +39,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/charitra/Desktop/JavaProject/Softablitz/demo2"
+    "last_opened_file_path": "C:/Users/charitra/Desktop/JavaProject/Softablitz/SecuriTron"
   }
 }]]></component>
   <component name="RunManager">
@@ -148,5 +148,15 @@
     <MESSAGE value="added new UI" />
     <MESSAGE value="resized and restructured splitpane UI" />
     <option name="LAST_COMMIT_MESSAGE" value="resized and restructured splitpane UI" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.RuntimeException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
