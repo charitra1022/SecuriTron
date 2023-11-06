@@ -63,85 +63,71 @@
             </AnchorPane>
             <AnchorPane GridPane.rowIndex="1">
                <children>
-                  <GridPane alignment="CENTER" prefHeight="558.0" prefWidth="878.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <columnConstraints>
-                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="-Infinity" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <AnchorPane>
+                  <SplitPane dividerPositions="0.32185218978102187, 0.7039233576642335" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                        <AnchorPane minWidth="-Infinity" prefWidth="150.0" />
+                      <AnchorPane minHeight="0.0" minWidth="-Infinity" prefHeight="160.0" prefWidth="350.0">
                            <children>
-                              <SplitPane dividerPositions="0.22490875912408756, 0.7039233576642335" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <items>
-                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                              <GridPane layoutX="107.0" layoutY="219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="507.1999816894531" minHeight="10.0" prefHeight="488.59998779296876" vgrow="SOMETIMES" />
+                                  <RowConstraints />
+                                </rowConstraints>
+                                 <children>
+                                    <AnchorPane prefHeight="472.0" prefWidth="414.0">
                                        <children>
-                                          <GridPane layoutX="107.0" layoutY="219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Pane layoutX="62.0" layoutY="71.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-radius: 8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                       </padding>
+                                    </AnchorPane>
+                                    <AnchorPane maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                                       <children>
+                                          <GridPane layoutX="98.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="169.4" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="169.4" />
                                             </columnConstraints>
                                             <rowConstraints>
-                                              <RowConstraints maxHeight="507.1999816894531" minHeight="10.0" prefHeight="488.59998779296876" vgrow="SOMETIMES" />
-                                              <RowConstraints />
+                                              <RowConstraints vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <AnchorPane prefHeight="472.0" prefWidth="414.0">
+                                                <AnchorPane GridPane.hgrow="SOMETIMES" GridPane.vgrow="NEVER">
                                                    <children>
-                                                      <Pane layoutX="62.0" layoutY="71.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-radius: 8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                      <Button layoutX="35.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Select Files" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="30.0" />
                                                    </children>
-                                                   <padding>
-                                                      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                                   </padding>
                                                 </AnchorPane>
-                                                <AnchorPane maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                                                <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" GridPane.vgrow="NEVER">
                                                    <children>
-                                                      <GridPane layoutX="98.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                        <columnConstraints>
-                                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="-Infinity" />
-                                                          <ColumnConstraints hgrow="SOMETIMES" />
-                                                        </columnConstraints>
-                                                        <rowConstraints>
-                                                          <RowConstraints vgrow="SOMETIMES" />
-                                                        </rowConstraints>
-                                                         <children>
-                                                            <AnchorPane GridPane.vgrow="NEVER">
-                                                               <children>
-                                                                  <Button layoutX="78.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Select Files" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="30.0" />
-                                                               </children>
-                                                            </AnchorPane>
-                                                            <AnchorPane GridPane.columnIndex="1" GridPane.vgrow="NEVER">
-                                                               <children>
-                                                                  <Button layoutX="78.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Encrypt Files" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="30.0" />
-                                                               </children>
-                                                            </AnchorPane>
-                                                         </children>
-                                                      </GridPane>
+                                                      <Button layoutX="32.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Encrypt Files" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="30.0" />
                                                    </children>
                                                 </AnchorPane>
                                              </children>
                                           </GridPane>
                                        </children>
                                     </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <GridPane prefHeight="574.0" prefWidth="218.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                            <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                            </columnConstraints>
-                                            <rowConstraints>
-                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                            </rowConstraints>
-                                          </GridPane>
-                                       </children>
-                                    </AnchorPane>
-                                </items>
-                              </SplitPane>
+                                 </children>
+                              </GridPane>
                            </children>
                         </AnchorPane>
-                     </children>
-                  </GridPane>
+                      <AnchorPane minWidth="-Infinity" prefWidth="100.0">
+                           <children>
+                              <GridPane prefHeight="574.0" prefWidth="218.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
                </children>
             </AnchorPane>
          </children>
