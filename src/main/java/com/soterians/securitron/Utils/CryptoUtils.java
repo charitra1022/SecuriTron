@@ -1,4 +1,4 @@
-package com.soterians.securitron;
+package com.soterians.securitron.Utils;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;

@@ -1,7 +1,7 @@
 // This class provides abstraction for app's settings with the help of basic APIs.
 
 
-package com.soterians.securitron;
+package com.soterians.securitron.Utils;
 
 /**
  * Class that provides basic APIs for managing the app's internal settings.
