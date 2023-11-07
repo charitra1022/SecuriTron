@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -65,7 +66,10 @@
                <children>
                   <SplitPane dividerPositions="0.32185218978102187, 0.7039233576642335" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                        <AnchorPane minWidth="-Infinity" prefWidth="150.0" />
+                        <AnchorPane minWidth="-Infinity" prefWidth="150.0">
+                           <children>
+                              <ListView fx:id="filesListView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children></AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="-Infinity" prefHeight="160.0" prefWidth="350.0">
                            <children>
                               <GridPane layoutX="107.0" layoutY="219.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

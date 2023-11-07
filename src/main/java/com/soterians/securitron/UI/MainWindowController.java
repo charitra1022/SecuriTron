@@ -1,12 +1,12 @@
 package com.soterians.securitron.UI;
 
+import com.soterians.securitron.Utils.EncryptedFileMetadata;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
+import javafx.scene.control.*;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
@@ -26,6 +26,9 @@ public class MainWindowController {
 
   @FXML
   private Pane dragPane;  // container over which files will be dropped
+
+  @FXML
+  private ListView<String> filesListView;  // to display list of encrypted files
 
   @FXML
   private void settingsBtnClicked(ActionEvent actionEvent) {
@@ -84,6 +87,7 @@ public class MainWindowController {
 
     // to add code for calling encryption function
 
+    // release resources after encryption process
     filesList = null;
     files = folders = null;
   }
@@ -94,7 +98,7 @@ public class MainWindowController {
    * @param title text to display as dialogBox title
    * @param text text to display as dialogBox content
    */
-  protected void showSimpleDialog(String title, String text) {
+  private void showSimpleDialog(String title, String text) {
     Dialog<String> dialog = new Dialog<>();
     dialog.setTitle(title);
     dialog.setContentText(text);
@@ -136,7 +140,7 @@ public class MainWindowController {
    * @param event: drag event object
    */
   @FXML
-  protected void onDragDropped(DragEvent event) {
+  private void onDragDropped(DragEvent event) {
     filesList = event.getDragboard().getFiles();  // get the list of files from drop event
     event.consume();
     handleFilesSelected();
@@ -148,7 +152,7 @@ public class MainWindowController {
    * @param event: drag event object
    */
   @FXML
-  protected void onDragEntered(DragEvent event) {
+  private void onDragEntered(DragEvent event) {
     dragPane.setStyle("-fx-border-color: #0096FF; -fx-border-width: 2; -fx-border-radius: 10");
   }
 
@@ -158,7 +162,7 @@ public class MainWindowController {
    * @param event: drag event object
    */
   @FXML
-  protected void onDragExited(DragEvent event) {
+  private void onDragExited(DragEvent event) {
     dragPane.setStyle("-fx-border-color: black; -fx-border-width: 0.5; -fx-border-radius: 5");
   }
 
@@ -168,7 +172,7 @@ public class MainWindowController {
    * @param event: drag event object
    */
   @FXML
-  protected void onDragOver(DragEvent event) {
+  private void onDragOver(DragEvent event) {
     // check if the type of dragged items are files
     if(event.getDragboard().hasFiles()) {
       event.acceptTransferModes(TransferMode.ANY);
@@ -177,5 +181,16 @@ public class MainWindowController {
       System.out.println("Content not a file!");
     }
     event.consume();
+  }
+
+  public void updateListView(ArrayList<EncryptedFileMetadata> encryptedFiles) {
+    System.out.println(encryptedFiles.toString());
+    
+//    ObservableList<String> names = FXCollections.observableArrayList();
+//
+//    for(int i=0; i<files.size(); i++) names.add(files.get(i).getName());
+//    for(int i=0; i<folders.size(); i++) names.add(folders.get(i).getName());
+//
+//    filesListView.setItems(names);
   }
 }
