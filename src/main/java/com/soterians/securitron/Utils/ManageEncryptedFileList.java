@@ -25,7 +25,7 @@ public class ManageEncryptedFileList {
 
     // if the file is not present in the system
     if(!(new File(filesListPath.toString())).exists()) {
-      System.out.println("encrypted-files-list json file not found. Creating..");
+      System.out.println("ManageEncryptedFileList: getEncryptedFilesListPath -> encrypted-files-list json file not found. Creating..");
       Files.createDirectories(filesListParentPath); // create the folders
 
       // create files list json file and write [] to it as contents
@@ -50,5 +50,11 @@ public class ManageEncryptedFileList {
     Path fileListPath = getEncryptedFilesListPath();
 
     return  metadataList;
+  }
+
+
+  public static void saveEncryptedFileMetaData(ArrayList<EncryptedFileMetadata> encryptedFileMetadataList) {
+    for(int i=0; i<encryptedFileMetadataList.size(); i++)
+      System.out.println("ManageEncryptedFileList: saveEncryptedFileMetaData -> " + encryptedFileMetadataList.get(i).getFileName());
   }
 }

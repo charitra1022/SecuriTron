@@ -1,6 +1,7 @@
 package com.soterians.securitron.UI;
 
 import com.soterians.securitron.Utils.EncryptedFileMetadata;
+import com.soterians.securitron.Utils.Encryption;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -32,12 +33,12 @@ public class MainWindowController {
 
   @FXML
   private void settingsBtnClicked(ActionEvent actionEvent) {
-    System.out.println("settings button clicked");
+    System.out.println("MainWindowController: settingsBtnClicked -> settings button clicked");
   }
 
   @FXML
   private void aboutBtnClicked(ActionEvent actionEvent) {
-    System.out.println("about button clicked");
+    System.out.println("MainWindowController: aboutBtnClicked -> about button clicked");
   }
 
 
@@ -76,16 +77,14 @@ public class MainWindowController {
   @FXML
   private void encryptBtnClicked(ActionEvent actionEvent) {
     if(filesList == null || filesList.isEmpty()) {
-      showSimpleDialog(
-              "No files to encrypt!",
-              "Open files or Drag files in the above box to encrypt them."
-      );
+      showSimpleDialog("No files to encrypt!", "Open files or Drag files in the above box to encrypt them.");
       return;
     }
 
-    System.out.println("encryption started");
+    System.out.println("MainWindowController: encryptBtnClicked -> encryption started");
 
     // to add code for calling encryption function
+    Encryption.encryptFiles(files);
 
     // release resources after encryption process
     filesList = null;
@@ -113,7 +112,7 @@ public class MainWindowController {
   private void handleFilesSelected() {
     if(filesList == null) {
       files = folders = null;
-      System.out.println("No files chosen!");
+      System.out.println("MainWindowController: handleFilesSelected -> No files chosen!");
       return;
     }
 
@@ -131,7 +130,7 @@ public class MainWindowController {
     if(!files.isEmpty() && !folders.isEmpty()) msg += " & ";
     if(!folders.isEmpty()) msg += folders.size() + " folders\n";
 
-    System.out.println(msg);
+    System.out.println("MainWindowController: handleFilesSelected -> " + msg);
   }
 
 
@@ -176,15 +175,15 @@ public class MainWindowController {
     // check if the type of dragged items are files
     if(event.getDragboard().hasFiles()) {
       event.acceptTransferModes(TransferMode.ANY);
-      System.out.println("Drop the file here!");
+      System.out.println("MainWindowController: onDragOver -> Drop the file here!");
     } else {
-      System.out.println("Content not a file!");
+      System.out.println("MainWindowController: onDragOver -> Content not a file!");
     }
     event.consume();
   }
 
   public void updateListView(ArrayList<EncryptedFileMetadata> encryptedFiles) {
-    System.out.println(encryptedFiles.toString());
+    System.out.println("MainWindowController: updateListView -> " + encryptedFiles.toString());
     
 //    ObservableList<String> names = FXCollections.observableArrayList();
 //
