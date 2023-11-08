@@ -74,4 +74,10 @@ public class EncryptedFileMetadata {
   public String getFilePath() {
     return file.getAbsolutePath();
   }
+
+
+  @Override
+  public String toString() {
+    return this.getFileName();
+  }
 }

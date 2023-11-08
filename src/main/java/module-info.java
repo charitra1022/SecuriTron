@@ -1,6 +1,7 @@
 module com.soterians.securitron {
   requires javafx.controls;
   requires javafx.fxml;
+  requires org.json;
 
 
   opens com.soterians.securitron to javafx.fxml;

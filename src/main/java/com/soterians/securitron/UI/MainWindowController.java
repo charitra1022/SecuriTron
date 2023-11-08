@@ -15,8 +15,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.soterians.securitron.Utils.ManageEncryptedFileList.readEncryptedFileMetaData;
 
 public class MainWindowController {
   private ArrayList<File> files, folders;   // list of files and folders
@@ -75,7 +79,7 @@ public class MainWindowController {
    * @param actionEvent button click event
    */
   @FXML
-  private void encryptBtnClicked(ActionEvent actionEvent) {
+  private void encryptBtnClicked(ActionEvent actionEvent) throws IOException, ParseException {
     if(filesList == null || filesList.isEmpty()) {
       showSimpleDialog("No files to encrypt!", "Open files or Drag files in the above box to encrypt them.");
       return;
@@ -83,8 +87,11 @@ public class MainWindowController {
 
     System.out.println("MainWindowController: encryptBtnClicked -> encryption started");
 
-    // to add code for calling encryption function
+    // to add code for calling encryption on folders function
     Encryption.encryptFiles(files);
+
+    // now update the listview
+    updateListView(readEncryptedFileMetaData());
 
     // release resources after encryption process
     filesList = null;
@@ -182,14 +189,18 @@ public class MainWindowController {
     event.consume();
   }
 
+
+  /**
+   * Updates the ListView with the list of encrypted files
+   * @param encryptedFiles ArrayList&lt;EncryptedFileMetadata&gt; object containing list of EncryptedFileMetadata object
+   */
   public void updateListView(ArrayList<EncryptedFileMetadata> encryptedFiles) {
     System.out.println("MainWindowController: updateListView -> " + encryptedFiles.toString());
     
-//    ObservableList<String> names = FXCollections.observableArrayList();
-//
-//    for(int i=0; i<files.size(); i++) names.add(files.get(i).getName());
-//    for(int i=0; i<folders.size(); i++) names.add(folders.get(i).getName());
-//
-//    filesListView.setItems(names);
+    ObservableList<String> names = FXCollections.observableArrayList();
+
+    for(int i=0; i<encryptedFiles.size(); i++) names.add(encryptedFiles.get(i).getFileName());
+
+    filesListView.setItems(names);
   }
 }
