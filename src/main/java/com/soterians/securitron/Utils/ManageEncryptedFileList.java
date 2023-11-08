@@ -46,27 +46,13 @@ public class ManageEncryptedFileList {
 
 
   /**
-   * Returns an arraylist of EncryptedFileMetadata after reading the encrypted-files-list json file.
-   * @return ArrayList of EncryptedFileMetadata
-   * @throws IOException
-   */
-  public static ArrayList<EncryptedFileMetadata> getEncryptedFilesList() throws IOException {
-    ArrayList<EncryptedFileMetadata> metadataList = new ArrayList<>();
-
-    Path fileListPath = getEncryptedFilesListPath();
-
-    return  metadataList;
-  }
-
-
-  /**
    * Saves the list of encrypted files as a JSON file in the disk for later retrieval
    * @param encryptedFileMetadataList Array&lt;EncryptedFileMetadata&gt; object
    * @throws IOException
    */
-  public static void saveEncryptedFileMetaData(ArrayList<EncryptedFileMetadata> encryptedFileMetadataList) throws IOException, ParseException {
-    // create a JSONArray object and add JSONObject objects to it
-    JSONArray jsonArray = new JSONArray();
+  public static void saveEncryptedFileMetaData(ArrayList<EncryptedFileMetadata> encryptedFileMetadataList) throws IOException {
+    // retrieve JSONArray object from stored json data add new data to it
+    JSONArray jsonArray = readJSONArrayFromListFile();
     for(int i=0; i<encryptedFileMetadataList.size(); i++)
       jsonArray.put(createJSONObjectFromEncryptedFileMetadata(encryptedFileMetadataList.get(i)));
 
@@ -76,10 +62,17 @@ public class ManageEncryptedFileList {
     FileWriter fileWriter = new FileWriter(getEncryptedFilesListPath().toString());
     jsonArray.write(fileWriter, 2, 2);
     fileWriter.close();
+
+    // ------- IMPORTANT: to append incoming changes to already present list, and check for duplicate entries!!!!!
   }
 
 
-  public static ArrayList<EncryptedFileMetadata> readEncryptedFileMetaData() throws IOException, ParseException {
+  /**
+   * Reads the json file and returns the JSONArray parsed from it
+   * @return JSONArray object parsed from the json file
+   * @throws IOException
+   */
+  public static JSONArray readJSONArrayFromListFile() throws IOException {
     // read the file contents
     BufferedReader reader = Files.newBufferedReader(getEncryptedFilesListPath());
     String line = reader.readLine();
@@ -88,33 +81,52 @@ public class ManageEncryptedFileList {
       fileContents.append(line);
       line = reader.readLine();
     }
+    reader.close();
 
-    JSONArray jsonArray = new JSONArray(fileContents.toString());
+    return new JSONArray(fileContents.toString());
+  }
 
+
+  /**
+   * Reads the json file of list of encrypted files and returns the list of EncryptedFileMetadata objects
+   * @return ArrayList&lt;EncryptedFileMetadata&gt; object that contains list of EncryptedFileMetadata objects
+   * @throws IOException
+   */
+  public static ArrayList<EncryptedFileMetadata> readEncryptedFileMetaData() throws IOException {
+    JSONArray jsonArray = readJSONArrayFromListFile();
     System.out.println("ManageEncryptedFileList: readEncryptedFileMetaData (1) -> " + jsonArray);
 
     // create array of EncryptedFileMetadata objects from JSONObjects
     ArrayList<EncryptedFileMetadata> fileMetadataList = new ArrayList<>();
-    for(int i=0; i<jsonArray.length(); i++) {
-      JSONObject jsonObject = jsonArray.getJSONObject(i);
-      EncryptedFileMetadata fileMetadata = createEncryptedFileMetadataFromJSONObject(jsonObject);
-      fileMetadataList.add(fileMetadata);
-      System.out.println("ManageEncryptedFileList: readEncryptedFileMetaData (2) -> " + jsonObject);
+    try {
+      for(int i=0; i<jsonArray.length(); i++) {
+        JSONObject jsonObject = jsonArray.getJSONObject(i);
+        EncryptedFileMetadata fileMetadata = createEncryptedFileMetadataFromJSONObject(jsonObject);
+        fileMetadataList.add(fileMetadata);
+        System.out.println("ManageEncryptedFileList: readEncryptedFileMetaData (2) -> " + jsonObject);
+      }
+    } catch (Exception err) {
+      new File(getEncryptedFilesListPath().toString()).delete();
     }
 
     return fileMetadataList;
   }
 
 
+  /**
+   * Creates EncryptedFileMetadata object from provided JSONObject
+   * @param jsonObject JSONObject that contains information read from the json file containing list of encrypted files
+   * @return EncryptedFileMetadata object parsed from the JSONObject
+   * @throws ParseException
+   */
   public static EncryptedFileMetadata createEncryptedFileMetadataFromJSONObject(JSONObject jsonObject) throws ParseException {
-    EncryptedFileMetadata fileMetadata = new EncryptedFileMetadata(
+    return new EncryptedFileMetadata(
             new File(jsonObject.get("path").toString()),
             jsonObject.get("checksum").toString(),
             (new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH)).parse(jsonObject.get("encryptedOn").toString()),
-            jsonObject.get("fileFormat").toString()
+            Long.parseLong(jsonObject.get("fileSize").toString()),
+            new File(jsonObject.get("encryptedFile").toString())
     );
-
-    return fileMetadata;
   }
 
 
@@ -128,8 +140,8 @@ public class ManageEncryptedFileList {
     jsonObject.put("path", fileMetadata.getFilePath());
     jsonObject.put("checksum", fileMetadata.getChecksum());
     jsonObject.put("encryptedOn", fileMetadata.getEncryptedOn().toString());
-    jsonObject.put("fileFormat", fileMetadata.getFileFormat());
-    jsonObject.put("fileSize", fileMetadata.getFileSizeBytes());
+    jsonObject.put("fileSize", fileMetadata.getFileSize());
+    jsonObject.put("encryptedFile", fileMetadata.getEncryptedFilePath());
     return jsonObject;
   }
 
