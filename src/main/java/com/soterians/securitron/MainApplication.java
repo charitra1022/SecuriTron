@@ -19,7 +19,7 @@ public class MainApplication extends Application {
    * @throws IOException
    */
   protected void initializeApp() throws IOException {
-    ArrayList<EncryptedFileMetadata> fileMetadataList = ManageEncryptedFileList.getEncryptedFilesList();
+    ArrayList<EncryptedFileMetadata> fileMetadataList = ManageEncryptedFileList.readEncryptedFileMetaData();
 
     MainWindowController mainWindowController = fxmlLoader.getController(); // controller class of main window
 
