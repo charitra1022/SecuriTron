@@ -8,8 +8,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -34,6 +36,18 @@ public class MainWindowController {
 
   @FXML
   private ListView<String> filesListView;  // to display list of encrypted files
+
+  @FXML
+  private GridPane fileDetailGridPane;  // grid view that displays the file details
+
+  @FXML
+  private ImageView imageView;  // display file icon on the right panel
+
+  @FXML
+  private Label fileNameLabel, fileFormatLabel, fileSizeLabel, fileEncryptedDateLabel;
+
+  @FXML
+  private Button openFileBtn, decryptFileBtn;
 
   @FXML
   private void settingsBtnClicked(ActionEvent actionEvent) {
@@ -202,5 +216,17 @@ public class MainWindowController {
     for(int i=0; i<encryptedFiles.size(); i++) names.add(encryptedFiles.get(i).getFileName());
 
     filesListView.setItems(names);
+  }
+
+
+  @FXML
+  private void onOpenFileBtnClicked(ActionEvent actionEvent) {
+    System.out.println("MainWindowController: onOpenFileBtnClicked -> open file button clicked");
+  }
+
+
+  @FXML
+  private void onDecryptFileBtnClicked(ActionEvent actionEvent) {
+    System.out.println("MainWindowController: onDecryptFileBtnClicked -> decrypt file button clicked");
   }
 }

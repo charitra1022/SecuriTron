@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -12,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="637.0" prefWidth="878.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.soterians.securitron.UI.MainWindowController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.soterians.securitron.UI.MainWindowController">
    <children>
       <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -64,7 +66,7 @@
             </AnchorPane>
             <AnchorPane GridPane.rowIndex="1">
                <children>
-                  <SplitPane dividerPositions="0.32185218978102187, 0.7039233576642335" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.3141139804096171, 0.7660284951024042" prefHeight="160.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
                         <AnchorPane minWidth="-Infinity" prefWidth="150.0">
                            <children>
@@ -152,8 +154,75 @@
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                 </columnConstraints>
                                 <rowConstraints>
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                    <RowConstraints vgrow="SOMETIMES" />
+                                  <RowConstraints vgrow="SOMETIMES" />
                                 </rowConstraints>
+                                 <children>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                       <children>
+                                          <GridPane layoutX="23.0" layoutY="92.8" prefHeight="107.0" prefWidth="246.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <AnchorPane prefHeight="70.0" prefWidth="251.0" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <Button fx:id="decryptFileBtn" layoutX="31.0" layoutY="68.0" mnemonicParsing="false" onAction="#onDecryptFileBtnClicked" text="Decrypt" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="10.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                                <AnchorPane>
+                                                   <children>
+                                                      <Button fx:id="openFileBtn" mnemonicParsing="false" onAction="#onOpenFileBtnClicked" text="Open" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="30.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="423.0" prefWidth="246.0" GridPane.rowIndex="1">
+                                       <children>
+                                          <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="79.0" />
+                                                <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints valignment="TOP" vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                                <RowConstraints vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label alignment="TOP_LEFT" text="Name:  " GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+                                                <Label fx:id="fileNameLabel" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP" />
+                                                <Label alignment="TOP_RIGHT" text="Format:  " GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                                                <Label fx:id="fileFormatLabel" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                                                <Label alignment="TOP_RIGHT" text="Size:  " GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+                                                <Label fx:id="fileSizeLabel" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+                                                <Label alignment="TOP_RIGHT" contentDisplay="RIGHT" text="Encrypted on:  " textAlignment="RIGHT" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                                                <Label fx:id="fileEncryptedDateLabel" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </AnchorPane>
+                                    <AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="250.0">
+                                       <children>
+                                          <ImageView fx:id="imageView" fitHeight="180.0" fitWidth="180.0" layoutX="14.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="35.400000000000006" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="37.19999999999999" AnchorPane.topAnchor="35.0">
+                                             <image>
+                                                <Image url="@icons/lock.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
                               </GridPane>
                            </children>
                         </AnchorPane>
