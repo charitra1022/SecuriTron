@@ -91,6 +91,10 @@ public class EncryptedFileMetadata {
     // size in bytes
     if(size < 1024) return size + " bytes";
 
+    // size in kilobytes
+    size /= 1024;
+    if(size < 1024) return (Math.floor(size * 100) / 100.0) + "KB";
+
     // size in megabytes
     size /= 1024;
     if(size < 1024) return (Math.floor(size * 100) / 100.0) + "MB";
