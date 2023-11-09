@@ -24,6 +24,8 @@ public class MainApplication extends Application {
     MainWindowController mainWindowController = fxmlLoader.getController(); // controller class of main window
 
     mainWindowController.updateListView(fileMetadataList);  // update the list view with list of encrypted files
+
+    mainWindowController.changeFileDetailPaneVisibility(false);
   }
 
 

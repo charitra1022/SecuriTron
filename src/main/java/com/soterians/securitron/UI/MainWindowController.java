@@ -223,6 +223,7 @@ public class MainWindowController {
     filesListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<EncryptedFileMetadata>() {
       @Override
       public void changed(ObservableValue<? extends EncryptedFileMetadata> observable, EncryptedFileMetadata oldValue, EncryptedFileMetadata newValue) {
+        changeFileDetailPaneVisibility(true);
         fileNameLabel.setText(newValue.getFileName());
         fileFormatLabel.setText(newValue.getFileFormat());
         fileSizeLabel.setText(newValue.getFileSizeString());
@@ -242,5 +243,10 @@ public class MainWindowController {
   @FXML
   private void onDecryptFileBtnClicked(ActionEvent actionEvent) {
     System.out.println("MainWindowController: onDecryptFileBtnClicked -> decrypt file button clicked");
+  }
+
+
+  public void changeFileDetailPaneVisibility(boolean visible) {
+    fileDetailGridPane.setVisible(visible);
   }
 }
