@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added encryptedFile property and related APIs. added constructor">
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added animateFx library">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/MainApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/Encryption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/ManageEncryptedFileList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/ManageEncryptedFileList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/main_window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/main_window.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,18 +46,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Notification.DisplayName-DoNotAsk-Vcs Important Messages&quot;: &quot;VCS important messages&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-Vcs Notifications&quot;: &quot;VCS notifications&quot;,
-    &quot;Notification.DoNotAsk-Vcs Important Messages&quot;: &quot;true&quot;,
-    &quot;Notification.DoNotAsk-Vcs Notifications&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/charitra/Desktop/JavaProject/Softablitz/SecuriTron/src/main/java/com/soterians/securitron&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Notification.DisplayName-DoNotAsk-Vcs Important Messages": "VCS important messages",
+    "Notification.DisplayName-DoNotAsk-Vcs Notifications": "VCS notifications",
+    "Notification.DoNotAsk-Vcs Important Messages": "true",
+    "Notification.DoNotAsk-Vcs Notifications": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/charitra/Desktop/JavaProject/Softablitz/SecuriTron/src/main/java/com/soterians/securitron",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\charitra\Desktop\JavaProject\Softablitz\SecuriTron\src\main\java\com\soterians\securitron" />
@@ -220,7 +219,39 @@
       <option name="project" value="LOCAL" />
       <updated>1699481291571</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="completed APIs for reading, writing EncryptedFileMetadata and related JSON data">
+      <option name="closed" value="true" />
+      <created>1699481470453</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1699481470453</updated>
+    </task>
+    <task id="LOCAL-00018" summary="manage EncryptedFileMetadata object handling that should be created after encryption of a file">
+      <option name="closed" value="true" />
+      <created>1699481563906</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1699481563906</updated>
+    </task>
+    <task id="LOCAL-00019" summary="read the encrypted files data and initialize the app">
+      <option name="closed" value="true" />
+      <created>1699481603042</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1699481603042</updated>
+    </task>
+    <task id="LOCAL-00020" summary="added animateFx library">
+      <option name="closed" value="true" />
+      <created>1699558240149</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1699558240149</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -251,7 +282,11 @@
     <MESSAGE value="added json library" />
     <MESSAGE value="added handlers for list of encrypted files and JSON handlers" />
     <MESSAGE value="added encryptedFile property and related APIs. added constructor" />
-    <option name="LAST_COMMIT_MESSAGE" value="added encryptedFile property and related APIs. added constructor" />
+    <MESSAGE value="completed APIs for reading, writing EncryptedFileMetadata and related JSON data" />
+    <MESSAGE value="manage EncryptedFileMetadata object handling that should be created after encryption of a file" />
+    <MESSAGE value="read the encrypted files data and initialize the app" />
+    <MESSAGE value="added animateFx library" />
+    <option name="LAST_COMMIT_MESSAGE" value="added animateFx library" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
