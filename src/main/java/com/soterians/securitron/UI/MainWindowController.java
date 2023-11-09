@@ -2,6 +2,8 @@ package com.soterians.securitron.UI;
 
 import com.soterians.securitron.Utils.EncryptedFileMetadata;
 import com.soterians.securitron.Utils.Encryption;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +21,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static com.soterians.securitron.Utils.ManageEncryptedFileList.readEncryptedFileMetaData;
@@ -35,7 +39,7 @@ public class MainWindowController {
   private Pane dragPane;  // container over which files will be dropped
 
   @FXML
-  private ListView<String> filesListView;  // to display list of encrypted files
+  private ListView<EncryptedFileMetadata> filesListView;  // to display list of encrypted files
 
   @FXML
   private GridPane fileDetailGridPane;  // grid view that displays the file details
@@ -211,11 +215,21 @@ public class MainWindowController {
   public void updateListView(ArrayList<EncryptedFileMetadata> encryptedFiles) {
     System.out.println("MainWindowController: updateListView -> " + encryptedFiles.toString());
     
-    ObservableList<String> names = FXCollections.observableArrayList();
+    ObservableList<EncryptedFileMetadata> encryptedFilesList = FXCollections.observableArrayList();
+    encryptedFilesList.addAll(encryptedFiles);
 
-    for(int i=0; i<encryptedFiles.size(); i++) names.add(encryptedFiles.get(i).getFileName());
+    filesListView.setItems(encryptedFilesList);
 
-    filesListView.setItems(names);
+    filesListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<EncryptedFileMetadata>() {
+      @Override
+      public void changed(ObservableValue<? extends EncryptedFileMetadata> observable, EncryptedFileMetadata oldValue, EncryptedFileMetadata newValue) {
+        fileNameLabel.setText(newValue.getFileName());
+        fileFormatLabel.setText(newValue.getFileFormat());
+        fileSizeLabel.setText(newValue.getFileSizeString());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy");
+        fileEncryptedDateLabel.setText(simpleDateFormat.format(newValue.getEncryptedOn()));
+      }
+    });
   }
 
 

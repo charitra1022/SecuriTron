@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added the title to the listView">
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added the file information pane UI and related component skeleton">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/main_window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/main_window.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/EncryptedFileMetadata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/EncryptedFileMetadata.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -260,7 +260,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699558428973</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="added the file information pane UI and related component skeleton">
+      <option name="closed" value="true" />
+      <created>1699564230843</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1699564230843</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -296,7 +304,8 @@
     <MESSAGE value="read the encrypted files data and initialize the app" />
     <MESSAGE value="added animateFx library" />
     <MESSAGE value="added the title to the listView" />
-    <option name="LAST_COMMIT_MESSAGE" value="added the title to the listView" />
+    <MESSAGE value="added the file information pane UI and related component skeleton" />
+    <option name="LAST_COMMIT_MESSAGE" value="added the file information pane UI and related component skeleton" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -307,7 +316,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
-          <line>95</line>
+          <line>98</line>
           <properties class="com.soterians.securitron.UI.MainWindowController" method="encryptBtnClicked">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -334,7 +343,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/EncryptedFileMetadata.java</url>
-          <line>124</line>
+          <line>128</line>
           <properties class="com.soterians.securitron.Utils.EncryptedFileMetadata" method="calculateFileFormat">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -343,7 +352,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/EncryptedFileMetadata.java</url>
-          <line>120</line>
+          <line>124</line>
           <properties class="com.soterians.securitron.Utils.EncryptedFileMetadata" method="calculateChecksum">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
