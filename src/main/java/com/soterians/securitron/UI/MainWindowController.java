@@ -1,5 +1,6 @@
 package com.soterians.securitron.UI;
 
+import com.soterians.securitron.MainApplication;
 import com.soterians.securitron.Utils.EncryptedFileMetadata;
 import com.soterians.securitron.Utils.Encryption;
 import com.soterians.securitron.Utils.ManageEncryptedFileList;
@@ -12,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
@@ -26,6 +28,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -34,6 +37,8 @@ import static com.soterians.securitron.Utils.ManageEncryptedFileList.readEncrypt
 public class MainWindowController implements Initializable {
   private ArrayList<File> files, folders;   // list of files and folders
   private List<File> filesList;   // list of files returned by the file selection event
+
+  private HashMap<String, String> fileIcons;  // map of icons mapped to their relative resource path
 
   @FXML
   private Button settingsBtn, aboutBtn, closeBtn, selectBtn, encryptBtn;
@@ -79,6 +84,28 @@ public class MainWindowController implements Initializable {
 
     updateListView(fileMetadataList);  // update the list view with list of encrypted files
     changeFileDetailPaneVisibility(false);
+
+
+    // add the file icons to the list
+    fileIcons = new HashMap<>();
+    fileIcons.put("audio", MainApplication.class.getResource("icons/audio.png").toExternalForm());
+    fileIcons.put("code", MainApplication.class.getResource("icons/code.png").toExternalForm());
+    fileIcons.put("compress", MainApplication.class.getResource("icons/compress.png").toExternalForm());
+    fileIcons.put("excel", MainApplication.class.getResource("icons/excel.png").toExternalForm());
+    fileIcons.put("folder", MainApplication.class.getResource("icons/folder.png").toExternalForm());
+    fileIcons.put("gif", MainApplication.class.getResource("icons/gif.png").toExternalForm());
+    fileIcons.put("link", MainApplication.class.getResource("icons/link.png").toExternalForm());
+    fileIcons.put("lock", MainApplication.class.getResource("icons/lock.png").toExternalForm());
+    fileIcons.put("pdf", MainApplication.class.getResource("icons/pdf.png").toExternalForm());
+    fileIcons.put("picture", MainApplication.class.getResource("icons/picture.png").toExternalForm());
+    fileIcons.put("ppt", MainApplication.class.getResource("icons/ppt.png").toExternalForm());
+    fileIcons.put("psd", MainApplication.class.getResource("icons/psd.png").toExternalForm());
+    fileIcons.put("svg", MainApplication.class.getResource("icons/svg.png").toExternalForm());
+    fileIcons.put("txt", MainApplication.class.getResource("icons/txt.png").toExternalForm());
+    fileIcons.put("unknown", MainApplication.class.getResource("icons/unknown.png").toExternalForm());
+    fileIcons.put("unlock", MainApplication.class.getResource("icons/unlock.png").toExternalForm());
+    fileIcons.put("video", MainApplication.class.getResource("icons/video.png").toExternalForm());
+    fileIcons.put("word", MainApplication.class.getResource("icons/word.png").toExternalForm());
   }
 
 
@@ -252,12 +279,17 @@ public class MainWindowController implements Initializable {
     filesListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<EncryptedFileMetadata>() {
       @Override
       public void changed(ObservableValue<? extends EncryptedFileMetadata> observable, EncryptedFileMetadata oldValue, EncryptedFileMetadata newValue) {
-        changeFileDetailPaneVisibility(true);
+        changeFileDetailPaneVisibility(true); // show the file info panel
+        // update the file info in the panel
         fileNameLabel.setText(newValue.getFileName());
         fileFormatLabel.setText(newValue.getFileFormat());
         fileSizeLabel.setText(newValue.getFileSizeString());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy");
         fileEncryptedDateLabel.setText(simpleDateFormat.format(newValue.getEncryptedOn()));
+
+        imageView.setImage(new Image(fileIcons.get("unknown")));
+
+        System.out.println();
       }
     });
   }
@@ -276,6 +308,6 @@ public class MainWindowController implements Initializable {
 
 
   public void changeFileDetailPaneVisibility(boolean visible) {
-    fileDetailGridPane.setVisible(visible);
+    if(fileDetailGridPane.visibleProperty().get() != visible) fileDetailGridPane.setVisible(visible);
   }
 }

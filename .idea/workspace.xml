@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="new icons added">
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="used Initializer class to initialize the app's initial settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/MainApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/MainApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -300,7 +299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699597654027</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="used Initializer class to initialize the app's initial settings">
+      <option name="closed" value="true" />
+      <created>1699597746623</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1699597746623</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -315,7 +322,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added readme file" />
     <MESSAGE value="renamed files according to need" />
     <MESSAGE value="changed name of main window files" />
     <MESSAGE value="designed basic view of main window" />
@@ -340,7 +346,8 @@
     <MESSAGE value="added click handler for listView items and update file info panel on item selection" />
     <MESSAGE value="change file detail view visibility on listview item selection" />
     <MESSAGE value="new icons added" />
-    <option name="LAST_COMMIT_MESSAGE" value="new icons added" />
+    <MESSAGE value="used Initializer class to initialize the app's initial settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="used Initializer class to initialize the app's initial settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -351,7 +358,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
-          <line>128</line>
+          <line>155</line>
           <properties class="com.soterians.securitron.UI.MainWindowController" method="encryptBtnClicked">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
