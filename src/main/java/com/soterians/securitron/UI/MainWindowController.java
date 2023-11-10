@@ -2,12 +2,14 @@ package com.soterians.securitron.UI;
 
 import com.soterians.securitron.Utils.EncryptedFileMetadata;
 import com.soterians.securitron.Utils.Encryption;
+import com.soterians.securitron.Utils.ManageEncryptedFileList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
@@ -20,15 +22,16 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static com.soterians.securitron.Utils.ManageEncryptedFileList.readEncryptedFileMetaData;
 
-public class MainWindowController {
+public class MainWindowController implements Initializable {
   private ArrayList<File> files, folders;   // list of files and folders
   private List<File> filesList;   // list of files returned by the file selection event
 
@@ -52,6 +55,32 @@ public class MainWindowController {
 
   @FXML
   private Button openFileBtn, decryptFileBtn;
+
+
+  /**
+   * Update the app UI and other data on app load
+   * @param location
+   * The location used to resolve relative paths for the root object, or
+   * {@code null} if the location is not known.
+   *
+   * @param resources
+   * The resources used to localize the root object, or {@code null} if
+   * the root object was not localized.
+   */
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    System.out.println("MainWindowController: initialize -> initialize called");
+    ArrayList<EncryptedFileMetadata> fileMetadataList = null;
+    try {
+      fileMetadataList = ManageEncryptedFileList.readEncryptedFileMetaData();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    updateListView(fileMetadataList);  // update the list view with list of encrypted files
+    changeFileDetailPaneVisibility(false);
+  }
+
 
   @FXML
   private void settingsBtnClicked(ActionEvent actionEvent) {
