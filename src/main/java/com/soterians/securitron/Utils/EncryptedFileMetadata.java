@@ -3,6 +3,8 @@ package com.soterians.securitron.Utils;
 import java.io.File;
 import java.util.Date;
 
+import org.apache.commons.io.FilenameUtils;
+
 public class EncryptedFileMetadata {
   private File file, encryptedFile;
   private String checksum;
@@ -22,7 +24,7 @@ public class EncryptedFileMetadata {
     this.checksum = checksum;
     this.encryptedOn = encryptedOn;
     this.fileSize = fileSize;
-    this.fileFormat = calculateFileFormat();
+    this.fileFormat = calculateFileFormat(file);
     this.encryptedFile = encryptedFile;
   }
 
@@ -37,7 +39,7 @@ public class EncryptedFileMetadata {
     this.checksum = calculateChecksum();
     this.encryptedOn = new Date();
     this.fileSize = file.length();
-    this.fileFormat = calculateFileFormat();
+    this.fileFormat = calculateFileFormat(originalFile);
     this.encryptedFile = encryptedFile;
   }
 
@@ -126,7 +128,7 @@ public class EncryptedFileMetadata {
     return "";
   }
 
-  public String calculateFileFormat() {
-    return "";
+  public String calculateFileFormat(File file) {
+    return FilenameUtils.getExtension(file.getName());
   }
 }
