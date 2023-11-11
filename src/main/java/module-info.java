@@ -3,6 +3,7 @@ module com.soterians.securitron {
   requires javafx.fxml;
   requires org.json;
   requires AnimateFX;
+  requires org.apache.commons.io;
 
 
   opens com.soterians.securitron to javafx.fxml;
