@@ -12,4 +12,6 @@ module com.soterians.securitron {
   opens com.soterians.securitron.UI to javafx.fxml;
   exports com.soterians.securitron.Utils;
   opens com.soterians.securitron.Utils to javafx.fxml;
+  exports com.soterians.securitron.Utils.CryptoClasses;
+  opens com.soterians.securitron.Utils.CryptoClasses to javafx.fxml;
 }

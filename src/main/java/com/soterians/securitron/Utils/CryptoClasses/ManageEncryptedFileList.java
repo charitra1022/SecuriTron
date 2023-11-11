@@ -1,5 +1,6 @@
-package com.soterians.securitron.Utils;
+package com.soterians.securitron.Utils.CryptoClasses;
 
+import com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

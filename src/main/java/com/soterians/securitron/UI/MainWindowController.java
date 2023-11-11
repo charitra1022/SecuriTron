@@ -1,9 +1,9 @@
 package com.soterians.securitron.UI;
 
-import com.soterians.securitron.Utils.EncryptedFileMetadata;
-import com.soterians.securitron.Utils.Encryption;
+import com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata;
+import com.soterians.securitron.Utils.CryptoClasses.Encryption;
 import com.soterians.securitron.Utils.FileIcons;
-import com.soterians.securitron.Utils.ManageEncryptedFileList;
+import com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static com.soterians.securitron.Utils.ManageEncryptedFileList.readEncryptedFileMetaData;
+import static com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList.readEncryptedFileMetaData;
 
 public class MainWindowController implements Initializable {
   private ArrayList<File> files, folders;   // list of files and folders

@@ -1,4 +1,4 @@
-package com.soterians.securitron.Utils;
+package com.soterians.securitron.Utils.CryptoClasses;
 
 import java.io.File;
 import java.io.IOException;

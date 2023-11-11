@@ -1,15 +1,11 @@
 package com.soterians.securitron;
 
-import com.soterians.securitron.UI.MainWindowController;
-import com.soterians.securitron.Utils.EncryptedFileMetadata;
-import com.soterians.securitron.Utils.ManageEncryptedFileList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class MainApplication extends Application {
   private FXMLLoader fxmlLoader;
