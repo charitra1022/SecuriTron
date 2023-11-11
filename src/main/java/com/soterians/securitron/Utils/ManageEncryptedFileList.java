@@ -1,6 +1,7 @@
 package com.soterians.securitron.Utils;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -83,7 +84,29 @@ public class ManageEncryptedFileList {
     }
     reader.close();
 
-    return new JSONArray(fileContents.toString());
+    // if the file is a valid json file, return its JSONArray object
+    if(isValidJsonArray(fileContents.toString()))
+      return new JSONArray(fileContents.toString());
+
+    // if the file is not a valid json file, delete it
+    getEncryptedFilesListPath().toFile().delete();
+    return new JSONArray("[]");
+  }
+
+
+  /**
+   * Checks if the provided string is a valid JSON string
+   * @param string string to be checked
+   * @return true if string is a valid JSONArray
+   */
+  public static boolean isValidJsonArray(String string) {
+    try{
+      // if its possible to make a JSONArray object, its a valid json file
+      new JSONArray(string);
+      return true;
+    } catch (JSONException err) {
+      return false;
+    }
   }
 
 
