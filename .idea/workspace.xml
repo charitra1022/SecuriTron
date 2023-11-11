@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added file icon mappings">
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added code to calculate file format">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/FileIcons.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" afterDir="false" />
     </list>
@@ -315,7 +316,39 @@
       <option name="project" value="LOCAL" />
       <updated>1699612430944</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="added exception handler for incorrect jsonarray parsing from string. (more handling expected in later phase)">
+      <option name="closed" value="true" />
+      <created>1699732293435</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1699732293435</updated>
+    </task>
+    <task id="LOCAL-00030" summary="added dependencies - Filescommons">
+      <option name="closed" value="true" />
+      <created>1699732336159</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1699732336159</updated>
+    </task>
+    <task id="LOCAL-00031" summary="added dependencies - Filescommons">
+      <option name="closed" value="true" />
+      <created>1699732352347</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1699732352347</updated>
+    </task>
+    <task id="LOCAL-00032" summary="added code to calculate file format">
+      <option name="closed" value="true" />
+      <created>1699732398388</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1699732398388</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -330,9 +363,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed name of main window files" />
-    <MESSAGE value="designed basic view of main window" />
-    <MESSAGE value="added some icons" />
     <MESSAGE value="added new UI" />
     <MESSAGE value="resized and restructured splitpane UI" />
     <MESSAGE value="added function for button clicks on encrypt button" />
@@ -355,7 +385,10 @@
     <MESSAGE value="new icons added" />
     <MESSAGE value="used Initializer class to initialize the app's initial settings" />
     <MESSAGE value="added file icon mappings" />
-    <option name="LAST_COMMIT_MESSAGE" value="added file icon mappings" />
+    <MESSAGE value="added exception handler for incorrect jsonarray parsing from string. (more handling expected in later phase)" />
+    <MESSAGE value="added dependencies - Filescommons" />
+    <MESSAGE value="added code to calculate file format" />
+    <option name="LAST_COMMIT_MESSAGE" value="added code to calculate file format" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -366,8 +399,8 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
-          <line>160</line>
-          <properties class="com.soterians.securitron.UI.MainWindowController" method="encryptBtnClicked">
+          <line>138</line>
+          <properties class="com.soterians.securitron.UI.MainWindowController">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
@@ -375,7 +408,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/ManageEncryptedFileList.java</url>
-          <line>151</line>
+          <line>174</line>
           <properties class="com.soterians.securitron.Utils.ManageEncryptedFileList" method="doesFileExist">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -384,7 +417,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/ManageEncryptedFileList.java</url>
-          <line>52</line>
+          <line>53</line>
           <properties class="com.soterians.securitron.Utils.ManageEncryptedFileList" method="saveEncryptedFileMetaData">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -393,7 +426,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/EncryptedFileMetadata.java</url>
-          <line>128</line>
+          <line>130</line>
           <properties class="com.soterians.securitron.Utils.EncryptedFileMetadata" method="calculateFileFormat">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -402,7 +435,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/EncryptedFileMetadata.java</url>
-          <line>124</line>
+          <line>126</line>
           <properties class="com.soterians.securitron.Utils.EncryptedFileMetadata" method="calculateChecksum">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
