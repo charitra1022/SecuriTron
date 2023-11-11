@@ -21,6 +21,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
@@ -85,6 +86,17 @@ public class MainWindowController implements Initializable {
     updateListView(fileMetadataList);  // update the list view with list of encrypted files
     changeFileDetailPaneVisibility(false);
 
+    // set the tooltip for the file info labels
+    fileNameLabel.setTooltip(new Tooltip(""));
+    fileFormatLabel.setTooltip(new Tooltip(""));
+    fileSizeLabel.setTooltip(new Tooltip(""));
+    fileEncryptedDateLabel.setTooltip(new Tooltip(""));
+
+    // set delay for tooltip for the labels
+    fileNameLabel.getTooltip().setShowDelay(Duration.seconds(0.2));
+    fileFormatLabel.getTooltip().setShowDelay(Duration.seconds(0.2));
+    fileSizeLabel.getTooltip().setShowDelay(Duration.seconds(0.2));
+    fileEncryptedDateLabel.getTooltip().setShowDelay(Duration.seconds(0.2));
 
     // add the file icons to the list
     fileIcons = new HashMap<>();
@@ -282,10 +294,17 @@ public class MainWindowController implements Initializable {
         changeFileDetailPaneVisibility(true); // show the file info panel
         // update the file info in the panel
         fileNameLabel.setText(newValue.getFileName());
+        fileNameLabel.getTooltip().setText(fileNameLabel.getText());  // set the tooltip text
+
         fileFormatLabel.setText(newValue.getFileFormat());
+        fileFormatLabel.getTooltip().setText(fileFormatLabel.getText());  // set the tooltip text
+
         fileSizeLabel.setText(newValue.getFileSizeString());
+        fileSizeLabel.getTooltip().setText(fileSizeLabel.getText());  // set the tooltip text
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy");
         fileEncryptedDateLabel.setText(simpleDateFormat.format(newValue.getEncryptedOn()));
+        fileEncryptedDateLabel.getTooltip().setText(fileEncryptedDateLabel.getText());  // set the tooltip text
 
         imageView.setImage(new Image(fileIcons.get("unknown")));
 
