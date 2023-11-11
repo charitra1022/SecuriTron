@@ -38,6 +38,7 @@ public class FileIcons {
     fileIcons.put("unlock", MainApplication.class.getResource("icons/unlock.png").toExternalForm());
     fileIcons.put("video", MainApplication.class.getResource("icons/video.png").toExternalForm());
     fileIcons.put("word", MainApplication.class.getResource("icons/word.png").toExternalForm());
+    fileIcons.put("application", MainApplication.class.getResource("icons/application.png").toExternalForm());
   }
 
 
@@ -78,6 +79,7 @@ public class FileIcons {
       else if (mimeType.contains("video")) iconType = "video";
       else if(mimeType.contains("msword") || mimeType.contains("wordprocessingml")) iconType = "word";
       else if(mimeType.contains("ms-excel") || mimeType.contains("spreadsheet")) iconType = "excel";
+      else if(mimeType.contains("application")) iconType = "application";
       else iconType = "unknown";
 
       // to add folder, link, code files
