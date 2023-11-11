@@ -67,19 +67,20 @@ public class FileIcons {
       else if (mimeType.contains("audio")) iconType = "audio";
       else if (mimeType.contains("text/plain")) iconType = "txt";
       else if (mimeType.contains("text")) iconType = "code";
-      else if (mimeType.contains("zip") || mimeType.contains("compressed"))
+      else if (mimeType.contains("zip") || mimeType.contains("compressed") || mimeType.contains("tar"))
         iconType = "compress";
       else if (mimeType.contains("gif")) iconType = "gif";
       else if (mimeType.contains("pdf")) iconType = "pdf";
       else if (mimeType.contains("svg")) iconType = "svg";
       else if (mimeType.contains("image")) iconType = "picture";
       else if(mimeType.contains("powerpoint") || mimeType.contains("presentation")) iconType = "ppt";
-      else if (mimeType.contains("psd")) iconType = "psd";
+      else if (mimeType.contains("psd") || mimeType.contains("postscript")) iconType = "psd";
       else if (mimeType.contains("video")) iconType = "video";
       else if(mimeType.contains("msword") || mimeType.contains("wordprocessingml")) iconType = "word";
+      else if(mimeType.contains("ms-excel") || mimeType.contains("spreadsheet")) iconType = "excel";
       else iconType = "unknown";
 
-      // to add excel, folder, link
+      // to add folder, link, code files
     } catch (IOException err) {}  // use default file icon if exception occurs
 
     Image image = new Image(fileIcons.get(iconType)); // create image object
