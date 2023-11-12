@@ -2,8 +2,8 @@ package com.soterians.securitron.UI;
 
 import com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata;
 import com.soterians.securitron.Utils.CryptoClasses.Encryption;
-import com.soterians.securitron.Utils.FileIcons;
 import com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList;
+import com.soterians.securitron.Utils.IconPack;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -17,7 +17,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -41,7 +40,7 @@ public class MainWindowController implements Initializable {
   private Button settingsBtn, aboutBtn, closeBtn, selectBtn, encryptBtn;
 
   @FXML
-  private Pane dragPane;  // container over which files will be dropped
+  private Label dragPane; // element over which files will be dropped
 
   @FXML
   private ListView<EncryptedFileMetadata> filesListView;  // to display list of encrypted files
@@ -71,6 +70,12 @@ public class MainWindowController implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    // set the drag and drop image
+    ImageView view = new ImageView(IconPack.getInstance().getIcon("dragdrop_grey"));
+    view.setFitHeight(80);
+    view.setPreserveRatio(true);
+    dragPane.setGraphic(view);
+
     System.out.println("MainWindowController: initialize -> initialize called");
     ArrayList<EncryptedFileMetadata> fileMetadataList = null;
     try {
@@ -220,7 +225,8 @@ public class MainWindowController implements Initializable {
    */
   @FXML
   private void onDragEntered(DragEvent event) {
-    dragPane.setStyle("-fx-border-color: #0096FF; -fx-border-width: 2; -fx-border-radius: 10");
+    dragPane.setStyle("-fx-border-color: #0096FF; -fx-border-width: 4; -fx-border-radius: 15; -fx-text-fill: #0096FF;");
+    ((ImageView)dragPane.getGraphic()).setImage(IconPack.getInstance().getIcon("dragdrop_blue"));
   }
 
 
@@ -230,7 +236,8 @@ public class MainWindowController implements Initializable {
    */
   @FXML
   private void onDragExited(DragEvent event) {
-    dragPane.setStyle("-fx-border-color: black; -fx-border-width: 0.5; -fx-border-radius: 5");
+    dragPane.setStyle("-fx-border-color: lightgrey; -fx-border-radius: 10; -fx-border-width: 2; -fx-text-fill: #868686;");
+    ((ImageView)dragPane.getGraphic()).setImage(IconPack.getInstance().getIcon("dragdrop_grey"));
   }
 
 
@@ -287,7 +294,7 @@ public class MainWindowController implements Initializable {
         fileEncryptedDateLabel.setText(simpleDateFormat.format(newValue.getEncryptedOn()));
         fileEncryptedDateLabel.getTooltip().setText(fileEncryptedDateLabel.getText());  // set the tooltip text
 
-        imageView.setImage(FileIcons.getInstance().getIconImage(newValue.getFile())); // set file icon in imageview
+        imageView.setImage(IconPack.getInstance().getFileIconImage(newValue.getFile())); // set file icon in imageview
       }
     });
   }
