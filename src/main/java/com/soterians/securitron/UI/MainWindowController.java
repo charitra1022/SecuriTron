@@ -128,15 +128,17 @@ public class MainWindowController implements Initializable {
    */
   @FXML
   private void selectBtnClicked(ActionEvent actionEvent) {
+    // get reference to the current stage
     Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
 
+    // show the filechooser to select files
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Select files to encrypt");
     fileChooser.getExtensionFilters().addAll(
             new FileChooser.ExtensionFilter("All Files", "*.*")
     );
     filesList = fileChooser.showOpenMultipleDialog(stage);
-    handleFilesSelected();
+    handleFilesSelected();  // process the selected files
   }
 
 
@@ -146,6 +148,7 @@ public class MainWindowController implements Initializable {
    */
   @FXML
   private void encryptBtnClicked(ActionEvent actionEvent) throws IOException, ParseException {
+    // if no files are selected currently
     if(filesList == null || filesList.isEmpty()) {
       showSimpleDialog("No files to encrypt!", "Open files or Drag files in the above box to encrypt them.");
       return;
@@ -179,6 +182,7 @@ public class MainWindowController implements Initializable {
   }
 
 
+  // TODO: to display the files to the user that are selected currently
   /**
    * Separates files and folders from the list returned by the selection event (drag/open)
    */
@@ -306,12 +310,24 @@ public class MainWindowController implements Initializable {
   }
 
 
+  /**
+   * Called when the decrypt button is called
+   * @param actionEvent button click event
+   */
   @FXML
   private void onDecryptFileBtnClicked(ActionEvent actionEvent) {
     System.out.println("MainWindowController: onDecryptFileBtnClicked -> decrypt file button clicked");
+
+    // get the selected item from the listview
+    EncryptedFileMetadata fileMetadata = filesListView.getSelectionModel().getSelectedItem();
+    Encryption.decryptFile(fileMetadata); // call the decrypt method on the file
   }
 
 
+  /**
+   * changes the visibility of the file detail pane on the right side.
+   * @param visible boolean value - true to show, false to hide
+   */
   public void changeFileDetailPaneVisibility(boolean visible) {
     if(fileDetailGridPane.visibleProperty().get() != visible) fileDetailGridPane.setVisible(visible);
   }

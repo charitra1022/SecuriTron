@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="changed drag element and set icon">
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="enabled encryption and ask for user's consent to delete original files using alert">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" afterDir="false" />
@@ -372,7 +372,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699735170834</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="enabled encryption and ask for user's consent to delete original files using alert">
+      <option name="closed" value="true" />
+      <created>1699833018255</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1699833018255</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -387,7 +395,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="changed cursor style for some buttons" />
     <MESSAGE value="added SettingsManager class skeleton" />
     <MESSAGE value="added CryptoUtils.java that provides basic API for encryption and decryption of files" />
     <MESSAGE value="added APIs for EncryptedFileMetadata class" />
@@ -412,7 +419,8 @@
     <MESSAGE value="added class to handle file icons" />
     <MESSAGE value="handle the file icons and listview exception if items are deselected when listview is refreshed" />
     <MESSAGE value="restructured project" />
-    <option name="LAST_COMMIT_MESSAGE" value="restructured project" />
+    <MESSAGE value="enabled encryption and ask for user's consent to delete original files using alert" />
+    <option name="LAST_COMMIT_MESSAGE" value="enabled encryption and ask for user's consent to delete original files using alert" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -456,6 +464,24 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
+          <line>104</line>
+          <properties class="com.soterians.securitron.UI.MainWindowController" method="settingsBtnClicked">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
+          <line>109</line>
+          <properties class="com.soterians.securitron.UI.MainWindowController" method="aboutBtnClicked">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

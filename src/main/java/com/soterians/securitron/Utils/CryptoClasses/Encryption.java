@@ -8,7 +8,6 @@ import javafx.scene.control.ButtonType;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -96,7 +95,7 @@ public class Encryption {
    * Encrypts the list of files passed
    * @param files ArrayList&lt;File&gt; files object that stores list of Files that need to be encrypted
    */
-  public static void encryptFiles(ArrayList<File> files) throws IOException, ParseException {
+  public static void encryptFiles(ArrayList<File> files) throws IOException {
     // create list of EncryptedFileMetadata objects
     ArrayList<EncryptedFileMetadata> fileMetadataList = new ArrayList<>();
     for(int i=0; i<files.size(); i++) {
@@ -108,5 +107,42 @@ public class Encryption {
 
     // reset the default deletion value
     deleteOriginal = false;
+  }
+
+
+  /**
+   * Decrypts the encrypted file and deletes it from the disk
+   * @param fileMetadata EncryptedFileMetadata object of the encrypted file
+   */
+  public static void decryptFile(EncryptedFileMetadata fileMetadata) {
+    System.out.println("Encryption: decryptFile (1) -> " + fileMetadata);
+
+    // create respective file objects
+    File encryptedFile = fileMetadata.getEncryptedFile();
+    File decryptedFile = fileMetadata.getFile();
+
+    // decrypt the file
+    try {
+      CryptoUtils.decrypt(key, encryptedFile, decryptedFile);
+      System.out.println("Encryption: decryptFile (2) -> Decrypted: " + decryptedFile.getAbsolutePath());
+      encryptedFile.delete(); // delete the encrypted file after it is decrypted
+
+      // TODO: remove the file entry from the list and update the listView
+    } catch (CryptoException ex) {
+      String msg = "";
+      if(!encryptedFile.exists()) msg = "File not found!";
+      else msg = "Error in decrypting file!";
+
+      System.out.println("Encryption: decryptFile (3) -> ERROR: " + ex.getMessage());
+      System.out.println("Encryption: decryptFile (4) -> ERROR: " + msg);
+      ex.printStackTrace();
+
+      // display the error dialog box
+      Alert errAlert = new Alert(Alert.AlertType.ERROR);
+      errAlert.setHeaderText(msg + "\nPath: " + fileMetadata.getEncryptedFilePath());
+      errAlert.showAndWait();
+
+      // TODO: to ask user to remove entry for the error file from the list
+    }
   }
 }
