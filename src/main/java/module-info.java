@@ -4,6 +4,8 @@ module com.soterians.securitron {
   requires org.json;
   requires AnimateFX;
   requires org.apache.commons.io;
+  requires java.desktop;
+  requires org.apache.commons.lang3;
 
 
   opens com.soterians.securitron to javafx.fxml;
