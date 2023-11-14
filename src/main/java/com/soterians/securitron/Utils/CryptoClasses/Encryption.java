@@ -4,7 +4,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import org.apache.commons.lang3.RandomStringUtils;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -145,4 +147,39 @@ public class Encryption {
       // TODO: to ask user to remove entry for the error file from the list
     }
   }
+
+
+  /**
+   * Open file without decrypting to the main location
+   * @param fileMetadata EncryptedFileMetadata object of the main encrypted file
+   * @throws IOException
+   */
+  public static void openFileTemporarily(EncryptedFileMetadata fileMetadata) throws IOException {
+    File encryptedFile = fileMetadata.getEncryptedFile(); // path to encrypted file
+    File decryptedFile = File.createTempFile(RandomStringUtils.randomAlphanumeric(3), "." + fileMetadata.getFileFormat());
+
+    try {
+      CryptoUtils.decrypt(key, encryptedFile, decryptedFile);
+      System.out.println("Encryption: openFileTemporarily (1) -> Opening as " + decryptedFile.getAbsolutePath());
+      Desktop.getDesktop().open(decryptedFile); // open the decrypted file
+    } catch(CryptoException ex) {
+      String msg = "";
+      if(!encryptedFile.exists()) msg = "File not found!";
+      else msg = "Error in decrypting file!";
+
+      System.out.println("Encryption: decryptFile (2) -> ERROR: " + ex.getMessage());
+      System.out.println("Encryption: decryptFile (3) -> ERROR: " + msg);
+      ex.printStackTrace();
+
+      // display the error dialog box
+      Alert errAlert = new Alert(Alert.AlertType.ERROR);
+      errAlert.setHeaderText(msg + "\nPath: " + fileMetadata.getEncryptedFilePath());
+      errAlert.showAndWait();
+
+      // TODO: to ask user to remove entry for the error file from the list
+    } finally {
+      decryptedFile.deleteOnExit(); // delete the decrypted file after the app has been closed
+    }
+  }
 }
+

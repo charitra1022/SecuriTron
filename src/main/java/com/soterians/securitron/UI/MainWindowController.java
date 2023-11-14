@@ -304,9 +304,16 @@ public class MainWindowController implements Initializable {
   }
 
 
+  /**
+ * Called when the open button is clicked for any encrypted file
+ * @param actionEvent button click action event
+ * @throws IOException
+ */
   @FXML
-  private void onOpenFileBtnClicked(ActionEvent actionEvent) {
+  private void onOpenFileBtnClicked(ActionEvent actionEvent) throws IOException {
     System.out.println("MainWindowController: onOpenFileBtnClicked -> open file button clicked");
+    EncryptedFileMetadata fileMetadata = filesListView.getSelectionModel().getSelectedItem(); // get selected item
+    Encryption.openFileTemporarily(fileMetadata); // open the encrypted file temporarily
   }
 
 
