@@ -13,6 +13,8 @@ import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 
+// TODO: to use file locking while encrypting/decrypting
+
 
 /**
  * Custom exception for the CryptoUtils class

@@ -71,7 +71,7 @@ public class MainWindowController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // set the drag and drop image
-    ImageView view = new ImageView(IconPack.getInstance().getIcon("dragdrop_grey"));
+    ImageView view = new ImageView(IconPack.DRAG_DROP_GREY.getImage());
     view.setFitHeight(80);
     view.setPreserveRatio(true);
     dragPane.setGraphic(view);
@@ -230,7 +230,7 @@ public class MainWindowController implements Initializable {
   @FXML
   private void onDragEntered(DragEvent event) {
     dragPane.setStyle("-fx-border-color: #0096FF; -fx-border-width: 4; -fx-border-radius: 15; -fx-text-fill: #0096FF;");
-    ((ImageView)dragPane.getGraphic()).setImage(IconPack.getInstance().getIcon("dragdrop_blue"));
+    ((ImageView)dragPane.getGraphic()).setImage(IconPack.DRAG_DROP_BLUE.getImage());
   }
 
 
@@ -241,7 +241,7 @@ public class MainWindowController implements Initializable {
   @FXML
   private void onDragExited(DragEvent event) {
     dragPane.setStyle("-fx-border-color: lightgrey; -fx-border-radius: 10; -fx-border-width: 2; -fx-text-fill: #868686;");
-    ((ImageView)dragPane.getGraphic()).setImage(IconPack.getInstance().getIcon("dragdrop_grey"));
+    ((ImageView)dragPane.getGraphic()).setImage(IconPack.DRAG_DROP_GREY.getImage());
   }
 
 
@@ -298,7 +298,7 @@ public class MainWindowController implements Initializable {
         fileEncryptedDateLabel.setText(simpleDateFormat.format(newValue.getEncryptedOn()));
         fileEncryptedDateLabel.getTooltip().setText(fileEncryptedDateLabel.getText());  // set the tooltip text
 
-        imageView.setImage(IconPack.getInstance().getFileIconImage(newValue.getFile())); // set file icon in imageview
+        imageView.setImage(IconPack.getFileIconImage(newValue.getFile())); // set file icon in imageview
       }
     });
   }
