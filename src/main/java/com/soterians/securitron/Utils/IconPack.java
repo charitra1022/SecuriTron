@@ -28,7 +28,9 @@ public enum IconPack{
     WORD(new Image(MainApplication.class.getResource("icons/word.png").toExternalForm())),
     APPLICATION(new Image(MainApplication.class.getResource("icons/application.png").toExternalForm())),
     DRAG_DROP_GREY(new Image(MainApplication.class.getResource("icons/dragdrop_grey.png").toExternalForm())),
-    DRAG_DROP_BLUE(new Image(MainApplication.class.getResource("icons/dragdrop_blue.png").toExternalForm()));
+    DRAG_DROP_BLUE(new Image(MainApplication.class.getResource("icons/dragdrop_blue.png").toExternalForm())),
+    GEAR(new Image(MainApplication.class.getResource("icons/gear.png").toExternalForm())),
+    INFO(new Image(MainApplication.class.getResource("icons/info.png").toExternalForm()));
 
     private final Image enumValue;  // store the value of the enum
 
