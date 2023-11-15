@@ -38,7 +38,7 @@ public class MainWindowController implements Initializable {
   private List<File> filesList;   // list of files returned by the file selection event
 
   @FXML
-  private Button settingsBtn, aboutBtn, closeBtn, selectBtn, encryptBtn;
+  private Button settingsBtn, aboutBtn, selectBtn, encryptBtn;
 
   @FXML
   private Label dragPane; // element over which files will be dropped
@@ -72,10 +72,20 @@ public class MainWindowController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // set the drag and drop image
-    ImageView view = new ImageView(IconPack.DRAG_DROP_GREY.getImage());
-    view.setFitHeight(80);
-    view.setPreserveRatio(true);
-    dragPane.setGraphic(view);
+    ImageView view1 = new ImageView(IconPack.DRAG_DROP_GREY.getImage());
+    view1.setFitHeight(80);
+    view1.setPreserveRatio(true);
+    dragPane.setGraphic(view1);
+
+    // set the button icons
+    ImageView view2 = new ImageView(IconPack.GEAR.getImage());
+    ImageView view3 = new ImageView(IconPack.INFO.getImage());
+    view2.setFitHeight(15);
+    view3.setFitHeight(15);
+    view2.setPreserveRatio(true);
+    view3.setPreserveRatio(true);
+    settingsBtn.setGraphic(view2);
+    aboutBtn.setGraphic(view3);
 
     System.out.println("MainWindowController: initialize -> initialize called");
     ArrayList<EncryptedFileMetadata> fileMetadataList = null;
@@ -110,16 +120,6 @@ public class MainWindowController implements Initializable {
   @FXML
   private void aboutBtnClicked(ActionEvent actionEvent) {
     System.out.println("MainWindowController: aboutBtnClicked -> about button clicked");
-  }
-
-
-  /**
-   * Close button click event. Closes the app
-   * @param actionEvent button click event
-   */
-  @FXML
-  private void closeBtnClicked(ActionEvent actionEvent) {
-    ((Stage)((Node)actionEvent.getSource()).getScene().getWindow()).close();
   }
 
 

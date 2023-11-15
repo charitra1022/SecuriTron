@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added code for decrypting files. also did some useful documentation.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added classes and methods to calculate and read file checksum (todo: check checksum after decryption)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/IconPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/IconPack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/main_window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/main_window.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -404,7 +404,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699835486285</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="added classes and methods to calculate and read file checksum (todo: check checksum after decryption)">
+      <option name="closed" value="true" />
+      <created>1700078668046</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1700078668046</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -419,7 +427,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added CryptoUtils.java that provides basic API for encryption and decryption of files" />
     <MESSAGE value="added APIs for EncryptedFileMetadata class" />
     <MESSAGE value="added json library" />
     <MESSAGE value="added handlers for list of encrypted files and JSON handlers" />
@@ -444,7 +451,8 @@
     <MESSAGE value="restructured project" />
     <MESSAGE value="enabled encryption and ask for user's consent to delete original files using alert" />
     <MESSAGE value="added code for decrypting files. also did some useful documentation." />
-    <option name="LAST_COMMIT_MESSAGE" value="added code for decrypting files. also did some useful documentation." />
+    <MESSAGE value="added classes and methods to calculate and read file checksum (todo: check checksum after decryption)" />
+    <option name="LAST_COMMIT_MESSAGE" value="added classes and methods to calculate and read file checksum (todo: check checksum after decryption)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -474,7 +482,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/EncryptedFileMetadata.java</url>
           <line>130</line>
-          <properties class="com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata" method="calculateFileFormat">
+          <properties class="com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
@@ -483,7 +491,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/EncryptedFileMetadata.java</url>
           <line>126</line>
-          <properties class="com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata" method="calculateChecksum">
+          <properties class="com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
