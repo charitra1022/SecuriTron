@@ -10,6 +10,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -51,7 +52,7 @@ public class Encryption {
    * @param inputFile File object to be encrypted
    * @return EncryptedFileMetadata object that contains all basic info about the encrypted file
    */
-  public static EncryptedFileMetadata encryptFile(File inputFile) {
+  public static EncryptedFileMetadata encryptFile(File inputFile) throws NoSuchAlgorithmException, IOException {
     String parent = inputFile.getParent();      // get path of parent directory
     String filename = inputFile.getName();      // get name of the file
     String outputFilename = filename + extension;   // name of new file
@@ -97,7 +98,7 @@ public class Encryption {
    * Encrypts the list of files passed
    * @param files ArrayList&lt;File&gt; files object that stores list of Files that need to be encrypted
    */
-  public static void encryptFiles(ArrayList<File> files) throws IOException {
+  public static void encryptFiles(ArrayList<File> files) throws IOException, NoSuchAlgorithmException {
     // create list of EncryptedFileMetadata objects
     ArrayList<EncryptedFileMetadata> fileMetadataList = new ArrayList<>();
     for(int i=0; i<files.size(); i++) {

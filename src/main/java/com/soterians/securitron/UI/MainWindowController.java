@@ -24,6 +24,7 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -147,7 +148,7 @@ public class MainWindowController implements Initializable {
    * @param actionEvent button click event
    */
   @FXML
-  private void encryptBtnClicked(ActionEvent actionEvent) throws IOException, ParseException {
+  private void encryptBtnClicked(ActionEvent actionEvent) throws IOException, ParseException, NoSuchAlgorithmException {
     // if no files are selected currently
     if(filesList == null || filesList.isEmpty()) {
       showSimpleDialog("No files to encrypt!", "Open files or Drag files in the above box to encrypt them.");
