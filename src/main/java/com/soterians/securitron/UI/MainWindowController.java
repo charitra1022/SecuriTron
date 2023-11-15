@@ -157,7 +157,7 @@ public class MainWindowController implements Initializable {
 
     System.out.println("MainWindowController: encryptBtnClicked -> encryption started");
 
-    // to add code for calling encryption on folders function
+    // TODO: add code for calling encryption on folders function
     Encryption.encryptFiles(files);
 
     // now update the listview
@@ -329,6 +329,11 @@ public class MainWindowController implements Initializable {
     // get the selected item from the listview
     EncryptedFileMetadata fileMetadata = filesListView.getSelectionModel().getSelectedItem();
     Encryption.decryptFile(fileMetadata); // call the decrypt method on the file
+
+    // remove the selected item from the listview
+    filesListView.getItems().remove(filesListView.getSelectionModel().getSelectedIndex());
+
+    // TODO: if an encrypted file is not found, it should be updated in the list.json as its getting deleted in the listview
   }
 
 

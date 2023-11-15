@@ -129,6 +129,7 @@ public class Encryption {
       CryptoUtils.decrypt(key, encryptedFile, decryptedFile);
       System.out.println("Encryption: decryptFile (2) -> Decrypted: " + decryptedFile.getAbsolutePath());
       encryptedFile.delete(); // delete the encrypted file after it is decrypted
+      ManageEncryptedFileList.removeFileEntryFromList(fileMetadata); // remove the file entry from list.json
 
       // TODO: remove the file entry from the list and update the listView
     } catch (CryptoException ex) {
@@ -146,6 +147,8 @@ public class Encryption {
       errAlert.showAndWait();
 
       // TODO: to ask user to remove entry for the error file from the list
+    } catch(IOException e) {
+      throw new RuntimeException(e);
     }
   }
 

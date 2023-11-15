@@ -12,7 +12,9 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Objects;
 
 public class ManageEncryptedFileList {
 
@@ -48,7 +50,7 @@ public class ManageEncryptedFileList {
 
 
   /**
-   * Saves the list of encrypted files as a JSON file in the disk for later retrieval
+   * Saves the list of encrypted files as a JSON file in the disk for later retrieval. Appends new data to already present list.
    * @param encryptedFileMetadataList Array&lt;EncryptedFileMetadata&gt; object
    * @throws IOException
    */
@@ -167,6 +169,29 @@ public class ManageEncryptedFileList {
     jsonObject.put("fileSize", fileMetadata.getFileSize());
     jsonObject.put("encryptedFile", fileMetadata.getEncryptedFilePath());
     return jsonObject;
+  }
+
+
+  /**
+   * Removes an entry from the list of files listed in the list.json
+   * @param fileMetadata EncryptedFileMetadata object of the file
+   * @throws IOException
+   */
+  public static void removeFileEntryFromList(EncryptedFileMetadata fileMetadata) throws IOException {
+    ArrayList<EncryptedFileMetadata> fileMetadataList = readEncryptedFileMetaData();  // current list
+    HashSet<EncryptedFileMetadata> fileMetadataSet = new HashSet<>(); // store only unique data
+
+    // add all objects other than the one to delete
+    for (EncryptedFileMetadata i : fileMetadataList)
+      if(!Objects.equals(fileMetadata.getFilePath(), i.getFilePath()))
+        fileMetadataSet.add(i);
+
+    // update the list with new values
+    fileMetadataList.clear();
+    fileMetadataList.addAll(fileMetadataSet);
+
+    (new File(String.valueOf(getEncryptedFilesListPath()))).delete(); // delete old list
+    saveEncryptedFileMetaData(fileMetadataList);  // save the new list to the disk
   }
 
 

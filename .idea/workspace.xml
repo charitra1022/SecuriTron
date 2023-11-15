@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added classes and methods to calculate and read file checksum (todo: check checksum after decryption)">
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="UI enhancements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/IconPack.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/IconPack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/main_window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/main_window.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/ManageEncryptedFileList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/ManageEncryptedFileList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -412,7 +412,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700078668046</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="added icons">
+      <option name="closed" value="true" />
+      <created>1700080597360</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1700080597360</updated>
+    </task>
+    <task id="LOCAL-00040" summary="UI enhancements">
+      <option name="closed" value="true" />
+      <created>1700080648122</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1700080648122</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -427,8 +443,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added APIs for EncryptedFileMetadata class" />
-    <MESSAGE value="added json library" />
     <MESSAGE value="added handlers for list of encrypted files and JSON handlers" />
     <MESSAGE value="added encryptedFile property and related APIs. added constructor" />
     <MESSAGE value="completed APIs for reading, writing EncryptedFileMetadata and related JSON data" />
@@ -452,7 +466,9 @@
     <MESSAGE value="enabled encryption and ask for user's consent to delete original files using alert" />
     <MESSAGE value="added code for decrypting files. also did some useful documentation." />
     <MESSAGE value="added classes and methods to calculate and read file checksum (todo: check checksum after decryption)" />
-    <option name="LAST_COMMIT_MESSAGE" value="added classes and methods to calculate and read file checksum (todo: check checksum after decryption)" />
+    <MESSAGE value="added icons" />
+    <MESSAGE value="UI enhancements" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI enhancements" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -463,7 +479,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/ManageEncryptedFileList.java</url>
-          <line>174</line>
+          <line>200</line>
           <properties class="com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList" method="doesFileExist">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -472,7 +488,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/ManageEncryptedFileList.java</url>
-          <line>53</line>
+          <line>56</line>
           <properties class="com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList" method="saveEncryptedFileMetaData">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -480,22 +496,40 @@
           <option name="timeStamp" value="16" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/EncryptedFileMetadata.java</url>
-          <line>130</line>
-          <properties class="com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata">
+          <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
+          <line>115</line>
+          <properties class="com.soterians.securitron.UI.MainWindowController" method="settingsBtnClicked">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="19" />
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/EncryptedFileMetadata.java</url>
-          <line>126</line>
-          <properties class="com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata">
+          <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
+          <line>120</line>
+          <properties class="com.soterians.securitron.UI.MainWindowController" method="aboutBtnClicked">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
-          <option name="timeStamp" value="20" />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
+          <line>189</line>
+          <properties class="com.soterians.securitron.UI.MainWindowController" method="handleFilesSelected">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
+          <line>150</line>
+          <properties class="com.soterians.securitron.UI.MainWindowController" method="encryptBtnClicked">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
