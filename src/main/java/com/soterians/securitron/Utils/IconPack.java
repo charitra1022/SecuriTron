@@ -30,7 +30,9 @@ public enum IconPack{
     DRAG_DROP_GREY(new Image(MainApplication.class.getResource("icons/dragdrop_grey.png").toExternalForm())),
     DRAG_DROP_BLUE(new Image(MainApplication.class.getResource("icons/dragdrop_blue.png").toExternalForm())),
     GEAR(new Image(MainApplication.class.getResource("icons/gear.png").toExternalForm())),
-    INFO(new Image(MainApplication.class.getResource("icons/info.png").toExternalForm()));
+    INFO(new Image(MainApplication.class.getResource("icons/info.png").toExternalForm())),
+    SHOW_EYE(new Image(MainApplication.class.getResource("icons/show-eye.png").toExternalForm())),
+    HIDE_EYE(new Image(MainApplication.class.getResource("icons/hide-eye.png").toExternalForm()));
 
     private final Image enumValue;  // store the value of the enum
 
