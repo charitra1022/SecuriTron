@@ -3,9 +3,7 @@ package com.soterians.securitron.UI;
 import com.soterians.securitron.Utils.IconPack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
 import java.net.URL;
@@ -91,4 +89,59 @@ public class SettingsWindowController implements Initializable{
   }
 
 
+  /**
+   * Creates and shows a dialog box with specific text and title
+   * @param title text to display as dialogBox title
+   * @param text text to display as dialogBox content
+   */
+  private void showSimpleDialog(String title, String text) {
+    Dialog<String> dialog = new Dialog<>();
+    dialog.setTitle(title);
+    dialog.setContentText(text);
+    dialog.getDialogPane().getButtonTypes().add(new ButtonType("OK", ButtonBar.ButtonData.OK_DONE));
+    dialog.showAndWait();
+  }
+
+
+  @FXML
+  private void changePswdBtn() {
+    String oldPswd = "";
+    String newPswd = "";
+    String confirmPswd = confirmPswdField.getText();
+
+    // get the old password field text
+    if(oldPswdField.isVisible()) oldPswd = oldPswdField.getText();
+    else oldPswd = oldPswdTxtField.getText();
+
+    // focus on the old password field if empty
+    if(oldPswd.isEmpty()) {
+      if(oldPswdField.isVisible()) oldPswdField.requestFocus();
+      else oldPswdTxtField.requestFocus();
+      return;
+    }
+
+    // get the new password field text
+    if(newPswdField.isVisible()) newPswd = newPswdField.getText();
+    else newPswd = newPswdTxtField.getText();
+
+    // if the password length is incorrect, notify user and focus on the textfield
+    if(newPswd.length() < 6 || newPswd.length() > 16) {
+      showSimpleDialog("Invalid Password Length", "Password Length should be in between 8 - 16 characters" +
+              "\nCurrent length: " + newPswd.length());
+      if(newPswdField.isVisible()) newPswdField.requestFocus();
+      else newPswdTxtField.requestFocus();
+      return;
+    }
+
+    // if the new password and confirm password fields don't match
+    if(newPswd.length() != confirmPswd.length()) {
+      showSimpleDialog("Password Mismatch", "Password fields don't match!");
+      confirmPswdField.requestFocus();
+      return;
+    }
+
+    System.out.println("SettingsWindowController: changePswdBtn -> " + newPswd);
+
+
+  }
 }
