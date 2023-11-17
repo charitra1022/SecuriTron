@@ -124,6 +124,8 @@ public class Encryption {
     File encryptedFile = fileMetadata.getEncryptedFile();
     File decryptedFile = fileMetadata.getFile();
 
+    // TODO: if a file with same name as decrypting file is present, ask user consent to delete or rename new file
+
     // decrypt the file
     try {
       CryptoUtils.decrypt(key, encryptedFile, decryptedFile);
