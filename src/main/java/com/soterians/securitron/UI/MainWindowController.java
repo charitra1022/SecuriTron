@@ -5,6 +5,8 @@ import com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata;
 import com.soterians.securitron.Utils.CryptoClasses.Encryption;
 import com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList;
 import com.soterians.securitron.Utils.IconPack;
+import com.soterians.securitron.Utils.SettingsManager;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -76,6 +78,49 @@ public class MainWindowController implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    String dialogFxml = "";
+    String dialogTitle = "";
+
+    // if database is present, show login dialog
+    if(!SettingsManager.isDBPresent()){
+      System.out.println("MainWindowController: initialize -> database found");
+      dialogFxml = "register_window.fxml";
+      dialogTitle = "SecuriTron: Setup Login Password to access application";
+    }
+
+    // if database is not present, show register dialog
+    else {
+      System.out.println("MainWindowController: initialize -> database not found");
+      dialogFxml = "login_window.fxml";
+      dialogTitle = "SecuriTron: Enter Password to Login";
+    }
+
+
+    // dialog window to login/register into the app
+    Stage stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.setResizable(false);
+    stage.setTitle(dialogTitle);
+
+    // when the login/register dialog is closed, close the app
+    stage.setOnCloseRequest(event -> {
+      Platform.exit();
+      System.exit(0);
+    });
+
+    // view login/register modal
+    try {
+      FXMLLoader loginRegisterFxmlLoader = new FXMLLoader(MainApplication.class.getResource(dialogFxml));
+      stage.setScene(new Scene(loginRegisterFxmlLoader.load()));
+      stage.showAndWait();
+    } catch(IOException ex) {
+      System.out.println("MainWindowController: initialize -> error, exiting");
+      ex.printStackTrace();
+      Platform.exit();
+      System.exit(-1);
+    }
+
+
     // set the drag and drop image
     ImageView view1 = new ImageView(IconPack.DRAG_DROP_GREY.getImage());
     view1.setFitHeight(80);
@@ -92,7 +137,6 @@ public class MainWindowController implements Initializable {
     settingsBtn.setGraphic(view2);
     aboutBtn.setGraphic(view3);
 
-    System.out.println("MainWindowController: initialize -> initialize called");
     ArrayList<EncryptedFileMetadata> fileMetadataList = null;
     try {
       fileMetadataList = ManageEncryptedFileList.readEncryptedFileMetaData();
