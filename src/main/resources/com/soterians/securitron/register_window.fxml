@@ -81,7 +81,7 @@
                                       </AnchorPane>
                                       <AnchorPane GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1">
                                           <children>
-                                              <Button fx:id="registerBtn" contentDisplay="CENTER" layoutX="41.0" layoutY="2.0" mnemonicParsing="false" prefWidth="60.0" text="Register" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                              <Button fx:id="registerBtn" contentDisplay="CENTER" defaultButton="true" layoutX="41.0" layoutY="2.0" mnemonicParsing="false" prefWidth="60.0" text="Register" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <cursor>
                                                       <Cursor fx:constant="HAND" />
                                                   </cursor>
