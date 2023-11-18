@@ -134,7 +134,7 @@ public class SettingsWindowController implements Initializable{
     }
 
     // if the new password and confirm password fields don't match
-    if(newPswd.length() != confirmPswd.length()) {
+    if(!newPswd.equals(confirmPswd)) {
       showSimpleDialog("Password Mismatch", "Password fields don't match!");
       confirmPswdField.requestFocus();
       return;

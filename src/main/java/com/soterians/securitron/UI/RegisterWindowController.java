@@ -65,16 +65,16 @@ public class RegisterWindowController implements Initializable{
 
 
   /**
-   * Creates and shows a dialog box with specific text and title
+   * Creates and shows a alert dialog box with specific text and title
    * @param title text to display as dialogBox title
    * @param text text to display as dialogBox content
    */
-  private void showSimpleDialog(String title, String text) {
-    Dialog<String> dialog = new Dialog<>();
-    dialog.setTitle(title);
-    dialog.setContentText(text);
-    dialog.getDialogPane().getButtonTypes().add(new ButtonType("OK", ButtonBar.ButtonData.OK_DONE));
-    dialog.showAndWait();
+  private void showAlertDialog(String title, String text, Alert.AlertType alertType) {
+    Alert alert = new Alert(alertType);
+    alert.setTitle(title);
+    alert.setContentText(text);
+    alert.setHeaderText(null);
+    alert.showAndWait();
   }
 
 
@@ -89,21 +89,23 @@ public class RegisterWindowController implements Initializable{
 
     // if the password length is incorrect, notify user and focus on the textfield
     if(newPswd.length() < 6 || newPswd.length() > 16) {
-      showSimpleDialog("Invalid Password Length", "Password Length should be in between 8 - 16 characters" +
-              "\nCurrent length: " + newPswd.length());
+      showAlertDialog("Invalid Password Length", "Password Length should be in between 8 - 16 characters" +
+              "\nCurrent length: " + newPswd.length(), Alert.AlertType.ERROR);
       if(newPswdField.isVisible()) newPswdField.requestFocus();
       else newPswdTxtField.requestFocus();
       return;
     }
 
     // if the new password and confirm password fields don't match
-    if(newPswd.length() != confirmPswd.length()) {
-      showSimpleDialog("Password Mismatch", "Password fields don't match!");
+    if(!newPswd.equals(confirmPswd)) {
+      showAlertDialog("Password Mismatch", "Password fields don't match!", Alert.AlertType.ERROR);
       confirmPswdField.requestFocus();
       return;
     }
 
     System.out.println("RegisterWindowController: registerBtnClicked -> " + newPswd);
+
+    showAlertDialog("Registered!", "Store the password at some safe place as you won't be able to access the software without it!!", Alert.AlertType.WARNING);
 
     DatabaseManager.initializeDB(newPswd);  // create database
     ((Stage)registerBtn.getScene().getWindow()).close();  // close the register window
