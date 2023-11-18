@@ -1,10 +1,12 @@
 package com.soterians.securitron.UI;
 
+import com.soterians.securitron.Utils.DatabaseManager;
 import com.soterians.securitron.Utils.IconPack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -91,8 +93,14 @@ public class LoginWindowController implements Initializable{
       return;
     }
 
-    System.out.println("LoginWindowController: loginBtnClicked -> " + pswd);
+    System.out.println("LoginWindowController: loginBtnClicked (1) -> " + pswd);
 
-    // TODO: login into database
+    if(!DatabaseManager.isPasswordCorrect(pswd)) {
+      showSimpleDialog("Incorrect Password!", "Please enter correct password!");
+      return;
+    }
+
+    System.out.println("LoginWindowController: loginBtnClicked (2) -> login successful");
+    ((Stage)loginBtn.getScene().getWindow()).close();  // close the login window
   }
 }

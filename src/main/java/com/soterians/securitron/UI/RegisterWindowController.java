@@ -1,10 +1,12 @@
 package com.soterians.securitron.UI;
 
+import com.soterians.securitron.Utils.DatabaseManager;
 import com.soterians.securitron.Utils.IconPack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -103,6 +105,7 @@ public class RegisterWindowController implements Initializable{
 
     System.out.println("RegisterWindowController: registerBtnClicked -> " + newPswd);
 
-    // TODO: setup database
+    DatabaseManager.initializeDB(newPswd);  // create database
+    ((Stage)registerBtn.getScene().getWindow()).close();  // close the register window
   }
 }

@@ -83,14 +83,14 @@ public class MainWindowController implements Initializable {
 
     // if database is present, show login dialog
     if(!DatabaseManager.isDBPresent()){
-      System.out.println("MainWindowController: initialize -> database found");
+      System.out.println("MainWindowController: initialize -> database not found");
       dialogFxml = "register_window.fxml";
       dialogTitle = "SecuriTron: Setup Login Password to access application";
     }
 
     // if database is not present, show register dialog
     else {
-      System.out.println("MainWindowController: initialize -> database not found");
+      System.out.println("MainWindowController: initialize -> database found");
       dialogFxml = "login_window.fxml";
       dialogTitle = "SecuriTron: Enter Password to Login";
     }
