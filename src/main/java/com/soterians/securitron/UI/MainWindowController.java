@@ -5,7 +5,7 @@ import com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata;
 import com.soterians.securitron.Utils.CryptoClasses.Encryption;
 import com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList;
 import com.soterians.securitron.Utils.IconPack;
-import com.soterians.securitron.Utils.SettingsManager;
+import com.soterians.securitron.Utils.DatabaseManager;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -82,7 +82,7 @@ public class MainWindowController implements Initializable {
     String dialogTitle = "";
 
     // if database is present, show login dialog
-    if(!SettingsManager.isDBPresent()){
+    if(!DatabaseManager.isDBPresent()){
       System.out.println("MainWindowController: initialize -> database found");
       dialogFxml = "register_window.fxml";
       dialogTitle = "SecuriTron: Setup Login Password to access application";

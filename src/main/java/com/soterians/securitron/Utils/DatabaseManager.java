@@ -14,24 +14,24 @@ import java.nio.file.Paths;
  * (Singleton class with only one possible object in whole application's lifecycle.)
  * Usage: SettingsManager smgr = SettingsManager.getInstance();
  */
-public class SettingsManager {
-  private static SettingsManager single_instance = null;  // object of the settings manager class
+public class DatabaseManager{
+  private static DatabaseManager single_instance = null;  // object of the settings manager class
   private static String db_password = null; // database password. Gets updated in runtime
   private static final String db_name = "securitron.db";  // name of the database file
 
   /**
    * Constructor of the class that initiates basic operations of the settings for the app
    */
-  private SettingsManager() {}
+  private DatabaseManager() {}
 
 
   /**
    * Function that returns the object of the settings manager class. if object not present, creates it
    * @return object of SettingsManager class
    */
-  public static SettingsManager getInstance() {
+  public static DatabaseManager getInstance() {
     // if the object is not present, create and store it
-    if(single_instance == null) single_instance = new SettingsManager();
+    if(single_instance == null) single_instance = new DatabaseManager();
     return single_instance;
   }
 
