@@ -3,8 +3,7 @@
 
 package com.soterians.securitron.Utils;
 
-import org.sqlite.SQLiteErrorCode;
-import org.sqlite.SQLiteException;
+import org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +25,7 @@ import java.util.Objects;
 public class DatabaseManager {
   private static DatabaseManager single_instance = null;  // object of the settings manager class
   private static String db_password = null; // database password. Gets updated in runtime
-  private static final String db_name = "securitron.db";  // name of the database file
+  private static final String db_name = "securitron";  // name of the database file
   private static String db_path = null; // stores the path to the database
 
   /**
@@ -61,6 +60,11 @@ public class DatabaseManager {
   }
 
 
+  private static String getJdbcURL() {
+    return "jdbc:h2:" + db_path; // jdbc path
+  }
+
+
   /**
    * Checks if database is already present
    * @return true if database is present, otherwise false
@@ -69,7 +73,7 @@ public class DatabaseManager {
   public static boolean isDBPresent() {
     try {
       db_path = Paths.get(getDBParentPath().toString(), db_name).toString();
-      File db = new File(db_path);
+      File db = new File(db_path + ".mv.db");
       return db.exists();
     } catch(IOException e) {
       return false;
@@ -85,23 +89,20 @@ public class DatabaseManager {
     DatabaseManager.db_password = pswd; // set the database password
     System.out.println("DatabaseManager: initializeDB (1) -> db_path = " + db_path);
 
-    String jdbcUrl = "jdbc:sqlite:/" + db_path; // jdbc path
+    String jdbcUrl = getJdbcURL();
     System.out.println("DatabaseManager: initializeDB (2) -> jdbcUrl = " + jdbcUrl);
 
     // create database
     try(final Connection conn = DriverManager.getConnection(jdbcUrl, "", pswd)) {
       try(final Statement stmt = conn.createStatement()) {
         System.out.println("DatabaseManager: initializeDB (3) -> connection established, password = " + pswd);
-        stmt.execute("CREATE TABLE files (path TEXT(100), key TEXT(100));");
+        stmt.execute("CREATE TABLE files (file_path VARCHAR(100), secret_key VARCHAR(100));");
         stmt.execute("INSERT INTO files VALUES ('xyz.txt', 'KDFLN867YB');");
         ResultSet res = stmt.executeQuery("SELECT * FROM files;");
-        while(res.next()) System.out.println(res.getString("path") + " --> " + res.getString("key"));
+        while(res.next()) System.out.println(res.getString("file_path") + " --> " + res.getString("secret_key"));
       }
-    } catch(SQLiteException ex) {
-      System.out.println("DatabaseManager: initializeDB (4) -> error " + ex);
-      ex.printStackTrace();
     } catch(SQLException ex) {
-      System.out.println("DatabaseManager: initializeDB (5) -> error " + ex);
+      System.out.println("DatabaseManager: initializeDB (4) -> error " + ex);
       ex.printStackTrace();
     }
   }
@@ -118,7 +119,7 @@ public class DatabaseManager {
 
     System.out.println("DatabaseManager: isPasswordCorrect (1) -> db_path = " + db_path);
 
-    String jdbcUrl = "jdbc:sqlite:/" + db_path; // jdbc path
+    String jdbcUrl = getJdbcURL();
     System.out.println("DatabaseManager: isPasswordCorrect (2) -> jdbcUrl = " + jdbcUrl);
 
     // try connecting to the database and run a query
@@ -127,16 +128,11 @@ public class DatabaseManager {
         System.out.println("DatabaseManager: isPasswordCorrect (3) -> connection established");
         ResultSet res = stmt.executeQuery("SELECT * FROM files;");
         DatabaseManager.db_password = pswd; // set the database password
-        while(res.next()) System.out.println(res.getString("path") + " --> " + res.getString("key"));
+        while(res.next()) System.out.println(res.getString("file_path") + " --> " + res.getString("secret_key"));
         return true;
       }
-    } catch(SQLiteException ex) {
-      System.out.println("DatabaseManager: isPasswordCorrect (4) -> error = " + ex);
-
-      if(ex.getResultCode() == SQLiteErrorCode.SQLITE_NOTADB)
-        System.out.println("DatabaseManager: isPasswordCorrect (5) -> incorrect password");
-      else System.out.println("DatabaseManager: isPasswordCorrect (5) -> something different");
-
+    } catch(JdbcSQLInvalidAuthorizationSpecException ex) {
+      System.out.println("DatabaseManager: isPasswordCorrect (4) -> incorrect username/password = " + ex);
       ex.printStackTrace();
     } catch(SQLException ex) {
       System.out.println("DatabaseManager: isPasswordCorrect (5) -> error " + ex);

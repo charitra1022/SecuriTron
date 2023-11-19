@@ -7,7 +7,7 @@ module com.soterians.securitron {
   requires java.desktop;
   requires org.apache.commons.lang3;
   requires java.sql;
-  requires io.github.willena.sqlitejdbc;
+  requires com.h2database;
 
 
   opens com.soterians.securitron to javafx.fxml;
