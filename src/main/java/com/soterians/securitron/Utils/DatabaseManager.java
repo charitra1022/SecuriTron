@@ -25,6 +25,7 @@ import java.util.Objects;
 public class DatabaseManager {
   private static DatabaseManager single_instance = null;  // object of the settings manager class
   private static String db_password = null; // database password. Gets updated in runtime
+  private static final String db_user = "securitron-root";  // database username
   private static final String db_name = "securitron";  // name of the database file
   private static String db_path = null; // stores the path to the database
 
@@ -60,6 +61,10 @@ public class DatabaseManager {
   }
 
 
+  /**
+   * Returns the JDBC connection URL for the database
+   * @return JDBC connection URL string
+   */
   private static String getJdbcURL() {
     return "jdbc:h2:" + db_path; // jdbc path
   }
@@ -93,7 +98,7 @@ public class DatabaseManager {
     System.out.println("DatabaseManager: initializeDB (2) -> jdbcUrl = " + jdbcUrl);
 
     // create database
-    try(final Connection conn = DriverManager.getConnection(jdbcUrl, "", pswd)) {
+    try(final Connection conn = DriverManager.getConnection(jdbcUrl, db_user, pswd)) {
       try(final Statement stmt = conn.createStatement()) {
         System.out.println("DatabaseManager: initializeDB (3) -> connection established, password = " + pswd);
         stmt.execute("CREATE TABLE files (file_path VARCHAR(100), secret_key VARCHAR(100));");
@@ -123,7 +128,7 @@ public class DatabaseManager {
     System.out.println("DatabaseManager: isPasswordCorrect (2) -> jdbcUrl = " + jdbcUrl);
 
     // try connecting to the database and run a query
-    try(final Connection conn = DriverManager.getConnection(jdbcUrl, "", pswd)) {
+    try(final Connection conn = DriverManager.getConnection(jdbcUrl, db_user, pswd)) {
       try(final Statement stmt = conn.createStatement()) {
         System.out.println("DatabaseManager: isPasswordCorrect (3) -> connection established");
         ResultSet res = stmt.executeQuery("SELECT * FROM files;");
