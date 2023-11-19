@@ -1,14 +1,26 @@
 package com.soterians.securitron.Utils.CryptoClasses;
 
-import javafx.scene.control.Alert;
+import com.soterians.securitron.UI.CustomDialogs;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import org.apache.commons.lang3.RandomStringUtils;
 
-import java.awt.*;
+import java.awt.Desktop;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -156,11 +168,80 @@ public class Encryption {
 
 
   /**
-   * Open file without decrypting to the main location
+   * Opens a file temporarily.
+   * Opens text and image files directly from memory, without decrypting to disk.
+   * @param fileMetadata EncryptedFileMetadata object of the main encrypted file
+   */
+  public static void openFileTemporarily(EncryptedFileMetadata fileMetadata) {
+    try{
+      String mimeType = Files.probeContentType(fileMetadata.getFile().toPath());  // get file type
+
+      long heapSize = Runtime.getRuntime().freeMemory();  // get the current free heap memory
+      long fileSize = fileMetadata.getFileSize(); // get file size
+
+      // if file is too large to be opened
+      if(fileSize > (heapSize - heapSize*0.1)) {
+        System.out.println("Encryption: openFileTemporarily (1) -> heapsize = " + heapSize + " filesize = " + fileSize);
+        CustomDialogs.showAlertDialog("Cannot open file", "File too large to be opened!", Alert.AlertType.ERROR);
+        return;
+      }
+
+      // if file is supported, display it
+      if(mimeType!=null && (mimeType.contains("text") || mimeType.contains("image"))) {
+        Stage stage = new Stage();  // stage that will contain the popup for preview
+        Node previewChild = new Node(){}; // node to display contents. casted to required type according to file type
+
+        // read the file contents in form of byte array
+        byte[] dataBytes = CryptoUtils.readEncryptedData(key, fileMetadata.getEncryptedFile());
+
+        // content is text, so cast Node to TextArea
+        if(mimeType.contains("text")) {
+          TextArea textArea = new TextArea(new String(dataBytes, StandardCharsets.UTF_8));  // get string from the file bytes
+          textArea.setEditable(false);
+          textArea.setFont(Font.font(18));
+          previewChild = textArea;
+        } else {
+          Label imageLabel = new Label("this is a label, to display image here");
+          imageLabel.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+
+          ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(dataBytes)));
+          imageView.setPreserveRatio(true);
+          imageView.setFitHeight(Math.min(imageView.getImage().getHeight(), 600));  // choose the image view height to be minimum of canvas size and iamge size
+          imageLabel.setGraphic(imageView);
+          previewChild = imageLabel;  // assign the label to the node
+          stage.setResizable(false);
+        }
+
+        // preview content modal
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle(fileMetadata.getFileName());
+
+        AnchorPane parent = new AnchorPane();
+        AnchorPane.setTopAnchor(previewChild, 0.0);
+        AnchorPane.setBottomAnchor(previewChild, 0.0);
+        AnchorPane.setLeftAnchor(previewChild, 0.0);
+        AnchorPane.setRightAnchor(previewChild, 0.0);
+        parent.getChildren().add(previewChild);
+        stage.setScene(new Scene(parent));
+        stage.showAndWait();
+        return;
+      }
+
+      CustomDialogs.showAlertDialog("Unsupported File","Selected file cannot be opened without decrypting!\n\nOnly images and text files can be opened!", Alert.AlertType.ERROR);
+    } catch(IOException | CryptoException ex) {
+      System.out.println("Encryption: openFileTemporarily (2) -> error = " + ex);
+      ex.printStackTrace();
+      CustomDialogs.showAlertDialog("Error", "Couldn't open file.\nInternal Error!\n\nDecrypt file to view it!", Alert.AlertType.ERROR);
+    }
+  }
+
+
+  /**
+   * Opens encrypted file by decrypting it temporarily to disk, and deletes decrypted file once app is closed
    * @param fileMetadata EncryptedFileMetadata object of the main encrypted file
    * @throws IOException
    */
-  public static void openFileTemporarily(EncryptedFileMetadata fileMetadata) throws IOException {
+  public static void openFileTemporarilyByDecrypting(EncryptedFileMetadata fileMetadata) throws IOException {
     File encryptedFile = fileMetadata.getEncryptedFile(); // path to encrypted file
     File decryptedFile = File.createTempFile(RandomStringUtils.randomAlphanumeric(3), "." + fileMetadata.getFileFormat());
 
