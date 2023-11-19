@@ -1,5 +1,6 @@
 package com.soterians.securitron.UI;
 
+import com.soterians.securitron.Utils.DatabaseManager;
 import com.soterians.securitron.Utils.IconPack;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -101,6 +102,14 @@ public class SettingsWindowController implements Initializable{
 
     // focus on the old password field if empty
     if(oldPswd.isEmpty()) {
+      if(oldPswdField.isVisible()) oldPswdField.requestFocus();
+      else oldPswdTxtField.requestFocus();
+      return;
+    }
+
+    // check if old password is correct or not
+    if(!DatabaseManager.isPasswordCorrect(oldPswd)) {
+      CustomDialogs.incorrectPasswordDialog();
       if(oldPswdField.isVisible()) oldPswdField.requestFocus();
       else oldPswdTxtField.requestFocus();
       return;
