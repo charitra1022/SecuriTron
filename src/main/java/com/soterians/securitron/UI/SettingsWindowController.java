@@ -135,5 +135,26 @@ public class SettingsWindowController implements Initializable{
     }
 
     System.out.println("SettingsWindowController: changePswdBtn -> " + newPswd);
+
+    // attempt to change the password
+    if(DatabaseManager.changeDBPassword(oldPswd, newPswd)) {
+      CustomDialogs.showAlertDialog("Password Changed", "Password change was successful", Alert.AlertType.INFORMATION);
+      CustomDialogs.passwordRegisteredDialog();
+      resetFields();
+    } else {
+      CustomDialogs.showAlertDialog("Error", "Couldn't change the password!\nPlease try again later!", Alert.AlertType.ERROR);
+    }
+  }
+
+
+  /**
+   * Resets all the password and text fields
+   */
+  private void resetFields() {
+    oldPswdField.setText("");
+    oldPswdTxtField.setText("");
+    newPswdField.setText("");
+    newPswdTxtField.setText("");
+    confirmPswdField.setText("");
   }
 }

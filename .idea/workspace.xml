@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="replaced sqlite database with H2 database">
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added database user">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/SettingsWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/SettingsWindowController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/DatabaseManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -106,14 +107,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699169079334</updated>
-    </task>
-    <task id="LOCAL-00006" summary="added some icons">
-      <option name="closed" value="true" />
-      <created>1699209078937</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1699209078937</updated>
     </task>
     <task id="LOCAL-00007" summary="added new UI">
       <option name="closed" value="true" />
@@ -499,7 +492,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700394327089</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="added database user">
+      <option name="closed" value="true" />
+      <created>1700395122094</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1700395122094</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -514,7 +515,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added exception handler for incorrect jsonarray parsing from string. (more handling expected in later phase)" />
     <MESSAGE value="added dependencies - Filescommons" />
     <MESSAGE value="added code to calculate file format" />
     <MESSAGE value="added class to handle file icons" />
@@ -539,7 +539,8 @@
     <MESSAGE value="moved commonly used dialog boxes to separate file" />
     <MESSAGE value="added old password check in settings page" />
     <MESSAGE value="replaced sqlite database with H2 database" />
-    <option name="LAST_COMMIT_MESSAGE" value="replaced sqlite database with H2 database" />
+    <MESSAGE value="added database user" />
+    <option name="LAST_COMMIT_MESSAGE" value="added database user" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -608,7 +609,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/DatabaseManager.java</url>
-          <line>25</line>
+          <line>21</line>
           <properties class="com.soterians.securitron.Utils.DatabaseManager">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -617,7 +618,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/DatabaseManager.java</url>
-          <line>33</line>
+          <line>29</line>
           <properties class="com.soterians.securitron.Utils.DatabaseManager" method="&lt;init&gt;">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />

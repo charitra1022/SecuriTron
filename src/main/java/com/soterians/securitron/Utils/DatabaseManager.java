@@ -10,11 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.Objects;
 
 /**
@@ -25,7 +21,7 @@ import java.util.Objects;
 public class DatabaseManager {
   private static DatabaseManager single_instance = null;  // object of the settings manager class
   private static String db_password = null; // database password. Gets updated in runtime
-  private static final String db_user = "securitron-root";  // database username
+  private static final String db_user = "root";  // database username
   private static final String db_name = "securitron";  // name of the database file
   private static String db_path = null; // stores the path to the database
 
@@ -141,6 +137,33 @@ public class DatabaseManager {
       ex.printStackTrace();
     } catch(SQLException ex) {
       System.out.println("DatabaseManager: isPasswordCorrect (5) -> error " + ex);
+      ex.printStackTrace();
+    }
+
+    return false;
+  }
+
+
+  /**
+   * Changes the database password
+   * @param oldPswd old password of the database
+   * @param newPswd new password to be set
+   * @return true if password was changed successfully, otherwise false
+   */
+  public static boolean changeDBPassword(String oldPswd, String newPswd) {
+    String jdbcUrl = getJdbcURL();
+
+    try(final Connection conn = DriverManager.getConnection(jdbcUrl, db_user, oldPswd)) {
+      try(final Statement stmt = conn.createStatement()) {
+        stmt.execute("alter user " + db_user + " set password '" + newPswd + "'");
+        DatabaseManager.db_password = newPswd;  // update the new password to the class variable
+        return true;
+      }
+
+    } catch(JdbcSQLInvalidAuthorizationSpecException ex) {
+      System.out.println("Invalid username or password");
+    } catch(Exception ex) {
+      System.out.println("exception occured: " + ex);
       ex.printStackTrace();
     }
 
