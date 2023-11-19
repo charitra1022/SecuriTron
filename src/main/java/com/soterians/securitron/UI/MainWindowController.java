@@ -209,7 +209,7 @@ public class MainWindowController implements Initializable {
   private void encryptBtnClicked(ActionEvent actionEvent) throws IOException, ParseException, NoSuchAlgorithmException {
     // if no files are selected currently
     if(filesList == null || filesList.isEmpty()) {
-      showAlertDialog("No files to encrypt!", "Open files or Drag files in the above box to encrypt them.", Alert.AlertType.WARNING);
+      CustomDialogs.showAlertDialog("No files to encrypt!", "Open files or Drag files in the above box to encrypt them.", Alert.AlertType.WARNING);
       return;
     }
 
@@ -224,20 +224,6 @@ public class MainWindowController implements Initializable {
     // release resources after encryption process
     filesList = null;
     files = folders = null;
-  }
-
-
-  /**
-   * Creates and shows a alert dialog box with specific text and title
-   * @param title text to display as dialogBox title
-   * @param text text to display as dialogBox content
-   */
-  private void showAlertDialog(String title, String text, Alert.AlertType alertType) {
-    Alert alert = new Alert(alertType);
-    alert.setTitle(title);
-    alert.setContentText(text);
-    alert.setHeaderText(null);
-    alert.showAndWait();
   }
 
 

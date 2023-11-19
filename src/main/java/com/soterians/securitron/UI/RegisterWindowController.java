@@ -64,20 +64,6 @@ public class RegisterWindowController implements Initializable{
   }
 
 
-  /**
-   * Creates and shows a alert dialog box with specific text and title
-   * @param title text to display as dialogBox title
-   * @param text text to display as dialogBox content
-   */
-  private void showAlertDialog(String title, String text, Alert.AlertType alertType) {
-    Alert alert = new Alert(alertType);
-    alert.setTitle(title);
-    alert.setContentText(text);
-    alert.setHeaderText(null);
-    alert.showAndWait();
-  }
-
-
   @FXML
   private void registerBtnClicked() {
     String newPswd = "";
@@ -89,8 +75,7 @@ public class RegisterWindowController implements Initializable{
 
     // if the password length is incorrect, notify user and focus on the textfield
     if(newPswd.length() < 6 || newPswd.length() > 16) {
-      showAlertDialog("Invalid Password Length", "Password Length should be in between 8 - 16 characters" +
-              "\nCurrent length: " + newPswd.length(), Alert.AlertType.ERROR);
+      CustomDialogs.invalidPasswordLengthDialog(newPswd.length());  // show error dialog box
       if(newPswdField.isVisible()) newPswdField.requestFocus();
       else newPswdTxtField.requestFocus();
       return;
@@ -98,14 +83,13 @@ public class RegisterWindowController implements Initializable{
 
     // if the new password and confirm password fields don't match
     if(!newPswd.equals(confirmPswd)) {
-      showAlertDialog("Password Mismatch", "Password fields don't match!", Alert.AlertType.ERROR);
+      CustomDialogs.passwordMismatchDialog(); // show error dialog box
       confirmPswdField.requestFocus();
       return;
     }
 
     System.out.println("RegisterWindowController: registerBtnClicked -> " + newPswd);
-
-    showAlertDialog("Registered!", "Store the password at some safe place as you won't be able to access the software without it!!", Alert.AlertType.WARNING);
+    CustomDialogs.passwordRegisteredDialog(); // show dialog box to warn user to store password at safe place
 
     DatabaseManager.initializeDB(newPswd);  // create database
     ((Stage)registerBtn.getScene().getWindow()).close();  // close the register window

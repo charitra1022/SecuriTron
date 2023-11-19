@@ -89,20 +89,6 @@ public class SettingsWindowController implements Initializable{
   }
 
 
-  /**
-   * Creates and shows a dialog box with specific text and title
-   * @param title text to display as dialogBox title
-   * @param text text to display as dialogBox content
-   */
-  private void showSimpleDialog(String title, String text) {
-    Dialog<String> dialog = new Dialog<>();
-    dialog.setTitle(title);
-    dialog.setContentText(text);
-    dialog.getDialogPane().getButtonTypes().add(new ButtonType("OK", ButtonBar.ButtonData.OK_DONE));
-    dialog.showAndWait();
-  }
-
-
   @FXML
   private void changePswdBtn() {
     String oldPswd = "";
@@ -126,8 +112,7 @@ public class SettingsWindowController implements Initializable{
 
     // if the password length is incorrect, notify user and focus on the textfield
     if(newPswd.length() < 6 || newPswd.length() > 16) {
-      showSimpleDialog("Invalid Password Length", "Password Length should be in between 8 - 16 characters" +
-              "\nCurrent length: " + newPswd.length());
+      CustomDialogs.invalidPasswordLengthDialog(newPswd.length());  // show error dialog box
       if(newPswdField.isVisible()) newPswdField.requestFocus();
       else newPswdTxtField.requestFocus();
       return;
@@ -135,13 +120,11 @@ public class SettingsWindowController implements Initializable{
 
     // if the new password and confirm password fields don't match
     if(!newPswd.equals(confirmPswd)) {
-      showSimpleDialog("Password Mismatch", "Password fields don't match!");
+      CustomDialogs.passwordMismatchDialog(); // show error dialog box
       confirmPswdField.requestFocus();
       return;
     }
 
     System.out.println("SettingsWindowController: changePswdBtn -> " + newPswd);
-
-
   }
 }

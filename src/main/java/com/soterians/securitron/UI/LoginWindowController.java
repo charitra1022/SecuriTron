@@ -64,20 +64,6 @@ public class LoginWindowController implements Initializable{
   }
 
 
-  /**
-   * Creates and shows a alert dialog box with specific text and title
-   * @param title text to display as dialogBox title
-   * @param text text to display as dialogBox content
-   */
-  private void showAlertDialog(String title, String text, Alert.AlertType alertType) {
-    Alert alert = new Alert(alertType);
-    alert.setTitle(title);
-    alert.setContentText(text);
-    alert.setHeaderText(null);
-    alert.showAndWait();
-  }
-
-
   @FXML
   private void loginBtnClicked() {
     String pswd = "";
@@ -96,7 +82,7 @@ public class LoginWindowController implements Initializable{
     System.out.println("LoginWindowController: loginBtnClicked (1) -> " + pswd);
 
     if(!DatabaseManager.isPasswordCorrect(pswd)) {
-      showAlertDialog("Incorrect Password!", "Please enter correct password!", Alert.AlertType.ERROR);
+      CustomDialogs.incorrectPasswordDialog();  // show error dialog box
       return;
     }
 
