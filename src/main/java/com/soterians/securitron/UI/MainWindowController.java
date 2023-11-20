@@ -45,10 +45,13 @@ public class MainWindowController implements Initializable {
   private List<File> filesList;   // list of files returned by the file selection event
 
   @FXML
-  private Button settingsBtn, aboutBtn, selectBtn, encryptBtn;
+  private Button settingsBtn, aboutBtn, selectBtn, encryptBtn, cancelBtn;
 
   @FXML
   private Label dragPane; // element over which files will be dropped
+
+  @FXML
+  private ListView<File> dragSelectListView;  // display list of files dragged/selected
 
   @FXML
   private ListView<EncryptedFileMetadata> filesListView;  // to display list of encrypted files
@@ -160,6 +163,9 @@ public class MainWindowController implements Initializable {
     fileEncryptedDateLabel.getTooltip().setShowDelay(Duration.seconds(0.2));
 
     dragPane.setOnMouseClicked(e -> selectBtn.fire());  // open the selection dialog when drag pane is clicked
+    dragPane.setVisible(true);  // view drag pane
+    dragSelectListView.setVisible(false); // hide selected files list view
+    cancelBtn.setVisible(false);  // hide cancel operation button
   }
 
 
@@ -224,12 +230,38 @@ public class MainWindowController implements Initializable {
     updateListView(readEncryptedFileMetaData());
 
     // release resources after encryption process
-    filesList = null;
-    files = folders = null;
+    clearSelectedFilesAndShowDragPane();
   }
 
 
-  // TODO: to display the files to the user that are selected currently
+  /**
+   * Clears the file arrayLists and also hides & clears selectedFileListView and shows dragPane
+   * In simple words, it resets the app backend and UI w.r.t. selected files
+   */
+  private void clearSelectedFilesAndShowDragPane() {
+    // clear the lists
+    filesList = null;
+    files = folders = null;
+
+    // clear & hide selectedFilesListView and show dragPane
+    dragPane.setVisible(true);
+    dragSelectListView.setVisible(false);
+    cancelBtn.setVisible(false);
+    dragSelectListView.getItems().clear();
+  }
+
+
+  /**
+   * Called on cancel button click. Cancels selection process for encryption
+   * @param actionEvent
+   */
+  @FXML
+  private void cancelBtnClicked(ActionEvent actionEvent) {
+    System.out.println("MainWindowController: cancelBtnClicked");
+    clearSelectedFilesAndShowDragPane();
+  }
+
+
   /**
    * Separates files and folders from the list returned by the selection event (drag/open)
    */
@@ -255,6 +287,14 @@ public class MainWindowController implements Initializable {
     if(!folders.isEmpty()) msg += folders.size() + " folders\n";
 
     System.out.println("MainWindowController: handleFilesSelected -> " + msg);
+
+    // hide dragPane and update & show selectedFilesListView
+    dragPane.setVisible(false);
+    dragSelectListView.setVisible(true);
+    cancelBtn.setVisible(true);
+    // remove older items and add new ones
+    dragSelectListView.getItems().clear();
+    for(File f: filesList) dragSelectListView.getItems().add(f);
   }
 
 
