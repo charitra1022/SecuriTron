@@ -4,8 +4,8 @@ import com.soterians.securitron.MainApplication;
 import com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata;
 import com.soterians.securitron.Utils.CryptoClasses.Encryption;
 import com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList;
-import com.soterians.securitron.Utils.IconPack;
 import com.soterians.securitron.Utils.DatabaseManager;
+import com.soterians.securitron.Utils.IconPack;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -158,6 +158,8 @@ public class MainWindowController implements Initializable {
     fileFormatLabel.getTooltip().setShowDelay(Duration.seconds(0.2));
     fileSizeLabel.getTooltip().setShowDelay(Duration.seconds(0.2));
     fileEncryptedDateLabel.getTooltip().setShowDelay(Duration.seconds(0.2));
+
+    dragPane.setOnMouseClicked(e -> selectBtn.fire());  // open the selection dialog when drag pane is clicked
   }
 
 
