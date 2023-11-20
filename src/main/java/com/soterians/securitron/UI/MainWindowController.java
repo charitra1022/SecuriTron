@@ -166,6 +166,71 @@ public class MainWindowController implements Initializable {
     dragPane.setVisible(true);  // view drag pane
     dragSelectListView.setVisible(false); // hide selected files list view
     cancelBtn.setVisible(false);  // hide cancel operation button
+
+    // modifies the listViews
+    modifySelectedFilesListView();  // modify the selectedFilesListView (adds tooltip to items)
+    modifyEncryptedFilesListView(); // modify the EncryptedFilesListView (adds tooltip to items)
+  }
+
+
+  /**
+   * Modifies the selectedFilesListView (adds tooltip to items)
+   */
+  private void modifySelectedFilesListView() {
+    dragSelectListView.setCellFactory(cell -> new ListCell<>(){
+      final Tooltip tooltip = new Tooltip();
+
+      @Override
+      protected void updateItem(File file, boolean empty) {
+        super.updateItem(file, empty);
+        // if no item is present
+        if(file == null || empty) {
+          setText(null);
+          setTooltip(null);
+        }
+        // if items are present, attach tooltip to them
+        else {
+          setText(file.getName());
+          tooltip.setText(file.getAbsolutePath());
+          tooltip.setShowDelay(Duration.seconds(0.2));
+          setTooltip(tooltip);
+        }
+      }
+    });
+  }
+
+
+  /**
+   * Modifies the EncryptedFilesListView (adds tooltip to items)
+   */
+  private void modifyEncryptedFilesListView() {
+    filesListView.setCellFactory(cell -> new ListCell<>() {
+      final Tooltip tooltip = new Tooltip();
+
+      @Override
+      protected void updateItem(EncryptedFileMetadata fileMetadata, boolean empty) {
+        super.updateItem(fileMetadata, empty);
+
+        // if no item is present
+        if(fileMetadata == null || empty) {
+          setText(null);
+          setTooltip(null);
+        }
+        // if items are present, attach tooltip to them
+        else {
+          setText(fileMetadata.toString());
+
+          String line1 = "Name: " + fileMetadata.getFileName();
+          String line2 = "Size: " + fileMetadata.getFileSizeString();
+          String line3 = "Path: " + fileMetadata.getFilePath();
+          tooltip.setText(line1 + "\n" + line2 + "\n" + line3);
+          tooltip.setShowDelay(Duration.seconds(0.2));
+          setTooltip(tooltip);
+        }
+      }
+    });
+
+
   }
 
 

@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="clicking on dragpane opens file selection dialog">
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="TODO done: to display the files to the user that are selected currently">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/main_window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/main_window.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,14 +106,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699169079334</updated>
-    </task>
-    <task id="LOCAL-00011" summary="added SettingsManager class skeleton">
-      <option name="closed" value="true" />
-      <created>1699307299224</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1699307299224</updated>
     </task>
     <task id="LOCAL-00012" summary="added CryptoUtils.java that provides basic API for encryption and decryption of files">
       <option name="closed" value="true" />
@@ -500,7 +491,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700475054618</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="TODO done: to display the files to the user that are selected currently">
+      <option name="closed" value="true" />
+      <created>1700477991236</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1700477991236</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -515,7 +514,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="restructured project" />
     <MESSAGE value="enabled encryption and ask for user's consent to delete original files using alert" />
     <MESSAGE value="added code for decrypting files. also did some useful documentation." />
     <MESSAGE value="added classes and methods to calculate and read file checksum (todo: check checksum after decryption)" />
@@ -540,7 +538,8 @@
     <MESSAGE value="h2 database bug" />
     <MESSAGE value="added warning note" />
     <MESSAGE value="clicking on dragpane opens file selection dialog" />
-    <option name="LAST_COMMIT_MESSAGE" value="clicking on dragpane opens file selection dialog" />
+    <MESSAGE value="TODO done: to display the files to the user that are selected currently" />
+    <option name="LAST_COMMIT_MESSAGE" value="TODO done: to display the files to the user that are selected currently" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -573,7 +572,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
-          <line>172</line>
+          <line>236</line>
           <properties class="com.soterians.securitron.UI.MainWindowController" method="settingsBtnClicked">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -582,7 +581,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
-          <line>186</line>
+          <line>250</line>
           <properties class="com.soterians.securitron.UI.MainWindowController" method="aboutBtnClicked">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -591,7 +590,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
-          <line>267</line>
+          <line>331</line>
           <properties class="com.soterians.securitron.UI.MainWindowController" method="handleFilesSelected">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -600,7 +599,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
-          <line>216</line>
+          <line>280</line>
           <properties class="com.soterians.securitron.UI.MainWindowController" method="encryptBtnClicked">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
