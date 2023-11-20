@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="h2 database bug">
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/register_window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/register_window.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,14 +105,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699169079334</updated>
-    </task>
-    <task id="LOCAL-00008" summary="resized and restructured splitpane UI">
-      <option name="closed" value="true" />
-      <created>1699280816778</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1699280816778</updated>
     </task>
     <task id="LOCAL-00009" summary="added function for button clicks on encrypt button">
       <option name="closed" value="true" />
@@ -499,7 +490,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700419178449</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="h2 database bug">
+      <option name="closed" value="true" />
+      <created>1700473634411</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1700473634412</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -514,7 +513,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added code to calculate file format" />
     <MESSAGE value="added class to handle file icons" />
     <MESSAGE value="handle the file icons and listview exception if items are deselected when listview is refreshed" />
     <MESSAGE value="restructured project" />
@@ -539,7 +537,8 @@
     <MESSAGE value="replaced sqlite database with H2 database" />
     <MESSAGE value="added database user" />
     <MESSAGE value="added 'open without decrypting' feature for text and image files." />
-    <option name="LAST_COMMIT_MESSAGE" value="added 'open without decrypting' feature for text and image files." />
+    <MESSAGE value="h2 database bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="h2 database bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
