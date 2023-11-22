@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added tooltip to listView items">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/ProgressBarWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/login_window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/login_window.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/register_window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/register_window.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -593,7 +592,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java</url>
           <line>333</line>
-          <properties class="com.soterians.securitron.UI.MainWindowController" method="handleFilesSelected">
+          <properties class="com.soterians.securitron.UI.MainWindowController">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
