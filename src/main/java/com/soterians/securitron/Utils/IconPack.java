@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public enum IconPack{
+    APP_ICON(new Image(MainApplication.class.getResource("icons/app_icon.png").toExternalForm())),
     AUDIO(new Image(MainApplication.class.getResource("icons/audio.png").toExternalForm())),
     CODE(new Image(MainApplication.class.getResource("icons/code.png").toExternalForm())),
     COMPRESS(new Image(MainApplication.class.getResource("icons/compress.png").toExternalForm())),

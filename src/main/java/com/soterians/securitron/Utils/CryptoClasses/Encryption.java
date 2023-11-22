@@ -1,6 +1,7 @@
 package com.soterians.securitron.Utils.CryptoClasses;
 
 import com.soterians.securitron.UI.CustomDialogs;
+import com.soterians.securitron.Utils.IconPack;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -41,6 +42,7 @@ public class Encryption {
   private static ButtonType showDeleteAlert(String contextString) {
     // Alert for user confirmation for deleting original files
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    ((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(IconPack.APP_ICON.getImage());
     alert.setTitle("Encryption Done");
     alert.setHeaderText("Do you want to delete the Original file?");
     alert.setContentText(contextString);
@@ -215,6 +217,7 @@ public class Encryption {
         // preview content modal
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle(fileMetadata.getFileName());
+        stage.getIcons().add(IconPack.APP_ICON.getImage());
 
         AnchorPane parent = new AnchorPane();
         AnchorPane.setTopAnchor(previewChild, 0.0);

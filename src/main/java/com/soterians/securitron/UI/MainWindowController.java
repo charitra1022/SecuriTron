@@ -104,6 +104,7 @@ public class MainWindowController implements Initializable {
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setResizable(false);
     stage.setTitle(dialogTitle);
+    stage.getIcons().add(IconPack.APP_ICON.getImage());
 
     // when the login/register dialog is closed, close the app
     stage.setOnCloseRequest(event -> {

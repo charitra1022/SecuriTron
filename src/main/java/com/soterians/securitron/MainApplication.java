@@ -1,5 +1,6 @@
 package com.soterians.securitron;
 
+import com.soterians.securitron.Utils.IconPack;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,7 +20,7 @@ public class MainApplication extends Application {
     stage.setMinWidth(900);
     stage.setMinHeight(600);
     stage.setResizable(false);
-
+    stage.getIcons().add(IconPack.APP_ICON.getImage());
     stage.show();
   }
 

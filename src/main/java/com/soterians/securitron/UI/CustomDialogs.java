@@ -1,6 +1,8 @@
 package com.soterians.securitron.UI;
 
+import com.soterians.securitron.Utils.IconPack;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
 public class CustomDialogs {
   /**
@@ -10,6 +12,7 @@ public class CustomDialogs {
    */
   public static void showAlertDialog(String title, String text, Alert.AlertType alertType) {
     Alert alert = new Alert(alertType);
+    ((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(IconPack.APP_ICON.getImage());
     alert.setTitle(title);
     alert.setContentText(text);
     alert.setHeaderText(null);
