@@ -1,6 +1,7 @@
 package com.soterians.securitron.Utils.CryptoClasses;
 
 import com.soterians.securitron.UI.CustomDialogs;
+import com.soterians.securitron.Utils.DatabaseManager;
 import com.soterians.securitron.Utils.IconPack;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -120,8 +121,8 @@ public class Encryption {
       fileMetadataList.add(encryptFile(files.get(i)));
     }
 
-    // save the EncryptedFileMetadata objects to disk
-    ManageEncryptedFileList.saveEncryptedFileMetaData(fileMetadataList);
+    // save the list to the database
+    DatabaseManager.insertEncryptedFileData(fileMetadataList);
 
     // reset the default deletion value
     deleteOriginal = false;
@@ -132,7 +133,7 @@ public class Encryption {
    * Decrypts the encrypted file and deletes it from the disk
    * @param fileMetadata EncryptedFileMetadata object of the encrypted file
    */
-  public static void decryptFile(EncryptedFileMetadata fileMetadata) {
+  public static boolean decryptFile(EncryptedFileMetadata fileMetadata) {
     System.out.println("Encryption: decryptFile (1) -> " + fileMetadata);
 
     // create respective file objects
@@ -146,7 +147,9 @@ public class Encryption {
       CryptoUtils.decrypt(fileMetadata.getSecretKey(), encryptedFile, decryptedFile);
       System.out.println("Encryption: decryptFile (2) -> Decrypted: " + decryptedFile.getAbsolutePath());
       encryptedFile.delete(); // delete the encrypted file after it is decrypted
-      ManageEncryptedFileList.removeFileEntryFromList(fileMetadata); // remove the file entry from list.json
+      DatabaseManager.deleteEncryptedFileData(fileMetadata);  // delete the file info from the database
+
+      return true;
 
       // TODO: remove the file entry from the list and update the listView
     } catch (CryptoException ex) {
@@ -159,14 +162,12 @@ public class Encryption {
       ex.printStackTrace();
 
       // display the error dialog box
-      Alert errAlert = new Alert(Alert.AlertType.ERROR);
-      errAlert.setHeaderText(msg + "\nPath: " + fileMetadata.getEncryptedFilePath());
-      errAlert.showAndWait();
+      CustomDialogs.showAlertDialog("SecuriTron: " + msg, "Path: " + fileMetadata.getEncryptedFilePath(), Alert.AlertType.ERROR);
 
       // TODO: to ask user to remove entry for the error file from the list
-    } catch(IOException e) {
-      throw new RuntimeException(e);
     }
+
+    return false;
   }
 
 
@@ -233,9 +234,13 @@ public class Encryption {
 
       CustomDialogs.showAlertDialog("Unsupported File","Selected file cannot be opened without decrypting!\n\nOnly images and text files can be opened!", Alert.AlertType.ERROR);
     } catch(IOException | CryptoException ex) {
+      if(!fileMetadata.getEncryptedFile().exists())
+        CustomDialogs.showAlertDialog("SecuriTron: File not found!", "Path: " + fileMetadata.getEncryptedFilePath(), Alert.AlertType.ERROR);
+      else
+        CustomDialogs.showAlertDialog("SecuriTron: Error!", ex.getMessage(), Alert.AlertType.ERROR);
+
       System.out.println("Encryption: openFileTemporarily (2) -> error = " + ex);
       ex.printStackTrace();
-      CustomDialogs.showAlertDialog("Error", "Couldn't open file.\nInternal Error!\n\nDecrypt file to view it!", Alert.AlertType.ERROR);
     }
   }
 

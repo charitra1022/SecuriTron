@@ -3,14 +3,25 @@
 
 package com.soterians.securitron.Utils;
 
+import com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata;
 import org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException;
 
 import java.io.File;
 import java.io.IOException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.*;
+
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -24,6 +35,10 @@ public class DatabaseManager {
   private static final String db_user = "root";  // database username
   private static final String db_name = "securitron";  // name of the database file
   private static String db_path = null; // stores the path to the database
+
+  private static final String tableName = "files";  // name of the table that will contain file list
+
+  private static final String tableCreationCmd = "CREATE TABLE " + tableName + " (file_path VARCHAR(max), fileSize BIGINT, encryptedFile VARCHAR(max), checksum VARCHAR(64), encryptedOn BIGINT, secret_key VARCHAR(16));";
 
   /**
    * Constructor of the class that initiates basic operations of the settings for the app
@@ -39,6 +54,66 @@ public class DatabaseManager {
     // if the object is not present, create and store it
     if(single_instance == null) single_instance = new DatabaseManager();
     return single_instance;
+  }
+
+
+  /**
+   * Creates insertion statement from EncryptedFileMetadata object
+   * @param fileMetadata EncryptedFileMetadata object containing information about the encrypted file
+   * @return insertion sql query
+   */
+  public static String insertCmdFromEncryptedFileMetadata(EncryptedFileMetadata fileMetadata) {
+    String cmd = "INSERT INTO files VALUES (" +
+            "'" + fileMetadata.getFilePath() + "', " +
+            fileMetadata.getFileSize() + ", " +
+            "'" + fileMetadata.getEncryptedFilePath() + "', " +
+            "'" + fileMetadata.getChecksum() + "', " +
+            fileMetadata.getEncryptedOn().getTime() + ", " +
+            "'" + fileMetadata.getSecretKey() + "'" +
+            ");";
+    return cmd;
+  }
+
+
+  /**
+   * Converts result set object into ArrayList&lt;EncryptedFileMetadata&gt; object
+   * @param res ResultSet object
+   * @return ArrayList&lt;EncryptedFileMetadata&gt; object with all predefined values
+   * @throws SQLException
+   */
+  public static ArrayList<EncryptedFileMetadata> getEncryptedFileListFromResultSet(ResultSet res) throws SQLException {
+    ArrayList<EncryptedFileMetadata> fileMetadataList = new ArrayList<>();
+    while(res.next()) {
+      EncryptedFileMetadata fileMetadata = new EncryptedFileMetadata(
+              new File(res.getString("file_path")),
+              res.getString("checksum"),
+              new Date(res.getLong("encryptedOn")),
+              res.getLong("fileSize"),
+              new File(res.getString("encryptedFile")),
+              res.getString("secret_key")
+      );
+      fileMetadataList.add(fileMetadata);
+    }
+
+    return fileMetadataList;
+  }
+
+
+  /**
+   * display contents of arraylist just for debugging purposes
+   * @param list
+   */
+  private static void printList(ArrayList<EncryptedFileMetadata> list) {
+    for(EncryptedFileMetadata i: list) {
+      System.out.println(i.getFile());
+      System.out.println(i.getFileSize());
+      System.out.println(i.getEncryptedFile());
+      System.out.println(i.getChecksum());
+      System.out.println(i.getEncryptedOn());
+      System.out.println(i.getSecretKey());
+      System.out.println();
+    }
+    System.out.println();
   }
 
 
@@ -96,11 +171,8 @@ public class DatabaseManager {
     // create database
     try(final Connection conn = DriverManager.getConnection(jdbcUrl, db_user, pswd)) {
       try(final Statement stmt = conn.createStatement()) {
-        System.out.println("DatabaseManager: initializeDB (3) -> connection established, password = " + pswd);
-        stmt.execute("CREATE TABLE files (file_path VARCHAR(100), secret_key VARCHAR(100));");
-        stmt.execute("INSERT INTO files VALUES ('xyz.txt', 'KDFLN867YB');");
-        ResultSet res = stmt.executeQuery("SELECT * FROM files;");
-        while(res.next()) System.out.println(res.getString("file_path") + " --> " + res.getString("secret_key"));
+        System.out.println("DatabaseManager: initializeDB (3) -> connection established, creating table.");
+        stmt.execute(tableCreationCmd);
       }
     } catch(SQLException ex) {
       System.out.println("DatabaseManager: initializeDB (4) -> error " + ex);
@@ -127,9 +199,7 @@ public class DatabaseManager {
     try(final Connection conn = DriverManager.getConnection(jdbcUrl, db_user, pswd)) {
       try(final Statement stmt = conn.createStatement()) {
         System.out.println("DatabaseManager: isPasswordCorrect (3) -> connection established");
-        ResultSet res = stmt.executeQuery("SELECT * FROM files;");
         DatabaseManager.db_password = pswd; // set the database password
-        while(res.next()) System.out.println(res.getString("file_path") + " --> " + res.getString("secret_key"));
         return true;
       }
     } catch(JdbcSQLInvalidAuthorizationSpecException ex) {
@@ -169,4 +239,100 @@ public class DatabaseManager {
 
     return false;
   }
+
+
+  /**
+   * Inserts the file metadata list into the database
+   * @param fileList ArrayList&lt;EncryptedFileMetadata&gt; object containing data to be inserted
+   */
+  public static void insertEncryptedFileData(ArrayList<EncryptedFileMetadata> fileList) {
+    String jdbcUrl = getJdbcURL();
+
+    // try connecting to the database and run query to insert data
+    try(final Connection conn = DriverManager.getConnection(jdbcUrl, db_user, db_password)) {
+      try(final Statement stmt = conn.createStatement()) {
+        System.out.println("DatabaseManager: insertEncryptedFileData (1) -> connection established, inserting data");
+
+        // run insertion query for all EncryptedFileMetadata object
+        for(EncryptedFileMetadata fileMetadata: fileList)
+          stmt.execute(insertCmdFromEncryptedFileMetadata(fileMetadata));
+      }
+    } catch(JdbcSQLInvalidAuthorizationSpecException ex) {
+      System.out.println("DatabaseManager: insertEncryptedFileData (2) -> incorrect username/password = " + ex);
+      ex.printStackTrace();
+    } catch(SQLException ex) {
+      System.out.println("DatabaseManager: insertEncryptedFileData (3) -> error " + ex);
+      ex.printStackTrace();
+    } catch(Exception ex) {
+      System.out.println("DatabaseManager: insertEncryptedFileData (4) -> error " + ex);
+      ex.printStackTrace();
+    }
+  }
+
+
+  /**
+   * Deletes a file metadata from the database
+   * @param fileMetadata EncryptedFileMetadata object
+   */
+  public static void deleteEncryptedFileData(EncryptedFileMetadata fileMetadata) {
+    String jdbcUrl = getJdbcURL();
+
+    // try connecting to the database and run query to insert data
+    try(final Connection conn = DriverManager.getConnection(jdbcUrl, db_user, db_password)) {
+      try(final Statement stmt = conn.createStatement()) {
+        System.out.println("DatabaseManager: deleteEncryptedFileData (1) -> connection established, deleting data");
+
+        // run deletion query for the EncryptedFileMetadata object
+        stmt.execute("DELETE FROM " + tableName + " WHERE file_path = '" + fileMetadata.getFilePath() + "';");
+
+        System.out.println("DatabaseManager: deleteEncryptedFileData (2) -> new data after deletion");
+        ResultSet res = stmt.executeQuery("SELECT * FROM files;");
+        printList(getEncryptedFileListFromResultSet(res));
+      }
+    } catch(JdbcSQLInvalidAuthorizationSpecException ex) {
+      System.out.println("DatabaseManager: deleteEncryptedFileData (3) -> incorrect username/password = " + ex);
+      ex.printStackTrace();
+    } catch(SQLException ex) {
+      System.out.println("DatabaseManager: deleteEncryptedFileData (4) -> error " + ex);
+      ex.printStackTrace();
+    } catch(Exception ex) {
+      System.out.println("DatabaseManager: deleteEncryptedFileData (5) -> error " + ex);
+      ex.printStackTrace();
+    }
+  }
+
+
+  /**
+   * Reads file metadata list from the database
+   * @return ArrayList&lt;EncryptedFileMetadata&gt; object containing data retrieved
+   */
+  public static ArrayList<EncryptedFileMetadata> readEncryptedFileData() {
+    String jdbcUrl = getJdbcURL();
+
+    ArrayList<EncryptedFileMetadata> fileList = null;
+
+    // try connecting to the database and run query to insert data
+    try(final Connection conn = DriverManager.getConnection(jdbcUrl, db_user, db_password)) {
+      try(final Statement stmt = conn.createStatement()) {
+        System.out.println("DatabaseManager: deleteEncryptedFileData (1) -> connection established");
+
+        // run retrieval query for the EncryptedFileMetadata object list
+        ResultSet res = stmt.executeQuery("SELECT * FROM files;");
+        fileList = getEncryptedFileListFromResultSet(res);
+        printList(fileList);
+      }
+    } catch(JdbcSQLInvalidAuthorizationSpecException ex) {
+      System.out.println("DatabaseManager: deleteEncryptedFileData (2) -> incorrect username/password = " + ex);
+      ex.printStackTrace();
+    } catch(SQLException ex) {
+      System.out.println("DatabaseManager: deleteEncryptedFileData (3) -> error " + ex);
+      ex.printStackTrace();
+    } catch(Exception ex) {
+      System.out.println("DatabaseManager: deleteEncryptedFileData (4) -> error " + ex);
+      ex.printStackTrace();
+    }
+
+    return fileList;
+  }
+
 }

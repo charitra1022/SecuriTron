@@ -3,7 +3,6 @@ package com.soterians.securitron.UI;
 import com.soterians.securitron.MainApplication;
 import com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata;
 import com.soterians.securitron.Utils.CryptoClasses.Encryption;
-import com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList;
 import com.soterians.securitron.Utils.DatabaseManager;
 import com.soterians.securitron.Utils.IconPack;
 import javafx.application.Platform;
@@ -38,7 +37,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList.readEncryptedFileMetaData;
 
 public class MainWindowController implements Initializable {
   private ArrayList<File> files, folders;   // list of files and folders
@@ -141,14 +139,7 @@ public class MainWindowController implements Initializable {
     settingsBtn.setGraphic(view2);
     aboutBtn.setGraphic(view3);
 
-    ArrayList<EncryptedFileMetadata> fileMetadataList = null;
-    try {
-      fileMetadataList = ManageEncryptedFileList.readEncryptedFileMetaData();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-
-    updateListView(fileMetadataList);  // update the list view with list of encrypted files
+    updateListView(DatabaseManager.readEncryptedFileData());  // update the list view with list of encrypted files
     changeFileDetailPaneVisibility(false);
 
     // set the tooltip for the file info labels
@@ -290,8 +281,8 @@ public class MainWindowController implements Initializable {
     // TODO: add code for calling encryption on folders function
     Encryption.encryptFiles(files);
 
-    // now update the listview
-    updateListView(readEncryptedFileMetaData());
+    // now update the listview by retrieving new database contents
+    updateListView(DatabaseManager.readEncryptedFileData());
 
     // release resources after encryption process
     clearSelectedFilesAndShowDragPane();
@@ -478,10 +469,10 @@ public class MainWindowController implements Initializable {
 
     // get the selected item from the listview
     EncryptedFileMetadata fileMetadata = filesListView.getSelectionModel().getSelectedItem();
-    Encryption.decryptFile(fileMetadata); // call the decrypt method on the file
+    boolean isSucess = Encryption.decryptFile(fileMetadata); // call the decrypt method on the file
 
-    // remove the selected item from the listview
-    filesListView.getItems().remove(filesListView.getSelectionModel().getSelectedIndex());
+    // remove the selected item from the listview if decryption was successfull
+    if(isSucess) filesListView.getItems().remove(filesListView.getSelectionModel().getSelectedIndex());
 
     // TODO: if an encrypted file is not found, it should be updated in the list.json as its getting deleted in the listview
   }
