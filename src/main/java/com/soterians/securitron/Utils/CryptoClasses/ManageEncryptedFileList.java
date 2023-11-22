@@ -151,7 +151,8 @@ public class ManageEncryptedFileList {
             jsonObject.get("checksum").toString(),
             (new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH)).parse(jsonObject.get("encryptedOn").toString()),
             Long.parseLong(jsonObject.get("fileSize").toString()),
-            new File(jsonObject.get("encryptedFile").toString())
+            new File(jsonObject.get("encryptedFile").toString()),
+            jsonObject.get("secret_key").toString()
     );
   }
 
@@ -168,6 +169,7 @@ public class ManageEncryptedFileList {
     jsonObject.put("encryptedOn", fileMetadata.getEncryptedOn().toString());
     jsonObject.put("fileSize", fileMetadata.getFileSize());
     jsonObject.put("encryptedFile", fileMetadata.getEncryptedFilePath());
+    jsonObject.put("secret_key", fileMetadata.getSecretKey());
     return jsonObject;
   }
 

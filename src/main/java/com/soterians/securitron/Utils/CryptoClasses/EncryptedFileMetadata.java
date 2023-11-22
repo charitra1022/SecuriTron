@@ -14,6 +14,8 @@ public class EncryptedFileMetadata {
   private Date encryptedOn;
   private String fileFormat;
   private long fileSize;
+  private String secret_key;
+
 
   /**
    * Creates an object with all pre-defined values. used for retrieving data from stored place, e.g., JSON
@@ -22,13 +24,14 @@ public class EncryptedFileMetadata {
    * @param encryptedOn date when the original file was encrypted on
    * @param encryptedFile File object for encrypted file
    */
-  EncryptedFileMetadata(File file, String checksum, Date encryptedOn, long fileSize, File encryptedFile) {
+  public EncryptedFileMetadata(File file, String checksum, Date encryptedOn, long fileSize, File encryptedFile, String secret_key) {
     this.file = file;
     this.checksum = checksum;
     this.encryptedOn = encryptedOn;
     this.fileSize = fileSize;
     this.fileFormat = calculateFileFormat(file);
     this.encryptedFile = encryptedFile;
+    this.secret_key = secret_key;
   }
 
 
@@ -36,15 +39,20 @@ public class EncryptedFileMetadata {
    * Creates an object with only original file information. used for initial process of encryption.
    * Automatically initiates encryptedOn and checksum attributes
    * @param originalFile File object for original file
+   * @param encryptedFile File object for encrypted file
+   * @param secret_key Secret key string used to encrypt the file
    */
-  EncryptedFileMetadata(File originalFile, File encryptedFile) throws NoSuchAlgorithmException, IOException {
+  public EncryptedFileMetadata(File originalFile, File encryptedFile, String secret_key) throws NoSuchAlgorithmException, IOException {
     this.file = originalFile;
     this.checksum = SHA256Checksum.getFileChecksum(originalFile);
     this.encryptedOn = new Date();
     this.fileSize = file.length();
     this.fileFormat = calculateFileFormat(originalFile);
     this.encryptedFile = encryptedFile;
+    this.secret_key = secret_key;
   }
+
+  public String getSecretKey() { return secret_key; }
 
   public Date getEncryptedOn() {
     return encryptedOn;

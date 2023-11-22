@@ -29,7 +29,6 @@ import java.util.Optional;
 
 public class Encryption {
   private static final String extension = ".securitron";
-  private static final String key = "090801----------";   // 16 bytes fixed size (to be changed later)
 
   private static boolean deleteOriginal = false;  // delete all original files after encryption
 
@@ -74,12 +73,14 @@ public class Encryption {
     // create file object for encrypted file
     File encryptedFile = new File(Paths.get(parent, outputFilename).toString());
 
+    String secret_key = "this is new key!"; // to be generated randomly of size 16
+
     // store basic info before encrypting
-    EncryptedFileMetadata fileMetadata = new EncryptedFileMetadata(inputFile, encryptedFile);
+    EncryptedFileMetadata fileMetadata = new EncryptedFileMetadata(inputFile, encryptedFile, secret_key);
 
     // encrypt the file
     try {
-      CryptoUtils.encrypt(key, inputFile, encryptedFile); // encrypt the input file
+      CryptoUtils.encrypt(secret_key, inputFile, encryptedFile); // encrypt the input file
       System.out.println("Encryption: encryptFile -> Encrypted: " + encryptedFile.getAbsolutePath());
 
       // if delete for all files is enabled, direct delete
@@ -142,7 +143,7 @@ public class Encryption {
 
     // decrypt the file
     try {
-      CryptoUtils.decrypt(key, encryptedFile, decryptedFile);
+      CryptoUtils.decrypt(fileMetadata.getSecretKey(), encryptedFile, decryptedFile);
       System.out.println("Encryption: decryptFile (2) -> Decrypted: " + decryptedFile.getAbsolutePath());
       encryptedFile.delete(); // delete the encrypted file after it is decrypted
       ManageEncryptedFileList.removeFileEntryFromList(fileMetadata); // remove the file entry from list.json
@@ -194,7 +195,7 @@ public class Encryption {
         Node previewChild = new Node(){}; // node to display contents. casted to required type according to file type
 
         // read the file contents in form of byte array
-        byte[] dataBytes = CryptoUtils.readEncryptedData(key, fileMetadata.getEncryptedFile());
+        byte[] dataBytes = CryptoUtils.readEncryptedData(fileMetadata.getSecretKey(), fileMetadata.getEncryptedFile());
 
         // content is text, so cast Node to TextArea
         if(mimeType.contains("text")) {
@@ -249,7 +250,7 @@ public class Encryption {
     File decryptedFile = File.createTempFile(RandomStringUtils.randomAlphanumeric(3), "." + fileMetadata.getFileFormat());
 
     try {
-      CryptoUtils.decrypt(key, encryptedFile, decryptedFile);
+      CryptoUtils.decrypt(fileMetadata.getSecretKey(), encryptedFile, decryptedFile);
       System.out.println("Encryption: openFileTemporarily (1) -> Opening as " + decryptedFile.getAbsolutePath());
       Desktop.getDesktop().open(decryptedFile); // open the decrypted file
     } catch(CryptoException ex) {
