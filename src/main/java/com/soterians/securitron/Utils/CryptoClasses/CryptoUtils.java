@@ -1,14 +1,13 @@
 package com.soterians.securitron.Utils.CryptoClasses;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Base64;
 
 // TODO: to use file locking while encrypting/decrypting
 
@@ -48,9 +47,9 @@ public class CryptoUtils{
    * @return byte array containing the decrypted contents
    * @throws CryptoException
    */
-  public static byte[] readEncryptedData(String key, File inputFile) throws CryptoException {
+  public static byte[] readEncryptedData(String keyString, File inputFile) throws CryptoException {
         try {
-            Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
+            SecretKey secretKey = stringToKey(keyString);
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
 
@@ -67,10 +66,10 @@ public class CryptoUtils{
         }
     }
 
-    private static void doCrypto(int cipherMode, String key, File inputFile, File outputFile) throws CryptoException {
+    private static void doCrypto(int cipherMode, String keyString, File inputFile, File outputFile) throws CryptoException {
         // to implement encryption of large files using chunks of data
         try {
-            Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
+            Key secretKey = stringToKey(keyString);
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);
             cipher.init(cipherMode, secretKey);
 
@@ -93,5 +92,30 @@ public class CryptoUtils{
                 IllegalBlockSizeException | IOException ex) {
             throw new CryptoException("Error encrypting/decrypting file", ex);
         }
+    }
+
+
+    /**
+     * Generates a key and returns String representation of the SecreKey object so formed
+     * @return String containing key. (size -> 24 chars)
+     * @throws NoSuchAlgorithmException
+     */
+    public static String generateKeyString() throws NoSuchAlgorithmException {
+        KeyGenerator keyGen = KeyGenerator.getInstance(ALGORITHM);
+        SecureRandom secRan = new SecureRandom();
+        keyGen.init(128, secRan);
+        SecretKey key = keyGen.generateKey();
+        return Base64.getEncoder().encodeToString(key.getEncoded());
+    }
+
+
+    /**
+     * Converts string key to SecretKey object
+     * @param key String containing key. (size -> 24 chars)
+     * @return SecretKey object
+     */
+    private static SecretKey stringToKey(String key) {
+        byte[] decodedKey = Base64.getDecoder().decode(key);
+        return new SecretKeySpec(decodedKey, 0, decodedKey.length, ALGORITHM);
     }
 }

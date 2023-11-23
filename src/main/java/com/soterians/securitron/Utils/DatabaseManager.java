@@ -38,7 +38,7 @@ public class DatabaseManager {
 
   private static final String tableName = "files";  // name of the table that will contain file list
 
-  private static final String tableCreationCmd = "CREATE TABLE " + tableName + " (file_path VARCHAR(max), fileSize BIGINT, encryptedFile VARCHAR(max), checksum VARCHAR(64), encryptedOn BIGINT, secret_key VARCHAR(16));";
+  private static final String tableCreationCmd = "CREATE TABLE " + tableName + " (file_path VARCHAR(max), fileSize BIGINT, encryptedFile VARCHAR(max), checksum VARCHAR(64), encryptedOn BIGINT, secret_key VARCHAR(24));";
 
   /**
    * Constructor of the class that initiates basic operations of the settings for the app

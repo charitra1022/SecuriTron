@@ -74,7 +74,7 @@ public class Encryption {
     // create file object for encrypted file
     File encryptedFile = new File(Paths.get(parent, outputFilename).toString());
 
-    String secret_key = "this is new key!"; // to be generated randomly of size 16
+    String secret_key = CryptoUtils.generateKeyString(); // key of size 16 bytes
 
     // store basic info before encrypting
     EncryptedFileMetadata fileMetadata = new EncryptedFileMetadata(inputFile, encryptedFile, secret_key);
