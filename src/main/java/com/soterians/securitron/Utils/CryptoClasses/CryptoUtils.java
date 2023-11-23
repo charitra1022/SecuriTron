@@ -16,19 +16,6 @@ import java.util.Base64;
 
 
 /**
- * Custom exception for the CryptoUtils class
- */
-class CryptoException extends Exception{
-    public CryptoException() {
-    }
-
-    public CryptoException(String message, Throwable throwable) {
-        super(message, throwable);
-    }
-}
-
-
-/**
  * Manages the internals of encryption and decryption in Java SDK with provided key, input/output files and algorithm
  */
 public class CryptoUtils{
