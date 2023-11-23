@@ -150,7 +150,7 @@ public class Encryption {
       encryptedFile.delete(); // delete the encrypted file after it is decrypted
       DatabaseManager.deleteEncryptedFileData(fileMetadata);  // delete the file info from the database
 
-      ButtonType btnPressed = CustomDialogs.showAlertDialog("SecriTron: Open file?", "File decrypted: " + fileMetadata.getFileName() + "\nDo you want to view it?", Alert.AlertType.CONFIRMATION);
+      ButtonType btnPressed = CustomDialogs.showAlertDialog("SecuriTron: Open file?", "File decrypted: " + fileMetadata.getFileName() + "\nDo you want to view it?", Alert.AlertType.CONFIRMATION);
       if(btnPressed == ButtonType.OK) Desktop.getDesktop().open(decryptedFile);
 
       return true;
@@ -245,7 +245,14 @@ public class Encryption {
         return;
       }
 
-      CustomDialogs.showAlertDialog("Unsupported File","Selected file cannot be opened without decrypting!\n\nOnly images and text files can be opened!", Alert.AlertType.ERROR);
+      ButtonType btnPressed = CustomDialogs.showAlertDialog(
+              "SecuriTron: Unsupported File",
+              "Selected file cannot be opened without decrypting!\nOnly images and text files can be opened!\n\n" +
+                      "Do you want to view it by temporarily decrypting it to disk?\nThis option can make the file vulnerable to unauthorised access, so choose wisely!",
+              Alert.AlertType.CONFIRMATION
+      );
+      if(btnPressed == ButtonType.OK) openFileTemporarilyByDecrypting(fileMetadata);
+
     } catch(IOException | CryptoException ex) {
       if(!fileMetadata.getEncryptedFile().exists())
         CustomDialogs.showAlertDialog("SecuriTron: File not found!", "Path: " + fileMetadata.getEncryptedFilePath(), Alert.AlertType.ERROR);
