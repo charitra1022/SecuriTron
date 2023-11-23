@@ -40,14 +40,14 @@ public class CryptoUtils{
     }
 
 
-  /**
-   * Reads an encrypted file and returns its decrypted contents in the form of byte array, and return it
-   * @param key Encryption key of the file
-   * @param inputFile input file
-   * @return byte array containing the decrypted contents
-   * @throws CryptoException
-   */
-  public static byte[] readEncryptedData(String keyString, File inputFile) throws CryptoException {
+    /**
+     * Reads an encrypted file and returns its decrypted contents in the form of byte array, and return it
+     * @param keyString Encryption key of the file
+     * @param inputFile input file
+     * @return byte array containing the decrypted contents
+     * @throws CryptoException
+     */
+    public static byte[] readEncryptedData(String keyString, File inputFile) throws CryptoException {
         try {
             SecretKey secretKey = stringToKey(keyString);
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);
@@ -65,6 +65,7 @@ public class CryptoUtils{
             throw new CryptoException("Error encrypting/decrypting file", ex);
         }
     }
+
 
     private static void doCrypto(int cipherMode, String keyString, File inputFile, File outputFile) throws CryptoException {
         // to implement encryption of large files using chunks of data

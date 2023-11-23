@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added app brand icon">
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="added keygen to generate randomized key for each file while encrypting and access it while decrypting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/CryptoUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/CryptoUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/DatabaseManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/register_window.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/soterians/securitron/register_window.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,14 +107,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699169079334</updated>
-    </task>
-    <task id="LOCAL-00019" summary="read the encrypted files data and initialize the app">
-      <option name="closed" value="true" />
-      <created>1699481603042</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1699481603042</updated>
     </task>
     <task id="LOCAL-00020" summary="added animateFx library">
       <option name="closed" value="true" />
@@ -503,7 +492,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700733453238</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="added keygen to generate randomized key for each file while encrypting and access it while decrypting">
+      <option name="closed" value="true" />
+      <created>1700738551985</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1700738551986</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -518,7 +515,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added settings window" />
     <MESSAGE value="added password validation and related functionalities" />
     <MESSAGE value="created login and register windows" />
     <MESSAGE value="show login and register window depending on app status" />
@@ -543,7 +539,8 @@
     <MESSAGE value="added wrapped label in content section of alert" />
     <MESSAGE value="transformed json file info storage to secure database storage for better performance" />
     <MESSAGE value="added app brand icon" />
-    <option name="LAST_COMMIT_MESSAGE" value="added app brand icon" />
+    <MESSAGE value="added keygen to generate randomized key for each file while encrypting and access it while decrypting" />
+    <option name="LAST_COMMIT_MESSAGE" value="added keygen to generate randomized key for each file while encrypting and access it while decrypting" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
