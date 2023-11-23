@@ -20,6 +20,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import java.awt.Desktop;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -196,7 +197,13 @@ public class Encryption {
         Node previewChild = new Node(){}; // node to display contents. casted to required type according to file type
 
         // read the file contents in form of byte array
-        byte[] dataBytes = CryptoUtils.readEncryptedData(fileMetadata.getSecretKey(), fileMetadata.getEncryptedFile());
+        FileInputStream fileInputStream = new FileInputStream(fileMetadata.getEncryptedFile());
+        byte[] dataBytes = CryptoUtils.readEncryptedData(
+                fileMetadata.getSecretKey(),
+                fileMetadata.getEncryptedFile(),
+                fileInputStream
+        );
+
 
         // content is text, so cast Node to TextArea
         if(mimeType.contains("text")) {
@@ -229,6 +236,9 @@ public class Encryption {
         parent.getChildren().add(previewChild);
         stage.setScene(new Scene(parent));
         stage.showAndWait();
+
+        // close stream of encrypted file after preview is closed so that file is locked until preview is closed
+        fileInputStream.close();
         return;
       }
 

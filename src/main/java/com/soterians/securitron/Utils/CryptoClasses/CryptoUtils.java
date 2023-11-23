@@ -2,7 +2,10 @@ package com.soterians.securitron.Utils.CryptoClasses;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -44,20 +47,19 @@ public class CryptoUtils{
      * Reads an encrypted file and returns its decrypted contents in the form of byte array, and return it
      * @param keyString Encryption key of the file
      * @param inputFile input file
+     * @param inputStream FileInputStream object for the encrypted file. passed as parameter for file locking purposes
      * @return byte array containing the decrypted contents
      * @throws CryptoException
      */
-    public static byte[] readEncryptedData(String keyString, File inputFile) throws CryptoException {
+    public static byte[] readEncryptedData(String keyString, File inputFile, FileInputStream inputStream) throws CryptoException {
         try {
             SecretKey secretKey = stringToKey(keyString);
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);
             cipher.init(Cipher.DECRYPT_MODE, secretKey);
 
             // read the input file
-            FileInputStream inputStream = new FileInputStream(inputFile);
             byte[] inputBytes = new byte[(int) inputFile.length()];
             inputStream.read(inputBytes);
-            inputStream.close();
 
             return cipher.doFinal(inputBytes);  // return decrypted bytes
         } catch(NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | IOException |
