@@ -150,9 +150,10 @@ public class Encryption {
       encryptedFile.delete(); // delete the encrypted file after it is decrypted
       DatabaseManager.deleteEncryptedFileData(fileMetadata);  // delete the file info from the database
 
-      return true;
+      ButtonType btnPressed = CustomDialogs.showAlertDialog("SecriTron: Open file?", "File decrypted: " + fileMetadata.getFileName() + "\nDo you want to view it?", Alert.AlertType.CONFIRMATION);
+      if(btnPressed == ButtonType.OK) Desktop.getDesktop().open(decryptedFile);
 
-      // TODO: remove the file entry from the list and update the listView
+      return true;
     } catch (CryptoException ex) {
       String msg = "";
       if(!encryptedFile.exists()) msg = "File not found!";
@@ -166,6 +167,8 @@ public class Encryption {
       CustomDialogs.showAlertDialog("SecuriTron: " + msg, "Path: " + fileMetadata.getEncryptedFilePath(), Alert.AlertType.ERROR);
 
       // TODO: to ask user to remove entry for the error file from the list
+    } catch(IOException e) {
+      throw new RuntimeException(e);
     }
 
     return false;

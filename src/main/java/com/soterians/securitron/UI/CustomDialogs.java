@@ -2,16 +2,20 @@ package com.soterians.securitron.UI;
 
 import com.soterians.securitron.Utils.IconPack;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class CustomDialogs {
   /**
-   * Creates and shows a alert dialog box with specific text and title
+   * Creates and shows a alert dialog box with specific text, title and type
+   *
    * @param title text to display as dialogBox title
-   * @param text text to display as dialogBox content
+   * @param text  text to display as dialogBox content
+   * @param alertType Alert.AlertType object denoting type of alert
+   * @return ButtonType representing the type of button clicked
    */
-  public static void showAlertDialog(String title, String text, Alert.AlertType alertType) {
+  public static ButtonType showAlertDialog(String title, String text, Alert.AlertType alertType) {
     Alert alert = new Alert(alertType);
     ((Stage)alert.getDialogPane().getScene().getWindow()).getIcons().add(IconPack.APP_ICON.getImage());
     alert.setTitle(title);
@@ -20,6 +24,7 @@ public class CustomDialogs {
     alert.getDialogPane().setContent(label);
     alert.setHeaderText(null);
     alert.showAndWait();
+    return alert.getResult();
   }
 
 
