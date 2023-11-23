@@ -49,6 +49,9 @@ public class MainWindowController implements Initializable {
   private Label dragPane; // element over which files will be dropped
 
   @FXML
+  private Label appTitleLabel;  // app title label
+
+  @FXML
   private ListView<File> dragSelectListView;  // display list of files dragged/selected
 
   @FXML
@@ -122,6 +125,11 @@ public class MainWindowController implements Initializable {
       System.exit(-1);
     }
 
+    // set app icon in title label
+    ImageView imgView = new ImageView(IconPack.APP_ICON.getImage());
+    imgView.setFitHeight(30);
+    imgView.setPreserveRatio(true);
+    appTitleLabel.setGraphic(imgView);
 
     // set the drag and drop image
     ImageView view1 = new ImageView(IconPack.DRAG_DROP_GREY.getImage());
@@ -230,10 +238,11 @@ public class MainWindowController implements Initializable {
     FXMLLoader settingsFxmlLoader = new FXMLLoader(MainApplication.class.getResource("settings_window.fxml"));
     Parent settingsRoot = settingsFxmlLoader.load();
     Stage stage = new Stage();
-    stage.setTitle("SecuriTron Settings");
+    stage.setTitle("SecuriTron: Settings");
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setScene(new Scene(settingsRoot));
     stage.setResizable(false);
+    stage.getIcons().add(IconPack.APP_ICON.getImage());
     stage.showAndWait();
 
   }

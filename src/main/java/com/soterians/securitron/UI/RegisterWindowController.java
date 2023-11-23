@@ -21,12 +21,21 @@ public class RegisterWindowController implements Initializable{
   @FXML
   private Button showNewPswdBtn, registerBtn;
 
+  @FXML
+  private Label appTitleLabel;
+
   private final ImageView show_icon = new ImageView(IconPack.SHOW_EYE.getImage());
   private final ImageView hide_icon = new ImageView(IconPack.HIDE_EYE.getImage());
 
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    // set app icon in label
+    ImageView imgView = new ImageView(IconPack.APP_ICON.getImage());
+    imgView.setFitHeight(60);
+    imgView.setPreserveRatio(true);
+    appTitleLabel.setGraphic(imgView);
+
     // set icon properties
     show_icon.setPreserveRatio(true);
     hide_icon.setPreserveRatio(true);
