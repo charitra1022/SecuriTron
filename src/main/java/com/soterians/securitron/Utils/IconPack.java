@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public enum IconPack{
+    APP_ICON(new Image(MainApplication.class.getResource("icons/app_icon.png").toExternalForm())),
     AUDIO(new Image(MainApplication.class.getResource("icons/audio.png").toExternalForm())),
     CODE(new Image(MainApplication.class.getResource("icons/code.png").toExternalForm())),
     COMPRESS(new Image(MainApplication.class.getResource("icons/compress.png").toExternalForm())),
@@ -28,7 +29,11 @@ public enum IconPack{
     WORD(new Image(MainApplication.class.getResource("icons/word.png").toExternalForm())),
     APPLICATION(new Image(MainApplication.class.getResource("icons/application.png").toExternalForm())),
     DRAG_DROP_GREY(new Image(MainApplication.class.getResource("icons/dragdrop_grey.png").toExternalForm())),
-    DRAG_DROP_BLUE(new Image(MainApplication.class.getResource("icons/dragdrop_blue.png").toExternalForm()));
+    DRAG_DROP_BLUE(new Image(MainApplication.class.getResource("icons/dragdrop_blue.png").toExternalForm())),
+    GEAR(new Image(MainApplication.class.getResource("icons/gear.png").toExternalForm())),
+    INFO(new Image(MainApplication.class.getResource("icons/info.png").toExternalForm())),
+    SHOW_EYE(new Image(MainApplication.class.getResource("icons/show-eye.png").toExternalForm())),
+    HIDE_EYE(new Image(MainApplication.class.getResource("icons/hide-eye.png").toExternalForm()));
 
     private final Image enumValue;  // store the value of the enum
 

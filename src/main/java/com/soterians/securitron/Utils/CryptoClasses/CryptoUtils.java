@@ -5,10 +5,7 @@ import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -19,8 +16,10 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Custom exception for the CryptoUtils class
  */
-class CryptoException extends Exception {
-    public CryptoException() {}
+class CryptoException extends Exception{
+    public CryptoException() {
+    }
+
     public CryptoException(String message, Throwable throwable) {
         super(message, throwable);
     }
@@ -30,7 +29,7 @@ class CryptoException extends Exception {
 /**
  * Manages the internals of encryption and decryption in Java SDK with provided key, input/output files and algorithm
  */
-public class CryptoUtils {
+public class CryptoUtils{
     private static final String ALGORITHM = "AES", TRANSFORMATION = "AES";
 
     public static void encrypt(String key, File inputFile, File outputFile) throws CryptoException {
@@ -41,43 +40,57 @@ public class CryptoUtils {
         doCrypto(Cipher.DECRYPT_MODE, key, inputFile, outputFile);
     }
 
+
+  /**
+   * Reads an encrypted file and returns its decrypted contents in the form of byte array, and return it
+   * @param key Encryption key of the file
+   * @param inputFile input file
+   * @return byte array containing the decrypted contents
+   * @throws CryptoException
+   */
+  public static byte[] readEncryptedData(String key, File inputFile) throws CryptoException {
+        try {
+            Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
+            Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+
+            // read the input file
+            FileInputStream inputStream = new FileInputStream(inputFile);
+            byte[] inputBytes = new byte[(int) inputFile.length()];
+            inputStream.read(inputBytes);
+            inputStream.close();
+
+            return cipher.doFinal(inputBytes);  // return decrypted bytes
+        } catch(NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | IOException |
+                IllegalBlockSizeException | BadPaddingException ex) {
+            throw new CryptoException("Error encrypting/decrypting file", ex);
+        }
+    }
+
     private static void doCrypto(int cipherMode, String key, File inputFile, File outputFile) throws CryptoException {
         // to implement encryption of large files using chunks of data
         try {
-//            Path outPath = Paths.get("D:/Temp");
-//            byte[] plainBuf = new byte[8192];
-//
-//            try (InputStream in = Files.newInputStream(f.toPath());
-//                 OutputStream out = Files.newOutputStream(outPath)) {
-//                int nread;
-//                while ((nread = in.read(plainBuf)) > 0) {
-//                    byte[] enc = cipher.update(plainBuf, 0, nread);
-//                    out.write(enc);
-//                }
-//                byte[] enc = cipher.doFinal();
-//                out.write(enc);
-//            }
-//            return outPath.toFile();
-
             Key secretKey = new SecretKeySpec(key.getBytes(), ALGORITHM);
             Cipher cipher = Cipher.getInstance(TRANSFORMATION);
             cipher.init(cipherMode, secretKey);
 
-            FileInputStream inputStream = new FileInputStream(inputFile);
-            byte[] inputBytes = new byte[(int) inputFile.length()];
+            FileInputStream inputStream = new FileInputStream(inputFile);   // inputstream for inputfile
+            FileOutputStream outputStream = new FileOutputStream(outputFile);   // outputstream for output file
 
-            inputStream.read(inputBytes);
+            byte dataBytes[] = new byte[1024];  // byte chunk
+            int bytesRead = 0;  // number of bytes read at a time
 
-            byte[] outputBytes = cipher.doFinal(inputBytes);
+            // loop until complete file is read
+            while ((bytesRead = inputStream.read(dataBytes)) != -1) {
+                outputStream.write(cipher.update(dataBytes, 0, bytesRead));
+            }
 
-            FileOutputStream outputStream = new FileOutputStream(outputFile);
-            outputStream.write(outputBytes);
+            outputStream.write(cipher.doFinal());   // do the final encoding
 
-            inputStream.close();
-            outputStream.close();
-
-        } catch (NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | BadPaddingException |
-                 IllegalBlockSizeException | IOException ex) {
+            inputStream.close();    // close inputstream
+            outputStream.close();   // close outputstream
+        } catch(NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | BadPaddingException |
+                IllegalBlockSizeException | IOException ex) {
             throw new CryptoException("Error encrypting/decrypting file", ex);
         }
     }

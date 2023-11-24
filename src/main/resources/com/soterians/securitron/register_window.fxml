@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="290.0" prefWidth="580.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.soterians.securitron.UI.RegisterWindowController">
+          <children>
+      <GridPane layoutX="20.0" layoutY="17.600000381469727" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints vgrow="NEVER" />
+            <RowConstraints vgrow="NEVER" />
+            <RowConstraints vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <AnchorPane style="-fx-background-color: #73A9AD;">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="166.0" layoutY="32.0" text="SecuriTron" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font name="Bookman Old Style Bold" size="48.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="20.0" top="20.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="85.0" GridPane.rowIndex="1">
+               <children>
+                  <Label layoutX="144.0" layoutY="6.0" style="-fx-background-color: yellow; -fx-border-width: 1; -fx-border-radius: 10; -fx-border-color: black;" text="Password will be used to access the application at later stage, and you won't be able to access encrypted files wihout it, so store it at a safe place!" textFill="#050505" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="15.0" right="15.0" top="10.0" />
+               </padding>
+            </AnchorPane>
+            <AnchorPane GridPane.rowIndex="2">
+               <children>
+                          <GridPane layoutY="2.3999996185302734" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              </columnConstraints>
+                              <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              </rowConstraints>
+                              <children>
+                                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                      <children>
+                                          <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                              <columnConstraints>
+                                                  <ColumnConstraints hgrow="NEVER" />
+                                                  <ColumnConstraints hgrow="ALWAYS" />
+                                                  <ColumnConstraints hgrow="NEVER" />
+                                              </columnConstraints>
+                                              <rowConstraints>
+                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              </rowConstraints>
+                                              <children>
+                                                  <AnchorPane GridPane.hgrow="NEVER">
+                                                      <children>
+                                                          <Label layoutX="76.0" layoutY="8.0" text="New Password" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                                      </children>
+                                                      <padding>
+                                                          <Insets right="10.0" />
+                                                      </padding>
+                                                  </AnchorPane>
+                                                  <AnchorPane GridPane.hgrow="NEVER" GridPane.rowIndex="1">
+                                                      <children>
+                                                          <Label layoutX="83.0" layoutY="10.0" text="Confirm Password" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="15.0" />
+                                             </font></Label>
+                                                      </children>
+                                                      <padding>
+                                                          <Insets right="10.0" />
+                                                      </padding>
+                                                  </AnchorPane>
+                                                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                                      <padding>
+                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                      </padding>
+                                                      <children>
+                                                          <PasswordField fx:id="newPswdField" layoutX="-38.0" layoutY="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                          <TextField fx:id="newPswdTxtField" layoutX="-15.0" layoutY="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                      </children>
+                                                  </AnchorPane>
+                                                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                      <padding>
+                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                      </padding>
+                                                      <children>
+                                                          <PasswordField fx:id="confirmPswdField" layoutX="26.0" layoutY="3.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                      </children>
+                                                  </AnchorPane>
+                                                  <AnchorPane GridPane.columnIndex="2" GridPane.hgrow="NEVER">
+                                                      <children>
+                                                          <Button fx:id="showNewPswdBtn" contentDisplay="GRAPHIC_ONLY" layoutX="29.0" layoutY="2.0" mnemonicParsing="false" style="-fx-background-color: #00000000;" text="Show" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                              <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                              </cursor>
+                                                          </Button>
+                                                      </children>
+                                                      <padding>
+                                                          <Insets bottom="5.0" right="30.0" top="5.0" />
+                                                      </padding>
+                                                  </AnchorPane>
+                                                  <AnchorPane GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1">
+                                                      <children>
+                                                          <Button fx:id="registerBtn" contentDisplay="CENTER" defaultButton="true" layoutX="41.0" layoutY="2.0" mnemonicParsing="false" prefWidth="75.0" text="Register" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                              <cursor>
+                                                                  <Cursor fx:constant="HAND" />
+                                                              </cursor>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                                          </Button>
+                                                      </children>
+                                                      <padding>
+                                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                      </padding>
+                                                  </AnchorPane>
+                                              </children>
+                                          </GridPane>
+                                      </children>
+                                  </AnchorPane>
+                              </children>
+                          </GridPane>
+               </children>
+               <padding>
+                  <Insets bottom="25.0" left="20.0" right="20.0" />
+               </padding>
+            </AnchorPane>
+         </children>
+      </GridPane>
+          </children>
+      </AnchorPane>

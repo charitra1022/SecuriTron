@@ -1,46 +1,55 @@
 package com.soterians.securitron.UI;
 
+import com.soterians.securitron.MainApplication;
 import com.soterians.securitron.Utils.CryptoClasses.EncryptedFileMetadata;
 import com.soterians.securitron.Utils.CryptoClasses.Encryption;
-import com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList;
+import com.soterians.securitron.Utils.DatabaseManager;
 import com.soterians.securitron.Utils.IconPack;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static com.soterians.securitron.Utils.CryptoClasses.ManageEncryptedFileList.readEncryptedFileMetaData;
 
 public class MainWindowController implements Initializable {
   private ArrayList<File> files, folders;   // list of files and folders
   private List<File> filesList;   // list of files returned by the file selection event
 
   @FXML
-  private Button settingsBtn, aboutBtn, closeBtn, selectBtn, encryptBtn;
+  private Button settingsBtn, aboutBtn, selectBtn, encryptBtn, cancelBtn;
 
   @FXML
   private Label dragPane; // element over which files will be dropped
+
+  @FXML
+  private ListView<File> dragSelectListView;  // display list of files dragged/selected
 
   @FXML
   private ListView<EncryptedFileMetadata> filesListView;  // to display list of encrypted files
@@ -70,21 +79,67 @@ public class MainWindowController implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // set the drag and drop image
-    ImageView view = new ImageView(IconPack.DRAG_DROP_GREY.getImage());
-    view.setFitHeight(80);
-    view.setPreserveRatio(true);
-    dragPane.setGraphic(view);
+    String dialogFxml = "";
+    String dialogTitle = "";
 
-    System.out.println("MainWindowController: initialize -> initialize called");
-    ArrayList<EncryptedFileMetadata> fileMetadataList = null;
-    try {
-      fileMetadataList = ManageEncryptedFileList.readEncryptedFileMetaData();
-    } catch (IOException e) {
-      throw new RuntimeException(e);
+    // if database is present, show login dialog
+    if(!DatabaseManager.isDBPresent()){
+      System.out.println("MainWindowController: initialize -> database not found");
+      dialogFxml = "register_window.fxml";
+      dialogTitle = "SecuriTron: Setup Login Password to access application";
     }
 
-    updateListView(fileMetadataList);  // update the list view with list of encrypted files
+    // if database is not present, show register dialog
+    else {
+      System.out.println("MainWindowController: initialize -> database found");
+      dialogFxml = "login_window.fxml";
+      dialogTitle = "SecuriTron: Enter Password to Login";
+    }
+
+
+    // dialog window to login/register into the app
+    Stage stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.setResizable(false);
+    stage.setTitle(dialogTitle);
+    stage.getIcons().add(IconPack.APP_ICON.getImage());
+
+    // when the login/register dialog is closed, close the app
+    stage.setOnCloseRequest(event -> {
+      Platform.exit();
+      System.exit(0);
+    });
+
+    // view login/register modal
+    try {
+      FXMLLoader loginRegisterFxmlLoader = new FXMLLoader(MainApplication.class.getResource(dialogFxml));
+      stage.setScene(new Scene(loginRegisterFxmlLoader.load()));
+      stage.showAndWait();
+    } catch(IOException ex) {
+      System.out.println("MainWindowController: initialize -> error, exiting");
+      ex.printStackTrace();
+      Platform.exit();
+      System.exit(-1);
+    }
+
+
+    // set the drag and drop image
+    ImageView view1 = new ImageView(IconPack.DRAG_DROP_GREY.getImage());
+    view1.setFitHeight(80);
+    view1.setPreserveRatio(true);
+    dragPane.setGraphic(view1);
+
+    // set the button icons
+    ImageView view2 = new ImageView(IconPack.GEAR.getImage());
+    ImageView view3 = new ImageView(IconPack.INFO.getImage());
+    view2.setFitHeight(15);
+    view3.setFitHeight(15);
+    view2.setPreserveRatio(true);
+    view3.setPreserveRatio(true);
+    settingsBtn.setGraphic(view2);
+    aboutBtn.setGraphic(view3);
+
+    updateListView(DatabaseManager.readEncryptedFileData());  // update the list view with list of encrypted files
     changeFileDetailPaneVisibility(false);
 
     // set the tooltip for the file info labels
@@ -98,27 +153,94 @@ public class MainWindowController implements Initializable {
     fileFormatLabel.getTooltip().setShowDelay(Duration.seconds(0.2));
     fileSizeLabel.getTooltip().setShowDelay(Duration.seconds(0.2));
     fileEncryptedDateLabel.getTooltip().setShowDelay(Duration.seconds(0.2));
+
+    dragPane.setOnMouseClicked(e -> selectBtn.fire());  // open the selection dialog when drag pane is clicked
+    dragPane.setVisible(true);  // view drag pane
+    dragSelectListView.setVisible(false); // hide selected files list view
+    cancelBtn.setVisible(false);  // hide cancel operation button
+
+    // modifies the listViews
+    modifySelectedFilesListView();  // modify the selectedFilesListView (adds tooltip to items)
+    modifyEncryptedFilesListView(); // modify the EncryptedFilesListView (adds tooltip to items)
+  }
+
+
+  /**
+   * Modifies the selectedFilesListView (adds tooltip to items)
+   */
+  private void modifySelectedFilesListView() {
+    dragSelectListView.setCellFactory(cell -> new ListCell<>(){
+      final Tooltip tooltip = new Tooltip();
+
+      @Override
+      protected void updateItem(File file, boolean empty) {
+        super.updateItem(file, empty);
+        // if no item is present
+        if(file == null || empty) {
+          setText(null);
+          setTooltip(null);
+        }
+        // if items are present, attach tooltip to them
+        else {
+          setText(file.getName());
+          tooltip.setText(file.getAbsolutePath());
+          tooltip.setShowDelay(Duration.seconds(0.2));
+          setTooltip(tooltip);
+        }
+      }
+    });
+  }
+
+
+  /**
+   * Modifies the EncryptedFilesListView (adds tooltip to items)
+   */
+  private void modifyEncryptedFilesListView() {
+    filesListView.setCellFactory(cell -> new ListCell<>() {
+      final Tooltip tooltip = new Tooltip();
+
+      @Override
+      protected void updateItem(EncryptedFileMetadata fileMetadata, boolean empty) {
+        super.updateItem(fileMetadata, empty);
+
+        // if no item is present
+        if(fileMetadata == null || empty) {
+          setText(null);
+          setTooltip(null);
+        }
+        // if items are present, attach tooltip to them
+        else {
+          setText(fileMetadata.toString());
+
+          String line1 = "Name: " + fileMetadata.getFileName();
+          String line2 = "Size: " + fileMetadata.getFileSizeString();
+          String line3 = "Path: " + fileMetadata.getFilePath();
+          tooltip.setText(line1 + "\n" + line2 + "\n" + line3);
+          tooltip.setShowDelay(Duration.seconds(0.2));
+          setTooltip(tooltip);
+        }
+      }
+    });
   }
 
 
   @FXML
-  private void settingsBtnClicked(ActionEvent actionEvent) {
-    System.out.println("MainWindowController: settingsBtnClicked -> settings button clicked");
+  private void settingsBtnClicked(ActionEvent actionEvent) throws IOException {
+    // view settings modal
+    FXMLLoader settingsFxmlLoader = new FXMLLoader(MainApplication.class.getResource("settings_window.fxml"));
+    Parent settingsRoot = settingsFxmlLoader.load();
+    Stage stage = new Stage();
+    stage.setTitle("SecuriTron Settings");
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.setScene(new Scene(settingsRoot));
+    stage.setResizable(false);
+    stage.showAndWait();
+
   }
 
   @FXML
   private void aboutBtnClicked(ActionEvent actionEvent) {
     System.out.println("MainWindowController: aboutBtnClicked -> about button clicked");
-  }
-
-
-  /**
-   * Close button click event. Closes the app
-   * @param actionEvent button click event
-   */
-  @FXML
-  private void closeBtnClicked(ActionEvent actionEvent) {
-    ((Stage)((Node)actionEvent.getSource()).getScene().getWindow()).close();
   }
 
 
@@ -147,42 +269,54 @@ public class MainWindowController implements Initializable {
    * @param actionEvent button click event
    */
   @FXML
-  private void encryptBtnClicked(ActionEvent actionEvent) throws IOException, ParseException {
+  private void encryptBtnClicked(ActionEvent actionEvent) throws IOException, ParseException, NoSuchAlgorithmException {
     // if no files are selected currently
     if(filesList == null || filesList.isEmpty()) {
-      showSimpleDialog("No files to encrypt!", "Open files or Drag files in the above box to encrypt them.");
+      CustomDialogs.showAlertDialog("No files to encrypt!", "Open files or Drag files in the above box to encrypt them.", Alert.AlertType.WARNING);
       return;
     }
 
     System.out.println("MainWindowController: encryptBtnClicked -> encryption started");
 
-    // to add code for calling encryption on folders function
+    // TODO: add code for calling encryption on folders function
     Encryption.encryptFiles(files);
 
-    // now update the listview
-    updateListView(readEncryptedFileMetaData());
+    // now update the listview by retrieving new database contents
+    updateListView(DatabaseManager.readEncryptedFileData());
 
     // release resources after encryption process
-    filesList = null;
-    files = folders = null;
+    clearSelectedFilesAndShowDragPane();
   }
 
 
   /**
-   * Creates and shows a dialog box with specific text and title
-   * @param title text to display as dialogBox title
-   * @param text text to display as dialogBox content
+   * Clears the file arrayLists and also hides & clears selectedFileListView and shows dragPane
+   * In simple words, it resets the app backend and UI w.r.t. selected files
    */
-  private void showSimpleDialog(String title, String text) {
-    Dialog<String> dialog = new Dialog<>();
-    dialog.setTitle(title);
-    dialog.setContentText(text);
-    dialog.getDialogPane().getButtonTypes().add(new ButtonType("OK", ButtonBar.ButtonData.OK_DONE));
-    dialog.showAndWait();
+  private void clearSelectedFilesAndShowDragPane() {
+    // clear the lists
+    filesList = null;
+    files = folders = null;
+
+    // clear & hide selectedFilesListView and show dragPane
+    dragPane.setVisible(true);
+    dragSelectListView.setVisible(false);
+    cancelBtn.setVisible(false);
+    dragSelectListView.getItems().clear();
   }
 
 
-  // TODO: to display the files to the user that are selected currently
+  /**
+   * Called on cancel button click. Cancels selection process for encryption
+   * @param actionEvent
+   */
+  @FXML
+  private void cancelBtnClicked(ActionEvent actionEvent) {
+    System.out.println("MainWindowController: cancelBtnClicked");
+    clearSelectedFilesAndShowDragPane();
+  }
+
+
   /**
    * Separates files and folders from the list returned by the selection event (drag/open)
    */
@@ -208,6 +342,14 @@ public class MainWindowController implements Initializable {
     if(!folders.isEmpty()) msg += folders.size() + " folders\n";
 
     System.out.println("MainWindowController: handleFilesSelected -> " + msg);
+
+    // hide dragPane and update & show selectedFilesListView
+    dragPane.setVisible(false);
+    dragSelectListView.setVisible(true);
+    cancelBtn.setVisible(true);
+    // remove older items and add new ones
+    dragSelectListView.getItems().clear();
+    for(File f: filesList) dragSelectListView.getItems().add(f);
   }
 
 
@@ -327,7 +469,12 @@ public class MainWindowController implements Initializable {
 
     // get the selected item from the listview
     EncryptedFileMetadata fileMetadata = filesListView.getSelectionModel().getSelectedItem();
-    Encryption.decryptFile(fileMetadata); // call the decrypt method on the file
+    boolean isSucess = Encryption.decryptFile(fileMetadata); // call the decrypt method on the file
+
+    // remove the selected item from the listview if decryption was successfull
+    if(isSucess) filesListView.getItems().remove(filesListView.getSelectionModel().getSelectedIndex());
+
+    // TODO: if an encrypted file is not found, it should be updated in the list.json as its getting deleted in the listview
   }
 
 

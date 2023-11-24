@@ -33,7 +33,6 @@
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -44,21 +43,21 @@
                               <Font name="Verdana" size="21.0" />
                            </font>
                         </Label>
-                        <Button fx:id="settingsBtn" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#settingsBtnClicked" prefWidth="80.0" style="-fx-background-color: #00000000; -fx-cursor: hand;" text="Settings" textFill="WHITE" GridPane.columnIndex="2">
+                        <Button fx:id="settingsBtn" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#settingsBtnClicked" prefWidth="100.0" style="-fx-background-color: #619ea2; -fx-cursor: hand;" text="Settings" textFill="WHITE" GridPane.columnIndex="2">
                            <font>
                               <Font name="Verdana" size="14.0" />
                            </font>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
                         </Button>
-                        <Button fx:id="aboutBtn" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aboutBtnClicked" prefWidth="80.0" style="-fx-background-color: #00000000; -fx-cursor: hand;" text="About" textFill="WHITE" GridPane.columnIndex="3">
+                        <Button fx:id="aboutBtn" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#aboutBtnClicked" prefWidth="100.0" style="-fx-background-color: #619ea2; -fx-cursor: hand;" text="About" textFill="WHITE" GridPane.columnIndex="3">
                            <font>
                               <Font name="Verdana" size="14.0" />
                            </font>
-                        </Button>
-      
-                        <Button fx:id="closeBtn" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#closeBtnClicked" prefWidth="60.0" style="-fx-background-color: #00000000; -fx-cursor: hand;" text="×" textFill="WHITE" GridPane.columnIndex="4">
-                           <font>
-                              <Font name="Verdana Bold" size="20.0" />
-                           </font>
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </GridPane.margin>
                         </Button>
                      </children>
                   </GridPane>
@@ -120,6 +119,7 @@
                                                 <Cursor fx:constant="HAND" />
                                              </cursor>
                                           </Label>
+                                          <ListView fx:id="dragSelectListView" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                        <padding>
                                           <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -139,6 +139,7 @@
                                                 <AnchorPane GridPane.hgrow="SOMETIMES" GridPane.vgrow="NEVER">
                                                    <children>
                                                       <Button fx:id="selectBtn" layoutX="35.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#selectBtnClicked" prefHeight="40.0" prefWidth="110.0" style="-fx-cursor: hand;" text="Select Files" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="30.0" />
+                                                      <Button fx:id="cancelBtn" layoutX="35.0" layoutY="30.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelBtnClicked" prefHeight="40.0" prefWidth="110.0" style="-fx-cursor: hand;" text="Cancel Operation" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="33.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="30.0" />
                                                    </children>
                                                 </AnchorPane>
                                                 <AnchorPane GridPane.columnIndex="1" GridPane.hgrow="SOMETIMES" GridPane.vgrow="NEVER">

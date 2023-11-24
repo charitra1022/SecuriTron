@@ -1,8 +1,11 @@
 package com.soterians.securitron.Utils.CryptoClasses;
 
 import java.io.File;
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
+import com.soterians.securitron.Utils.SHA256Checksum;
 import org.apache.commons.io.FilenameUtils;
 
 public class EncryptedFileMetadata {
@@ -11,6 +14,8 @@ public class EncryptedFileMetadata {
   private Date encryptedOn;
   private String fileFormat;
   private long fileSize;
+  private String secret_key;
+
 
   /**
    * Creates an object with all pre-defined values. used for retrieving data from stored place, e.g., JSON
@@ -19,13 +24,14 @@ public class EncryptedFileMetadata {
    * @param encryptedOn date when the original file was encrypted on
    * @param encryptedFile File object for encrypted file
    */
-  EncryptedFileMetadata(File file, String checksum, Date encryptedOn, long fileSize, File encryptedFile) {
+  public EncryptedFileMetadata(File file, String checksum, Date encryptedOn, long fileSize, File encryptedFile, String secret_key) {
     this.file = file;
     this.checksum = checksum;
     this.encryptedOn = encryptedOn;
     this.fileSize = fileSize;
     this.fileFormat = calculateFileFormat(file);
     this.encryptedFile = encryptedFile;
+    this.secret_key = secret_key;
   }
 
 
@@ -33,35 +39,20 @@ public class EncryptedFileMetadata {
    * Creates an object with only original file information. used for initial process of encryption.
    * Automatically initiates encryptedOn and checksum attributes
    * @param originalFile File object for original file
+   * @param encryptedFile File object for encrypted file
+   * @param secret_key Secret key string used to encrypt the file
    */
-  EncryptedFileMetadata(File originalFile, File encryptedFile){
+  public EncryptedFileMetadata(File originalFile, File encryptedFile, String secret_key) throws NoSuchAlgorithmException, IOException {
     this.file = originalFile;
-    this.checksum = calculateChecksum();
+    this.checksum = SHA256Checksum.getFileChecksum(originalFile);
     this.encryptedOn = new Date();
     this.fileSize = file.length();
     this.fileFormat = calculateFileFormat(originalFile);
     this.encryptedFile = encryptedFile;
+    this.secret_key = secret_key;
   }
 
-  public void setChecksum(String checksum) {
-    this.checksum = checksum;
-  }
-
-  public void setEncryptedOn(Date encryptedOn) {
-    this.encryptedOn = encryptedOn;
-  }
-
-  public void setFile(File file) {
-    this.file = file;
-  }
-
-  public void setEncryptedFile(File encryptedFile) {
-    this.encryptedFile = encryptedFile;
-  }
-
-  public void setFileFormat(String fileFormat) {
-    this.fileFormat = fileFormat;
-  }
+  public String getSecretKey() { return secret_key; }
 
   public Date getEncryptedOn() {
     return encryptedOn;
@@ -124,10 +115,12 @@ public class EncryptedFileMetadata {
     return this.getFileName();
   }
 
-  public String calculateChecksum() {
-    return "";
-  }
 
+  /**
+   * Returns the file extension for a file
+   * @param file File object for the file to be processed
+   * @return String containing the file extension
+   */
   public String calculateFileFormat(File file) {
     return FilenameUtils.getExtension(file.getName());
   }
