@@ -248,8 +248,17 @@ public class MainWindowController implements Initializable {
   }
 
   @FXML
-  private void aboutBtnClicked(ActionEvent actionEvent) {
-    System.out.println("MainWindowController: aboutBtnClicked -> about button clicked");
+  private void aboutBtnClicked(ActionEvent actionEvent) throws IOException {
+    // view settings modal
+    FXMLLoader settingsFxmlLoader = new FXMLLoader(MainApplication.class.getResource("about_window.fxml"));
+    Parent settingsRoot = settingsFxmlLoader.load();
+    Stage stage = new Stage();
+    stage.setTitle("SecuriTron: About Us");
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.setScene(new Scene(settingsRoot));
+    stage.setResizable(false);
+    stage.getIcons().add(IconPack.APP_ICON.getImage());
+    stage.showAndWait();
   }
 
 

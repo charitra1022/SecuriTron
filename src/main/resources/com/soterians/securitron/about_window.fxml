@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.soterians.securitron.UI.AboutWindowController">
+    <children>
+        <GridPane layoutX="200.0" layoutY="96.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="NEVER" />
+                <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <AnchorPane style="-fx-background-color: #73A9AD;">
+                    <children>
+                        <Label fx:id="appTitleLabel" alignment="CENTER" graphicTextGap="20.0" layoutX="202.0" layoutY="75.0" text="SecuriTron" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <font>
+                                <Font name="Bookman Old Style Bold" size="48.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="20.0" top="20.0" />
+                            </padding>
+                        </Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+                    <padding>
+                        <Insets bottom="30.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+               <children>
+                  <Label alignment="TOP_LEFT" layoutX="188.0" layoutY="89.0" style="-fx-border-color: #868686; -fx-border-radius: 6; -fx-border-width: 0.2;" text="Welcome to SecuriTron, a robust encryption solution designed to safeguard your sensitive data. Our software employs encryption algorithms, ensuring security of your files. Developed by Soterians, SecuriTron is committed to protecting your privacy. Explore our features, and trust in our dedication to delivering reliable encryption. Your data's security is our priority." wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <font>
+                        <Font name="Bookman Old Style" size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+                </AnchorPane>
+            </children>
+        </GridPane>
+    </children>
+    <padding>
+        <Insets bottom="10.0" />
+    </padding>
+</AnchorPane>
