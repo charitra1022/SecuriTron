@@ -20,6 +20,9 @@ public class SettingsWindowController implements Initializable{
   @FXML
   private Button showOldPswdBtn, showNewPswdBtn, applyPswdBtn;
 
+  @FXML
+  private Label appTitleLabel;
+
   private final ImageView show_icon_old = new ImageView(IconPack.SHOW_EYE.getImage());
   private final ImageView show_icon_new = new ImageView(IconPack.SHOW_EYE.getImage());
   private final ImageView hide_icon_old = new ImageView(IconPack.HIDE_EYE.getImage());
@@ -28,6 +31,12 @@ public class SettingsWindowController implements Initializable{
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    // set app icon in label
+    ImageView imgView = new ImageView(IconPack.APP_ICON_LIGHT.getImage());
+    imgView.setFitHeight(60);
+    imgView.setPreserveRatio(true);
+    appTitleLabel.setGraphic(imgView);
+
     // set icon properties
     show_icon_old.setPreserveRatio(true);
     show_icon_new.setPreserveRatio(true);
