@@ -56,6 +56,31 @@ public class CryptoUtils{
     }
 
 
+    /**
+     * Encrypts the data bytes and saves to the output encrypted file
+     * @param keyString String containing the key
+     * @param dataBytes Byte array containing data to be encrypted and written to the disk
+     * @param outputFile File object containing output encrypted file
+     * @throws CryptoException
+     */
+    public static void saveDecryptedData(String keyString, byte[] dataBytes, File outputFile) throws CryptoException {
+        try {
+            SecretKey secretKey = stringToKey(keyString);
+            Cipher cipher = Cipher.getInstance(TRANSFORMATION);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+
+            byte[] encryptedBytes = cipher.doFinal(dataBytes);  // get decrypted bytes
+            FileOutputStream outputStream = new FileOutputStream(outputFile);   // open output stream
+            outputStream.write(encryptedBytes); // write the encrypted data to the file
+            outputStream.close();   // close the stream
+
+        } catch(NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | IOException |
+                IllegalBlockSizeException | BadPaddingException ex) {
+            throw new CryptoException("Error encrypting/decrypting file", ex);
+        }
+    }
+
+
     private static void doCrypto(int cipherMode, String keyString, File inputFile, File outputFile) throws CryptoException {
         // to implement encryption of large files using chunks of data
         try {
