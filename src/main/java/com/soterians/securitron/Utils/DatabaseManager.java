@@ -303,6 +303,19 @@ public class DatabaseManager {
 
 
   /**
+   * Updates an existing fileMetaData data in the database
+   * @param oldData EncryptedFileMetadata object containing old data
+   * @param newData EncryptedFileMetadata object containing new data
+   */
+  public static void updateEncryptedFileData(EncryptedFileMetadata oldData, EncryptedFileMetadata newData) {
+    ArrayList<EncryptedFileMetadata> list = new ArrayList<>();
+    list.add(newData);
+    deleteEncryptedFileData(oldData);
+    insertEncryptedFileData(list);
+  }
+
+
+  /**
    * Reads file metadata list from the database
    * @return ArrayList&lt;EncryptedFileMetadata&gt; object containing data retrieved
    */
