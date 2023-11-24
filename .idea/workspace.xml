@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="made Crypto exception as a different class">
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="changed comment9081">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,14 +107,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699169079334</updated>
-    </task>
-    <task id="LOCAL-00025" summary="change file detail view visibility on listview item selection">
-      <option name="closed" value="true" />
-      <created>1699566043705</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1699566043705</updated>
     </task>
     <task id="LOCAL-00026" summary="new icons added">
       <option name="closed" value="true" />
@@ -500,7 +492,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700777744845</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="changed comment">
+      <option name="closed" value="true" />
+      <created>1700828829078</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1700828829078</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -515,7 +515,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="handle database creation and authentication" />
     <MESSAGE value="set default buttons" />
     <MESSAGE value="change alert dialog box and password confirmation check bug." />
     <MESSAGE value="moved commonly used dialog boxes to separate file" />
@@ -540,7 +539,8 @@
     <MESSAGE value="ask user if he wants to open file after decrypting" />
     <MESSAGE value="open unknown files in preview window" />
     <MESSAGE value="made Crypto exception as a different class" />
-    <option name="LAST_COMMIT_MESSAGE" value="made Crypto exception as a different class" />
+    <MESSAGE value="changed comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed comment" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

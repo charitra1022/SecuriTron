@@ -6,6 +6,7 @@ import com.soterians.securitron.UI.PreviewTextWindow;
 import com.soterians.securitron.Utils.DatabaseManager;
 import com.soterians.securitron.Utils.IconPack;
 
+import com.soterians.securitron.Utils.SHA256Checksum;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert;
@@ -141,10 +142,17 @@ public class Encryption {
     try {
       CryptoUtils.decrypt(fileMetadata.getSecretKey(), encryptedFile, decryptedFile);
       System.out.println("Encryption: decryptFile (2) -> Decrypted: " + decryptedFile.getAbsolutePath());
-      encryptedFile.delete(); // delete the encrypted file after it is decrypted
-      DatabaseManager.deleteEncryptedFileData(fileMetadata);  // delete the file info from the database
 
-      ButtonType btnPressed = CustomDialogs.showAlertDialog("SecuriTron: Open file?", "File decrypted: " + fileMetadata.getFileName() + "\nDo you want to view it?", Alert.AlertType.CONFIRMATION);
+      // verify the file checksum
+      String newChecksum = SHA256Checksum.getFileChecksum(decryptedFile); // checksum of new file
+      if(!newChecksum.equals(fileMetadata.getChecksum())) {
+        CustomDialogs.showAlertDialog("SecuriTron: File Corrupt!", "Seems like the file was changed after encryption!\nThe decrypted file doesn't match the original file!", Alert.AlertType.WARNING);
+      } else {
+        encryptedFile.delete(); // delete the encrypted file after it is decrypted
+        DatabaseManager.deleteEncryptedFileData(fileMetadata);  // delete the file info from the database
+      }
+
+      ButtonType btnPressed = CustomDialogs.showAlertDialog("SecuriTron: Decryption done!", "File decrypted: " + fileMetadata.getFileName() + "\nDo you want to view it?", Alert.AlertType.CONFIRMATION);
       if(btnPressed == ButtonType.OK) Desktop.getDesktop().open(decryptedFile);
 
       return true;
@@ -160,8 +168,15 @@ public class Encryption {
       // display the error dialog box
       CustomDialogs.showAlertDialog("SecuriTron: " + msg, "Path: " + fileMetadata.getEncryptedFilePath(), Alert.AlertType.ERROR);
 
-      // TODO: to ask user to remove entry for the error file from the list
+      ButtonType result = CustomDialogs.showAlertDialog("SecuriTron: Remove entry?", "Do you want to remove this file from the disk and the app list?", Alert.AlertType.CONFIRMATION);
+      if(result == ButtonType.OK) {
+        encryptedFile.delete(); // delete the encrypted file after it is decrypted
+        DatabaseManager.deleteEncryptedFileData(fileMetadata);  // delete the file info from the database
+        return true;
+      }
     } catch(IOException e) {
+      throw new RuntimeException(e);
+    } catch(NoSuchAlgorithmException e) {
       throw new RuntimeException(e);
     }
 
