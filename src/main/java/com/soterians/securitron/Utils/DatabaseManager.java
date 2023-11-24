@@ -38,7 +38,7 @@ public class DatabaseManager {
 
   private static final String tableName = "files";  // name of the table that will contain file list
 
-  private static final String tableCreationCmd = "CREATE TABLE " + tableName + " (file_path VARCHAR(max), fileSize BIGINT, encryptedFile VARCHAR(max), checksum VARCHAR(64), encryptedOn BIGINT, secret_key VARCHAR(16));";
+  private static final String tableCreationCmd = "CREATE TABLE " + tableName + " (file_path VARCHAR(max), fileSize BIGINT, encryptedFile VARCHAR(max), checksum VARCHAR(64), encryptedOn BIGINT, secret_key VARCHAR(24));";
 
   /**
    * Constructor of the class that initiates basic operations of the settings for the app
@@ -299,6 +299,19 @@ public class DatabaseManager {
       System.out.println("DatabaseManager: deleteEncryptedFileData (5) -> error " + ex);
       ex.printStackTrace();
     }
+  }
+
+
+  /**
+   * Updates an existing fileMetaData data in the database
+   * @param oldData EncryptedFileMetadata object containing old data
+   * @param newData EncryptedFileMetadata object containing new data
+   */
+  public static void updateEncryptedFileData(EncryptedFileMetadata oldData, EncryptedFileMetadata newData) {
+    ArrayList<EncryptedFileMetadata> list = new ArrayList<>();
+    list.add(newData);
+    deleteEncryptedFileData(oldData);
+    insertEncryptedFileData(list);
   }
 
 

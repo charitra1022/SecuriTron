@@ -38,9 +38,9 @@
                       <RowConstraints minHeight="-Infinity" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label prefHeight="50.0" prefWidth="193.0" style="-fx-padding: 12;" text="SecuriTron" textFill="WHITE">
+                        <Label fx:id="appTitleLabel" graphicTextGap="10.0" prefHeight="50.0" prefWidth="193.0" style="-fx-padding: 12;" text="SecuriTron" textFill="WHITE">
                            <font>
-                              <Font name="Verdana" size="21.0" />
+                              <Font name="Bookman Old Style Bold" size="21.0" />
                            </font>
                         </Label>
                         <Button fx:id="settingsBtn" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#settingsBtnClicked" prefWidth="100.0" style="-fx-background-color: #619ea2; -fx-cursor: hand;" text="Settings" textFill="WHITE" GridPane.columnIndex="2">

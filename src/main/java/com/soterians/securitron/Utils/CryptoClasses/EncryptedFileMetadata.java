@@ -124,4 +124,16 @@ public class EncryptedFileMetadata {
   public String calculateFileFormat(File file) {
     return FilenameUtils.getExtension(file.getName());
   }
+
+
+  public void printAllData() {
+    System.out.println("file: " + file);
+    System.out.println("encryptedFile: " + encryptedFile);
+    System.out.println("fileSize: " + fileSize);
+    System.out.println("fileFormat: " + fileFormat);
+    System.out.println("encryptedOn: " + encryptedOn);
+    System.out.println("checksum: " + checksum);
+    System.out.println("secret_key: " + secret_key);
+    System.out.println();
+  }
 }

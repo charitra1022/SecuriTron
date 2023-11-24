@@ -37,4 +37,22 @@ public class SHA256Checksum {
 
     return (new BigInteger(1, digestBytes)).toString(16); // convert the byte digest to string
   }
+
+
+  /**
+   * Calculates the SHA-256 checksum from byte array
+   * @param dataBytes byte array containing byte data for which the checksum is to be calculated
+   * @return String containing the checksum of the file
+   * @throws NoSuchAlgorithmException thrown if an invalid checksum algorithm is used
+   * @throws IOException thrown if a file is not found
+   */
+  public static String getFileChecksumFromBytes(byte[] dataBytes) throws NoSuchAlgorithmException, IOException {
+    // get implementation of SHA-256 checksum
+    MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+
+    byte[] digestBytes = messageDigest.digest(dataBytes);  // compute digest of the file that is read
+    messageDigest.reset();  // reset the messageDigest after the process
+
+    return (new BigInteger(1, digestBytes)).toString(16); // convert the byte digest to string
+  }
 }

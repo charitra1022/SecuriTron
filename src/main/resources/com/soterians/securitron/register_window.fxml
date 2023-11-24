@@ -26,7 +26,7 @@
          <children>
             <AnchorPane style="-fx-background-color: #73A9AD;">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="166.0" layoutY="32.0" text="SecuriTron" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <Label fx:id="appTitleLabel" alignment="CENTER" graphicTextGap="20.0" layoutX="166.0" layoutY="32.0" text="SecuriTron" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <font>
                         <Font name="Bookman Old Style Bold" size="48.0" />
                      </font>
