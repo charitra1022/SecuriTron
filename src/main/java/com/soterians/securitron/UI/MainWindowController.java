@@ -249,7 +249,7 @@ public class MainWindowController implements Initializable {
 
   @FXML
   private void aboutBtnClicked(ActionEvent actionEvent) throws IOException {
-    // view settings modal
+    // view about modal
     FXMLLoader settingsFxmlLoader = new FXMLLoader(MainApplication.class.getResource("about_window.fxml"));
     Parent settingsRoot = settingsFxmlLoader.load();
     Stage stage = new Stage();
