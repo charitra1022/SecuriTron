@@ -126,7 +126,7 @@ public class MainWindowController implements Initializable {
     }
 
     // set app icon in title label
-    ImageView imgView = new ImageView(IconPack.APP_ICON.getImage());
+    ImageView imgView = new ImageView(IconPack.APP_ICON_LIGHT.getImage());
     imgView.setFitHeight(30);
     imgView.setPreserveRatio(true);
     appTitleLabel.setGraphic(imgView);

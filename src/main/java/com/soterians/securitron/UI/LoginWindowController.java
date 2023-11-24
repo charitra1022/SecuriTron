@@ -31,7 +31,7 @@ public class LoginWindowController implements Initializable{
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // set app icon in label
-    ImageView imgView = new ImageView(IconPack.APP_ICON.getImage());
+    ImageView imgView = new ImageView(IconPack.APP_ICON_LIGHT.getImage());
     imgView.setFitHeight(60);
     imgView.setPreserveRatio(true);
     appTitleLabel.setGraphic(imgView);
