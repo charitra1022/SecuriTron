@@ -1,28 +1,22 @@
 package com.soterians.securitron.Utils.CryptoClasses;
 
 import com.soterians.securitron.UI.CustomDialogs;
+import com.soterians.securitron.UI.PreviewImageWindow;
+import com.soterians.securitron.UI.PreviewTextWindow;
 import com.soterians.securitron.Utils.DatabaseManager;
 import com.soterians.securitron.Utils.IconPack;
-import javafx.scene.Node;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Font;
-import javafx.stage.Modality;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
 import javafx.stage.Stage;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.awt.Desktop;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
@@ -196,8 +190,14 @@ public class Encryption {
 
       // if file is supported, display it
       if(mimeType!=null && (mimeType.contains("text") || mimeType.contains("image"))) {
-        Stage stage = new Stage();  // stage that will contain the popup for preview
-        Node previewChild = new Node(){}; // node to display contents. casted to required type according to file type
+
+        // handle textual files in a different window with editing features
+        if(mimeType.contains("text")) {
+          PreviewTextWindow textWindow = new PreviewTextWindow(fileMetadata);
+          Stage textWindowStage = textWindow.getStage();
+          textWindowStage.showAndWait();
+          return;
+        }
 
         // read the file contents in form of byte array
         FileInputStream fileInputStream = new FileInputStream(fileMetadata.getEncryptedFile());
@@ -207,38 +207,9 @@ public class Encryption {
                 fileInputStream
         );
 
-
-        // content is text, so cast Node to TextArea
-        if(mimeType.contains("text")) {
-          TextArea textArea = new TextArea(new String(dataBytes, StandardCharsets.UTF_8));  // get string from the file bytes
-          textArea.setEditable(false);
-          textArea.setFont(Font.font(18));
-          previewChild = textArea;
-        } else {
-          Label imageLabel = new Label("this is a label, to display image here");
-          imageLabel.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-
-          ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(dataBytes)));
-          imageView.setPreserveRatio(true);
-          imageView.setFitHeight(Math.min(imageView.getImage().getHeight(), 600));  // choose the image view height to be minimum of canvas size and iamge size
-          imageLabel.setGraphic(imageView);
-          previewChild = imageLabel;  // assign the label to the node
-          stage.setResizable(false);
-        }
-
-        // preview content modal
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setTitle(fileMetadata.getFileName());
-        stage.getIcons().add(IconPack.APP_ICON.getImage());
-
-        AnchorPane parent = new AnchorPane();
-        AnchorPane.setTopAnchor(previewChild, 0.0);
-        AnchorPane.setBottomAnchor(previewChild, 0.0);
-        AnchorPane.setLeftAnchor(previewChild, 0.0);
-        AnchorPane.setRightAnchor(previewChild, 0.0);
-        parent.getChildren().add(previewChild);
-        stage.setScene(new Scene(parent));
-        stage.showAndWait();
+        PreviewImageWindow imageWindow = new PreviewImageWindow(fileMetadata, dataBytes);
+        Stage imageWindowStage = imageWindow.getStage();
+        imageWindowStage.showAndWait();
 
         // close stream of encrypted file after preview is closed so that file is locked until preview is closed
         fileInputStream.close();

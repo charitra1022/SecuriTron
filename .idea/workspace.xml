@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="ask user if he wants to open file after decrypting">
+    <list default="true" id="8695332b-3fd1-46fc-a446-a8489ad5d202" name="Changes" comment="made Crypto exception as a different class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/MainWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/CryptoUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/CryptoUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/EncryptedFileMetadata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/EncryptedFileMetadata.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/CryptoClasses/Encryption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/DatabaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/DatabaseManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/SHA256Checksum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/soterians/securitron/Utils/SHA256Checksum.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,22 +112,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699169079334</updated>
-    </task>
-    <task id="LOCAL-00023" summary="fixed bug in file size string">
-      <option name="closed" value="true" />
-      <created>1699565685001</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1699565685001</updated>
-    </task>
-    <task id="LOCAL-00024" summary="added click handler for listView items and update file info panel on item selection">
-      <option name="closed" value="true" />
-      <created>1699565731489</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1699565731489</updated>
     </task>
     <task id="LOCAL-00025" summary="change file detail view visibility on listview item selection">
       <option name="closed" value="true" />
@@ -500,7 +489,23 @@
       <option name="project" value="LOCAL" />
       <updated>1700763114538</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="open unknown files in preview window">
+      <option name="closed" value="true" />
+      <created>1700769965487</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1700769965487</updated>
+    </task>
+    <task id="LOCAL-00073" summary="made Crypto exception as a different class">
+      <option name="closed" value="true" />
+      <created>1700777744845</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1700777744845</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -515,8 +520,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="renamed class" />
-    <MESSAGE value="added sqlite3 jdbc and required dependencies. using sqlite-jdbc-crypt" />
     <MESSAGE value="handle database creation and authentication" />
     <MESSAGE value="set default buttons" />
     <MESSAGE value="change alert dialog box and password confirmation check bug." />
@@ -540,7 +543,9 @@
     <MESSAGE value="some indentation" />
     <MESSAGE value="used file locking in preview encrypted file" />
     <MESSAGE value="ask user if he wants to open file after decrypting" />
-    <option name="LAST_COMMIT_MESSAGE" value="ask user if he wants to open file after decrypting" />
+    <MESSAGE value="open unknown files in preview window" />
+    <MESSAGE value="made Crypto exception as a different class" />
+    <option name="LAST_COMMIT_MESSAGE" value="made Crypto exception as a different class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -606,6 +611,15 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/soterians/securitron/UI/PreviewTextWindow.java</url>
+          <line>152</line>
+          <properties class="com.soterians.securitron.UI.PreviewTextWindow" method="saveBtnClicked">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

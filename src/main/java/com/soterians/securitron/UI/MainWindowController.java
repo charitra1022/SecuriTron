@@ -465,6 +465,12 @@ public class MainWindowController implements Initializable {
     System.out.println("MainWindowController: onOpenFileBtnClicked -> open file button clicked");
     EncryptedFileMetadata fileMetadata = filesListView.getSelectionModel().getSelectedItem(); // get selected item
     Encryption.openFileTemporarily(fileMetadata); // open the encrypted file temporarily
+
+    // if the file was edited while being opened, then update the UI
+    if(PreviewTextWindow.isFileEdited) {
+      updateListView(DatabaseManager.readEncryptedFileData());
+      PreviewTextWindow.isFileEdited = false;
+    }
   }
 
 
