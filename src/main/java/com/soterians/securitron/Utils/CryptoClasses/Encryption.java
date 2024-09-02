@@ -27,9 +27,6 @@ import java.util.Optional;
 public class Encryption {
   private static final String extension = ".securitron";
 
-  private static boolean deleteOriginal = false;  // delete all original files after encryption
-
-
   /**
    * Displays an Alert DialogPane to ask for user's consent to delete original files after encryption is done
    * @param contextString Filename of the file just encrypted
@@ -80,23 +77,6 @@ public class Encryption {
       CryptoUtils.encrypt(secret_key, inputFile, encryptedFile); // encrypt the input file
       System.out.println("Encryption: encryptFile -> Encrypted: " + encryptedFile.getAbsolutePath());
 
-      // if delete for all files is enabled, direct delete
-      if(deleteOriginal) inputFile.delete();
-      // otherwise ask for user confirmation
-      else {
-        ButtonType result = showDeleteAlert(inputFile.getName());  // show confirmation
-
-        // delete only current file
-        if(result.getButtonData() == ButtonType.YES.getButtonData())
-          inputFile.delete();     // delete original file after encryption
-
-        // delete all consequent files
-        else if(result.getButtonData() == ButtonType.APPLY.getButtonData()){
-          inputFile.delete();     // delete original file after encryption
-          deleteOriginal = true;
-        }
-      }
-
     } catch (CryptoException ex) {
       System.out.println("Encryption: encryptFile -> Error: " + ex.getMessage());
       ex.printStackTrace();
@@ -111,17 +91,34 @@ public class Encryption {
    * @param files ArrayList&lt;File&gt; files object that stores list of Files that need to be encrypted
    */
   public static void encryptFiles(ArrayList<File> files) throws IOException, NoSuchAlgorithmException {
+    boolean deleteDefault = false;  // delete all files after encryption
+
     // create list of EncryptedFileMetadata objects
     ArrayList<EncryptedFileMetadata> fileMetadataList = new ArrayList<>();
-    for(int i=0; i<files.size(); i++) {
-      fileMetadataList.add(encryptFile(files.get(i)));
+    for (File f : files) {
+      fileMetadataList.add(encryptFile(f));
+
+      // if delete for all files is enabled, direct delete
+      if (deleteDefault) f.delete();
+
+      // otherwise ask for user confirmation
+      else {
+        ButtonType result = showDeleteAlert(f.getName());  // show confirmation
+
+        // delete only current file
+        if(result.getButtonData() == ButtonType.YES.getButtonData())
+          f.delete();     // delete original file after encryption
+
+        // delete all consequent files
+        else if(result.getButtonData() == ButtonType.APPLY.getButtonData()){
+          f.delete();     // delete original file after encryption
+          deleteDefault = true;
+        }
+      }
     }
 
     // save the list to the database
     DatabaseManager.insertEncryptedFileData(fileMetadataList);
-
-    // reset the default deletion value
-    deleteOriginal = false;
   }
 
 

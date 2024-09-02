@@ -94,6 +94,8 @@ public class CryptoUtils{
             byte dataBytes[] = new byte[1024];  // byte chunk
             int bytesRead = 0;  // number of bytes read at a time
 
+            long startTime = System.currentTimeMillis();    // timestamp in ms
+
             // loop until complete file is read
             while ((bytesRead = inputStream.read(dataBytes)) != -1) {
                 outputStream.write(cipher.update(dataBytes, 0, bytesRead));
@@ -103,6 +105,11 @@ public class CryptoUtils{
 
             inputStream.close();    // close inputstream
             outputStream.close();   // close outputstream
+
+            long endTime = System.currentTimeMillis();  // timestamp in ms
+            long timeDiff = (endTime - startTime);
+            System.out.println("CryptoUtils: doCrypto -> " + timeDiff + " ms -> " + timeDiff/1000 + " sec");
+
         } catch(NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | BadPaddingException |
                 IllegalBlockSizeException | IOException ex) {
             throw new CryptoException("Error encrypting/decrypting file", ex);
